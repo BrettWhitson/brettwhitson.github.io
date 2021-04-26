@@ -1,0 +1,33 @@
+
+*, html, body {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.container {
+    display: flex;
+    min-height: 50vh;
+    box-sizing: border-box;
+    margin: 25px;
+    justify-content: center;
+    align-items: center;
+    button {
+        border: 2px solid green;
+        padding: 10px;
+        border-radius: 15px;
+        transition: 400ms;
+        a{
+            color: green;
+            text-decoration: none;
+            transition: 400ms;
+            &:hover {
+                color: red;
+            }
+        }
+        &:hover {
+            padding: 20px 50px;
+            border-color: red;
+        }
+    }
+}
