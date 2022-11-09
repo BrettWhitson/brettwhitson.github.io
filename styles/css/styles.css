@@ -293,7 +293,7 @@ body {
           animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-second 750ms steps(2, jump-none) infinite;
 }
 
-@media only screen and (max-width: 930px) {
+@media only screen and (max-width: 1200px) {
   .linkbar {
     width: 35%;
     height: 50px;
