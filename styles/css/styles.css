@@ -109,7 +109,6 @@ body {
 
 .section .list-no-style-inline {
   list-style: none;
-  display: inline;
 }
 
 .section .list-no-style-inline .list-item-header {
@@ -118,6 +117,7 @@ body {
 
 .section .list-no-style-inline [class*="devicon"] {
   font-size: 2rem;
+  display: inline-block;
   margin: 5px;
   -webkit-transition: all 200ms ease-in-out;
   transition: all 200ms ease-in-out;
@@ -329,5 +329,8 @@ body {
   }
   #content .section {
     max-width: unset;
+  }
+  #resume-section {
+    display: none;
   }
 }

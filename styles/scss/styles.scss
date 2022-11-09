@@ -24,9 +24,9 @@ body {
 	}
 
 	list-style: none;
-	display: inline;
 	[class*="devicon"] {
 		font-size: 2rem;
+		display: inline-block;
 		margin: 5px;
 		transition: all 200ms ease-in-out;
 		&:hover {
@@ -209,5 +209,8 @@ body {
 		.section {
 			max-width: unset;
 		}
+	}
+	#resume-section {
+		display: none;
 	}
 }
