@@ -1,0 +1,111 @@
+{
+	"sections": [
+		{
+			"section": "about",
+			"title": "About Me",
+			"type": "pg",
+			"body": "I am an ambitious and motivated computer scientist with a passion for problem solving and expanding my knowledge and experiences. I am a detail-oriented worker adept in both self-driven and collaborative environments with an aptitude for learning new skills and technologies. I have experience in Front-end and Back-end development and am passionate about both."
+		},
+		{
+			"section": "experience",
+			"title": "Experience",
+			"type": "ls",
+			"body": [
+				{
+					"header": "University of Tennessee at Martin",
+					"subheader": "Programmer/Analyst",
+					"subsubheader": "July 2021 - Present",
+					"main": ""
+				},
+				{
+					"header": "University of Tennessee at Martin",
+					"subheader": "IT Technician III",
+					"subsubheader": "October 2020 - July 2021",
+					"main": ""
+				},
+				{
+					"header": "Joint Accounts",
+					"subheader": "Part Time App/Web Developer",
+					"subsubheader": "January 2021 - July 2021",
+					"main": ""
+				}
+			]
+		},
+		{
+			"section": "education",
+			"title": "Education",
+			"type": "ls",
+			"body": [
+				{
+					"header": "University of Tennessee at Martin",
+					"subheader": "May 2020 ",
+					"subsubheader": "",
+					"main": "Bachelor of Science, Computer Science"
+				}
+			]
+		},
+		{
+			"section": "skills",
+			"title": "Skills",
+			"type": "ls",
+			"body": [
+				{
+					"header": "Languages",
+					"subheader": "",
+					"subsubheader": "",
+					"main": "<ul class=\"lang-icon-list list-no-style-inline\"></ul>"
+				},
+				{
+					"header": "Tools",
+					"subheader": "",
+					"subsubheader": "",
+					"main": "<ul class=\"tool-icon-list list-no-style-inline\"></ul>"
+				}
+			]
+		},
+		{
+			"section": "interests",
+			"title": "Interests",
+			"type": "pg",
+			"body": "I enjoy playing games, playing music, and learning new things."
+		},
+		{
+			"section": "awards",
+			"title": "Awards",
+			"type": "ls",
+			"body": [
+				{
+					"header": "ACM Mid-Southeast Chapter Conference 2019",
+					"subheader": "",
+					"subsubheader": "",
+					"main": "First Place in Undergraduate Programs"
+				}
+			]
+		},
+		{
+			"section": "resume",
+			"title": "Resume",
+			"type": "rs",
+			"file": "./data/whitson_resume_21.pdf",
+			"body": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis recusandae quod voluptas? Dignissimos beatae cupiditate voluptate dicta at molestiae, ipsa accusantium, omnis incidunt est dolorem sequi laborum error placeat modi ex explicabo, earum nulla aut sapiente blanditiis! Cumque quam rem corporis sit amet omnis deserunt minima velit impedit, optio tempora."
+		}
+	],
+	"icons": {
+		"languages": [
+			"javascript",
+			"python",
+			"c",
+			"cplusplus",
+			"csharp",
+			"java",
+			"kotlin",
+			"php",
+			"haskell",
+			"jquery",
+			"html5",
+			"css3",
+			"go"
+		],
+		"tools": ["vscode", "git", "github", "docker", "linux", "vim", "googlecloud", "firebase", "nodejs", "oracle"]
+	}
+}

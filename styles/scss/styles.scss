@@ -1,0 +1,177 @@
+@import "./fonts.scss";
+@import "./mixins.scss";
+@import "./colors.scss";
+*,
+html,
+body {
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	@include unsplash-background;
+}
+
+.section .list-no-style-inline {
+	.list-item-header {
+		margin-bottom: 10px;
+	}
+
+	list-style: none;
+	display: inline;
+	[class*="devicon"] {
+		font-size: 2rem;
+		margin: 5px;
+		transition: all 200ms ease-in-out;
+		&:hover {
+			font-size: 2.5rem;
+			color: rgb(100, 255, 247);
+		}
+	}
+}
+
+.icon-list {
+	color: white;
+	font-size: 3rem;
+}
+
+.linkbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 30px;
+	padding: 5% 0 0 5px;
+	width: 250px;
+	box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.5);
+	background-color: rgba(12, 35, 63, 0.9);
+	.linklist {
+		list-style-type: none;
+		@include indent(1);
+		a {
+			font-family: $font-family;
+			color: $font-main-color;
+			font-size: $font-size-linkbar;
+			font-weight: bold;
+			text-decoration: none;
+			transition: font-size 150ms ease-in-out, color 150ms ease-in-out;
+			&:hover {
+				font-size: $font-size-linkbar-hover;
+				color: $font-color-glitch-link-hover;
+			}
+		}
+	}
+	#portrait {
+		width: 80%;
+		margin: 0 auto;
+		border-radius: 20%;
+		display: block;
+	}
+	h1 {
+		font-family: $font-family;
+		font-size: 2.5rem;
+		color: $font-main-color;
+		white-space: nowrap;
+	}
+}
+
+#content {
+	font-family: $font-family;
+	font-size: 1.5rem;
+	color: $font-main-color;
+	margin-left: 300px;
+	background-color: transparent;
+	.section {
+		max-width: 1200px;
+		background-color: rgba(18, 26, 36, 0.5);
+		&::before {
+			content: " ";
+			display: block;
+			width: 100%;
+			height: 1px;
+			margin: 1rem 0;
+			background-color: white;
+		}
+		&::after {
+			content: " ";
+			display: block;
+			width: 100%;
+			height: 1px;
+			margin: 1rem 0;
+			background-color: white;
+		}
+		.section-body {
+			@include indent(1);
+		}
+		.section-title {
+			letter-spacing: 5px;
+			font-size: 2rem;
+		}
+		.section-body-list {
+			list-style-type: none;
+			@include indent(1);
+			letter-spacing: 2px;
+			.section-list-item {
+				margin-bottom: 20px;
+				.list-item-header {
+					font-weight: bold;
+				}
+				.list-item-subheader {
+					@include indent(1);
+					font-size: 1.2rem;
+				}
+				.list-item-subsubheader {
+					@include indent(1);
+					font-size: 0.8rem;
+					font-style: italic;
+				}
+				.list-item-main {
+					@include indent(2);
+				}
+			}
+		}
+	}
+}
+
+#pdfFrame {
+	width: 800px;
+	zoom: 1;
+	height: 110vh;
+	box-shadow: 5px 5px 50px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glitched-list a {
+	position: relative;
+	&:hover {
+		font-size: 5rem;
+		$glitch-time: 3000ms;
+		$fragment-glitch-time: 2000ms;
+		$fragment-shift-time: 750ms;
+		animation: glitch $glitch-time steps(3, jump-none) infinite;
+		&::before {
+			content: attr(data-text);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			animation: glitch $fragment-glitch-time steps(3, jump-none) infinite,
+				glitch-shift-first $fragment-shift-time steps(2, jump-none) infinite;
+		}
+		&::after {
+			content: attr(data-text);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			animation: glitch $fragment-glitch-time steps(3, jump-none) infinite,
+				glitch-shift-second $fragment-shift-time steps(2, jump-none) infinite;
+		}
+	}
+}
