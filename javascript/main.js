@@ -163,6 +163,8 @@ function buildRsSection(section) {
 	mobileElement.anchor.download = "whitson_resume_21.pdf";
 	mobileElement.title.appendChild(mobileElement.anchor);
 	mobileElement.div.appendChild(mobileElement.title);
-	dom.content.appendChild(element.div);
+	if (window.screen.width > 980) {
+		dom.content.appendChild(element.div);
+	}
 	dom.content.appendChild(mobileElement.div);
 }
