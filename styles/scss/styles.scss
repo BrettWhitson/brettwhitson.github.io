@@ -41,6 +41,10 @@ body {
 	font-size: 3rem;
 }
 
+.mobile {
+	display: none;
+}
+
 .linkbar {
 	position: fixed;
 	top: 0;
@@ -108,6 +112,10 @@ body {
 		p {
 			font-size: 1.2rem;
 			font-family: $secondary-font-family;
+		}
+		a {
+			font-size: 2rem;
+			color: white;
 		}
 		.section-body {
 			@include indent(1);
@@ -210,7 +218,10 @@ body {
 			max-width: unset;
 		}
 	}
-	#resume-section {
+	.mobile-hide {
 		display: none;
+	}
+	.mobile {
+		display: block;
 	}
 }

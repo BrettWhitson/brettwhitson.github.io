@@ -139,8 +139,14 @@ function buildRsSection(section) {
 			file: section.file,
 		},
 	};
+	let mobileElement = {
+		div: document.createElement("div"),
+		title: document.createElement("h2"),
+		anchor: document.createElement("a"),
+	};
 	element.div.id = section.section + "-section";
 	element.div.classList.add("section");
+	element.div.classList.add("mobile-hide");
 	element.title.innerHTML = section.title;
 	element.title.classList.add("section-title");
 	element.div.appendChild(element.title);
@@ -148,5 +154,15 @@ function buildRsSection(section) {
 	element.frame.iframe.classList.add("section-body-iframe");
 	element.frame.iframe.id = "pdfFrame";
 	element.div.appendChild(element.frame.iframe);
+	mobileElement.div.id = section.section + "-section";
+	mobileElement.div.classList.add("section");
+	mobileElement.div.classList.add("mobile");
+	mobileElement.title.classList.add("section-title");
+	mobileElement.anchor.href = element.frame.file;
+	mobileElement.anchor.innerHTML = "Download Resume PDF";
+	mobileElement.anchor.download = "whitson_resume_21.pdf";
+	mobileElement.title.appendChild(mobileElement.anchor);
+	mobileElement.div.appendChild(mobileElement.title);
 	dom.content.appendChild(element.div);
+	dom.content.appendChild(mobileElement.div);
 }

@@ -133,6 +133,10 @@ body {
   font-size: 3rem;
 }
 
+.mobile {
+  display: none;
+}
+
 .linkbar {
   position: fixed;
   top: 0;
@@ -213,6 +217,11 @@ body {
 #content .section p {
   font-size: 1.2rem;
   font-family: "Open Sans", sans-serif;
+}
+
+#content .section a {
+  font-size: 2rem;
+  color: white;
 }
 
 #content .section .section-body {
@@ -330,7 +339,10 @@ body {
   #content .section {
     max-width: unset;
   }
-  #resume-section {
+  .mobile-hide {
     display: none;
+  }
+  .mobile {
+    display: block;
   }
 }
