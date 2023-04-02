@@ -150,7 +150,7 @@ function buildRsSection(section) {
 	element.title.innerHTML = section.title;
 	element.title.classList.add("section-title");
 	element.div.appendChild(element.title);
-	element.frame.iframe.src = element.frame.file + "#navpanes=0&toolbar=0";
+	element.frame.iframe.src = element.frame.file + "&toolbar=0";
 	element.frame.iframe.classList.add("section-body-iframe");
 	element.frame.iframe.id = "pdfFrame";
 	element.div.appendChild(element.frame.iframe);
