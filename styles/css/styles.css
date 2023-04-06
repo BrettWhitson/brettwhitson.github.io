@@ -139,6 +139,28 @@
   }
 }
 
+@-webkit-keyframes grow {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+}
+
+@keyframes grow {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+}
+
 *,
 html,
 body {
@@ -385,8 +407,8 @@ body {
 }
 
 .glitched-list a:hover {
-  -webkit-animation: glitch 3000ms steps(3, jump-none) infinite;
-          animation: glitch 3000ms steps(3, jump-none) infinite;
+  -webkit-animation: glitch 3000ms steps(3, jump-none) infinite, grow 1s forwards;
+          animation: glitch 3000ms steps(3, jump-none) infinite, grow 1s forwards;
 }
 
 .glitched-list a:hover::before {
@@ -396,8 +418,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-first 750ms steps(2, jump-none) infinite;
-          animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-first 750ms steps(2, jump-none) infinite;
+  -webkit-animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-first 750ms steps(2, jump-none) infinite, grow 150ms forwards;
+          animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-first 750ms steps(2, jump-none) infinite, grow 150ms forwards;
 }
 
 .glitched-list a:hover::after {
@@ -407,8 +429,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-second 750ms steps(2, jump-none) infinite;
-          animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-second 750ms steps(2, jump-none) infinite;
+  -webkit-animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-second 750ms steps(2, jump-none) infinite, grow 500ms forwards;
+          animation: glitch 2000ms steps(3, jump-none) infinite, glitch-shift-second 750ms steps(2, jump-none) infinite, grow 500ms forwards;
 }
 
 @media only screen and (max-width: 980px) {
