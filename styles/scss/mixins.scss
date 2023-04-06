@@ -35,6 +35,33 @@
 	}
 }
 
+@keyframes bounce {
+	$bounce-height: 3px;
+	$StrengthX: 0.04;
+	$StrengthY: 0.04;
+	$shadowStrength: 10px;
+	$shadowBlur: 3px;
+	33% {
+		transform: translateY(-#{$bounce-height}) scaleX(#{1-$StrengthX});
+		drop-shadow: 0 $shadowStrength $shadowBlur rgba(0, 0, 0, 0.5);
+	}
+	66% {
+		transform: translateY(#{$bounce-height}) scaleX(#{1 + $StrengthX}) scaleY(#{1 - $StrengthY});
+		drop-shadow: 0 -$shadowStrength $shadowBlur rgba(0, 0, 0, 0.5);
+	}
+}
+@keyframes pulse {
+	0% {
+		transform: scale(1.1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1.1);
+	}
+}
+
 @mixin unsplash-background {
 	background-color: #0c233f;
 	background-image: url("https://source.unsplash.com/featured/?code");

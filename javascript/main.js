@@ -58,6 +58,7 @@ function buildExtLinks(data) {
 		let anchor = document.createElement("a");
 		icotag.classList.add("devicon-" + icon);
 		anchor.href = link;
+		anchor.classList.add("bounce");
 		anchor.target = "_blank";
 		anchor.appendChild(icotag);
 		ext.appendChild(anchor);
@@ -68,14 +69,20 @@ function buildDevIcons(icons) {
 	let skills = get(".lang-icon-list");
 	for (let icon of icons.languages) {
 		let icotag = document.createElement("i");
+		let span = document.createElement("span");
 		icotag.classList.add("devicon-" + icon + "-plain");
-		skills.appendChild(icotag);
+		icotag.setAttribute("data-text", icon);
+		span.appendChild(icotag);
+		skills.appendChild(span);
 	}
 	let tools = get(".tool-icon-list");
 	for (let icon of icons.tools) {
 		let icotag = document.createElement("i");
+		let span = document.createElement("span");
 		icotag.classList.add("devicon-" + icon + "-plain");
-		tools.appendChild(icotag);
+		icotag.setAttribute("data-text", icon);
+		span.appendChild(icotag);
+		tools.appendChild(span);
 	}
 }
 

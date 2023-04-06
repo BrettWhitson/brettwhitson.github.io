@@ -24,16 +24,30 @@ body {
 	}
 
 	list-style: none;
-	[class*="devicon"] {
-		font-size: 2rem;
-		display: inline-block;
-		margin: 5px;
-		transition: all 200ms ease-in-out;
-		&:hover {
-			font-size: 2.5rem;
-			color: rgb(100, 255, 247);
+	span:has([class*="devicon"]) {
+		position: relative;
+		padding-bottom: 10px;
+		i {
+			font-size: 2rem;
+			display: inline-block;
+			margin: 5px;
+			transition: all 300ms ease-in-out;
+			&:hover {
+				animation: pulse 1s ease-in-out infinite;
+				text-shadow: 2px 2px 2px rgb(0, 245, 255);
+				&::after {
+					content: attr(data-text);
+					position: absolute;
+					font-size: 1rem;
+					transform: translate(-40%, 30px);
+				}
+			}
 		}
 	}
+}
+
+.bounce:hover {
+	animation: bounce 1s ease-in-out infinite;
 }
 
 .icon-list {
@@ -62,7 +76,7 @@ body {
 			justify-content: center;
 			font-size: 3rem;
 			a {
-				margin: 2px 5px;
+				margin: 5px 10px;
 				text-decoration: none;
 				transition: all 100ms ease-in-out;
 				&:hover {
@@ -84,9 +98,9 @@ body {
 			font-size: $font-size-linkbar;
 			font-weight: bold;
 			text-decoration: none;
-			transition: font-size 150ms ease-in-out, color 150ms ease-in-out;
+			transition: transform 150ms ease-in-out, color 150ms ease-in-out;
 			&:hover {
-				font-size: $font-size-linkbar-hover;
+				transform: scale(1.5);
 				color: $font-color-glitch-link-hover;
 			}
 		}
@@ -181,7 +195,6 @@ body {
 .glitched-list a {
 	position: relative;
 	&:hover {
-		font-size: 5rem;
 		$glitch-time: 3000ms;
 		$fragment-glitch-time: 2000ms;
 		$fragment-shift-time: 750ms;

@@ -83,6 +83,62 @@
   }
 }
 
+@-webkit-keyframes bounce {
+  33% {
+    -webkit-transform: translateY(-3px) scaleX(0.96);
+            transform: translateY(-3px) scaleX(0.96);
+    drop-shadow: 0 10px 3px rgba(0, 0, 0, 0.5);
+  }
+  66% {
+    -webkit-transform: translateY(3px) scaleX(1.04) scaleY(0.96);
+            transform: translateY(3px) scaleX(1.04) scaleY(0.96);
+    drop-shadow: -10px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes bounce {
+  33% {
+    -webkit-transform: translateY(-3px) scaleX(0.96);
+            transform: translateY(-3px) scaleX(0.96);
+    drop-shadow: 0 10px 3px rgba(0, 0, 0, 0.5);
+  }
+  66% {
+    -webkit-transform: translateY(3px) scaleX(1.04) scaleY(0.96);
+            transform: translateY(3px) scaleX(1.04) scaleY(0.96);
+    drop-shadow: -10px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+
 *,
 html,
 body {
@@ -115,17 +171,36 @@ body {
   margin-bottom: 10px;
 }
 
-.section .list-no-style-inline [class*="devicon"] {
+.section .list-no-style-inline span:has([class*="devicon"]) {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section .list-no-style-inline span:has([class*="devicon"]) i {
   font-size: 2rem;
   display: inline-block;
   margin: 5px;
-  -webkit-transition: all 200ms ease-in-out;
-  transition: all 200ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
-.section .list-no-style-inline [class*="devicon"]:hover {
-  font-size: 2.5rem;
-  color: #64fff7;
+.section .list-no-style-inline span:has([class*="devicon"]) i:hover {
+  -webkit-animation: pulse 1s ease-in-out infinite;
+          animation: pulse 1s ease-in-out infinite;
+  text-shadow: 2px 2px 2px #00f5ff;
+}
+
+.section .list-no-style-inline span:has([class*="devicon"]) i:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  font-size: 1rem;
+  -webkit-transform: translate(-40%, 30px);
+          transform: translate(-40%, 30px);
+}
+
+.bounce:hover {
+  -webkit-animation: bounce 1s ease-in-out infinite;
+          animation: bounce 1s ease-in-out infinite;
 }
 
 .icon-list {
@@ -165,7 +240,7 @@ body {
 }
 
 .linkbar .ext-links ul a {
-  margin: 2px 5px;
+  margin: 5px 10px;
   text-decoration: none;
   -webkit-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
@@ -192,12 +267,15 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
-  -webkit-transition: font-size 150ms ease-in-out, color 150ms ease-in-out;
-  transition: font-size 150ms ease-in-out, color 150ms ease-in-out;
+  -webkit-transition: color 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+  transition: color 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, color 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, color 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
 }
 
 .linkbar .linklist a:hover {
-  font-size: 1.6rem;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
   color: rgba(252, 132, 43, 0);
 }
 
@@ -307,7 +385,6 @@ body {
 }
 
 .glitched-list a:hover {
-  font-size: 5rem;
   -webkit-animation: glitch 3000ms steps(3, jump-none) infinite;
           animation: glitch 3000ms steps(3, jump-none) infinite;
 }
