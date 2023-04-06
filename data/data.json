@@ -125,5 +125,19 @@
 			"go"
 		],
 		"tools": ["vscode", "git", "github", "docker", "linux", "vim", "googlecloud", "firebase", "nodejs", "oracle"]
+	},
+	"ext": {
+		"linkedin": {
+			"icon": "linkedin-plain",
+			"link": "https://www.linkedin.com/in/brett-whitson/"
+		},
+		"github": {
+			"icon": "github-original-wordmark",
+			"link": "https://github.com/brettwhitson"
+		},
+		"this": {
+			"icon": "git-plain",
+			"link": "https://github.com/BrettWhitson/brettwhitson.github.io"
+		}
 	}
 }

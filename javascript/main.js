@@ -10,6 +10,7 @@ function main() {
 		};
 		buildLinks(data.sections);
 		buildSections(data.sections);
+		buildExtLinks(data.ext);
 		buildDevIcons(data.icons);
 	});
 }
@@ -33,7 +34,6 @@ function buildLinks(sections) {
 }
 
 async function buildSections(sections) {
-	console.log("building sections");
 	for (let section of sections) {
 		switch (section.type) {
 			case "pg":
@@ -49,8 +49,22 @@ async function buildSections(sections) {
 	}
 }
 
+function buildExtLinks(data) {
+	let ext = get(".ext-icon-list");
+	for (let entry in data) {
+		let icon = data[entry].icon;
+		let link = data[entry].link;
+		let icotag = document.createElement("i");
+		let anchor = document.createElement("a");
+		icotag.classList.add("devicon-" + icon);
+		anchor.href = link;
+		anchor.target = "_blank";
+		anchor.appendChild(icotag);
+		ext.appendChild(anchor);
+	}
+}
+
 function buildDevIcons(icons) {
-	console.log(icons);
 	let skills = get(".lang-icon-list");
 	for (let icon of icons.languages) {
 		let icotag = document.createElement("i");
@@ -150,7 +164,7 @@ function buildRsSection(section) {
 	element.title.innerHTML = section.title;
 	element.title.classList.add("section-title");
 	element.div.appendChild(element.title);
-	element.frame.iframe.src = element.frame.file + "&toolbar=0";
+	element.frame.iframe.src = element.frame.file + "#toolbar=0";
 	element.frame.iframe.classList.add("section-body-iframe");
 	element.frame.iframe.id = "pdfFrame";
 	element.div.appendChild(element.frame.iframe);
@@ -160,7 +174,7 @@ function buildRsSection(section) {
 	mobileElement.title.classList.add("section-title");
 	mobileElement.anchor.href = element.frame.file;
 	mobileElement.anchor.innerHTML = "Download Resume PDF";
-	mobileElement.anchor.download = "whitson_resume_21.pdf";
+	mobileElement.anchor.download = "whitson_resume_23.pdf";
 	mobileElement.title.appendChild(mobileElement.anchor);
 	mobileElement.div.appendChild(mobileElement.title);
 	if (window.screen.width > 980) {
