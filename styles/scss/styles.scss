@@ -117,6 +117,13 @@ body {
 		color: $font-main-color;
 		white-space: nowrap;
 	}
+	.mailto {
+		font-family: $font-family;
+		color: $font-main-color;
+		display: block;
+		text-align: center;
+		margin-top: -10px;
+	}
 }
 
 #content {
@@ -224,25 +231,38 @@ body {
 
 @media only screen and (max-width: 980px) {
 	.linkbar {
-		width: 35%;
+		width: 100%;
 		height: 50px;
 		padding: 2px;
 		display: flex;
 		flex-direction: row;
-		h1 {
-			font-size: 2rem;
-			align-self: center;
-			margin-left: 20px;
-		}
-		.linklist {
-			display: none;
-		}
+		align-items: center;
+		position: static;
 		#portrait {
 			margin: 0;
 			width: 50px;
 			height: 50px;
 			border-radius: 50%;
 			display: inline-block;
+			order: 1;
+		}
+		.ext-links {
+			order: 2;
+			margin-top: 10px;
+			a {
+				font-size: 1.5rem;
+			}
+		}
+		h1 {
+			display: none;
+		}
+		.mailto {
+			order: 3;
+			margin-top: 10px;
+			font-size: 0.85rem;
+		}
+		.linklist {
+			display: none;
 		}
 	}
 	#content {
