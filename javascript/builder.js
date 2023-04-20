@@ -30,9 +30,12 @@ class Builder {
 	}
 	static mod = {
 		id: {
-			add: () => {},
-			remove: () => {},
-			toggle: () => {},
+			add: (node, idString) => {
+				node.setAttribute("id", idString);
+			},
+			remove: (node, idString) => {
+				node.removeAttribute("id");
+			},
 		},
 		class: {
 			add: (node, classString) => {
