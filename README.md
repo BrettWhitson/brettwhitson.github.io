@@ -6,6 +6,15 @@
 
 > A modern, data-driven portfolio site built with vanilla JavaScript and custom BuilderJS library.
 
+## 📝 TODOs
+
+- [ ] **Complete style overhaul** - Modernize from current design to clean, contemporary design:
+  - Clean typography and spacing
+  - Modern color palette (move away from dark/neon theme)
+  - Simplified animations (reduce glitch effects)
+  - Responsive grid layout (replace fixed sidebar)
+  - Streamlined SCSS organization
+
 ## 🚀 Quick Links
 
 | Link                                                      | Description         |
