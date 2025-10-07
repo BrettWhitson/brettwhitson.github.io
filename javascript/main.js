@@ -860,7 +860,8 @@ class PortfolioController {
       button.innerText = "Preview";
       this.log("Resume preview hidden");
     }
-  } // === PUBLIC API ===
+  } 
+  // === PUBLIC API ===
 
   /**
    * Get current data
