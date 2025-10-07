@@ -4,7 +4,7 @@
       "section": "about",
       "title": "About Me",
       "type": "pg",
-      "body": "I'm an ambitious computer scientist and fullstack developer with a passion for expanding my knowledge and experience. I'm detail-oriented and adept in both collaborative and independent work environments, with an aptitude for problem solving, analysis, and honing in on my skills."
+      "body": "I'm a dedicated computer scientist and full-stack developer with a strong drive for learning and growth. I thrive in both team and solo settings, bringing attention to detail, analytical thinking, and creative problem-solving to every project. My passion lies in building robust solutions and continuously expanding my technical expertise."
     },
     {
       "section": "experience",
@@ -13,8 +13,14 @@
       "body": [
         {
           "header": "University of Tennessee at Martin",
+          "subheader": "IT Admin IV - Oracle DBA and Banner Systems Administrator",
+          "subsubheader": "June 2025 - Present",
+          "main": ""
+        },
+        {
+          "header": "University of Tennessee at Martin",
           "subheader": "Programmer/Analyst",
-          "subsubheader": "July 2021 - Present",
+          "subsubheader": "July 2021 - June 2025",
           "main": ""
         },
         {
@@ -33,18 +39,6 @@
           "header": "University of Tennessee at Martin",
           "subheader": "Help Desk & Config/Install Student Technician",
           "subsubheader": " April 2018 - August 2020",
-          "main": ""
-        },
-        {
-          "header": "William's Sausage",
-          "subheader": "Processing Department",
-          "subsubheader": "October 2014 - February 2016",
-          "main": ""
-        },
-        {
-          "header": "Hampton Inn",
-          "subheader": "Front Desk Customer Service Representative",
-          "subsubheader": "September 2011 - September 2013",
           "main": ""
         }
       ]
