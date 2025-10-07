@@ -4,16 +4,11 @@
 [![JSDoc](https://img.shields.io/badge/JSDoc-Documentation-blue)](https://home.brettwhitson.dev/docs/JSDocs)
 [![BuilderJS](https://img.shields.io/badge/BuilderJS-v0.0.3-orange)](https://github.com/BrettWhitson/Builder-JS)
 
-> A modern, data-driven portfolio site built with vanilla JavaScript and custom BuilderJS library.
+> A modern, data-driven portfolio site with contemporary design, featuring light/dark themes and built with vanilla JavaScript and custom BuilderJS library.
 
 ## 📝 TODOs
 
-- [ ] **Complete style overhaul** - Modernize from current design to clean, contemporary design:
-  - Clean typography and spacing
-  - Modern color palette (move away from dark/neon theme)
-  - Simplified animations (reduce glitch effects)
-  - Responsive grid layout (replace fixed sidebar)
-  - Streamlined SCSS organization
+- [ ] **Portfolio content refactoring** - Update and restructure portfolio sections and data architecture
 
 ## 🚀 Quick Links
 
@@ -23,35 +18,60 @@
 | **[API Docs](https://home.brettwhitson.dev/docs/JSDocs)** | JSDoc documentation |
 | **[Changelog](./CHANGELOG.md)**                           | Version history     |
 
-## ✨ Recent Updates (v2.0.0)
+## ✨ Latest Updates (v3.0.0)
 
-- 🏗️ Refactored to **PortfolioController** class architecture
-- ⚡ Upgraded to **BuilderJS v0.0.3** with new `scope()` method
-- 📚 Added professional JSDoc documentation with automated generation
-- 🛡️ Enhanced error handling and GitHub Pages compatibility
+- 🎨 **Complete style overhaul** - Modern, clean design system with professional aesthetics
+- 🌙 **Light/Dark theme system** - Automatic system detection with manual override
+- 📱 **Responsive design** - Mobile-first approach with CSS Grid and Flexbox
+- 📄 **Interactive resume** - Toggle-able PDF preview with download options
+- 🏗️ **Modular SCSS architecture** - Organized, maintainable styling system
+- ⚡ **Enhanced animations** - Smooth, contemporary transitions
+
+## 🎨 Design Features
+
+- **Theme System**: Light/dark modes with system preference detection
+- **Modern UI**: Clean typography, professional color palette, card-based layouts
+- **Responsive**: Mobile-first design with smooth breakpoint transitions
+- **Accessibility**: ARIA labels, keyboard navigation, high contrast support
+- **Performance**: CSS custom properties, optimized animations, minified assets
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: Vanilla JavaScript (ES6+)
 - **DOM Library**: BuilderJS v0.0.3
-- **Styling**: SCSS with custom mixins
+- **Styling**: SCSS with modular architecture
 - **Icons**: DevIcon library
 - **Documentation**: JSDoc 4.0.3
 - **Deployment**: GitHub Pages
 
-## 📁 Key Files
+## 📁 Architecture
 
-- `javascript/main.js` - PortfolioController application logic
+### Key Files
+
+- `javascript/main.js` - PortfolioController and ThemeController classes
 - `data/data.json` - Content data source
+- `styles/scss/` - Modular SCSS architecture
+  - `abstracts/` - Variables, mixins, functions
+  - `base/` - Reset, typography, utilities
+  - `layout/` - Header, main, footer
+  - `components/` - Buttons, cards, navigation
+
+### Design System
+
+- **CSS Custom Properties** - Dynamic theming support
+- **Component Library** - Reusable UI components
+- **Utility Classes** - Flexible layout and spacing
+- **Responsive Mixins** - Consistent breakpoint handling
 
 ## 📝 Changelog
 
-### [2.0.0] - 2025-10-07
+### [3.0.0] - 2025-10-07
 
-- Refactored to PortfolioController class architecture
-- Upgraded to BuilderJS v0.0.3 with `scope()` method
-- Added JSDoc documentation with automated generation
-- Enhanced error handling and GitHub Pages compatibility
+- Complete style overhaul with modern design system
+- Light/dark theme system with automatic detection
+- Modular SCSS architecture and responsive design
+- Interactive resume preview functionality
+- Enhanced ThemeController and event handling patterns
 
 _[Full changelog](./CHANGELOG.md)_
 

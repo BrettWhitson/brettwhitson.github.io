@@ -610,8 +610,11 @@ class PortfolioController {
         const iconBuilder = new Builder("span").scope((span) => {
           span.addChild("i", {
             class: `devicon-${icon}-plain`,
-            "data-text": icon,
             title: icon,
+          });
+          span.addChild("span", {
+            class: "icon-label",
+            innerText: icon.charAt(0).toUpperCase() + icon.slice(1),
           });
         });
 
@@ -635,14 +638,32 @@ class PortfolioController {
       id: `${section.section}-section`,
       class: this.config.classes.section,
     }).scope((div) => {
-      div.addChild("h2", {
-        class: this.config.classes.sectionTitle,
-        innerText: section.title,
-      });
-      div.addChild("p", {
-        class: this.config.classes.sectionBody,
-        innerText: section.body,
-      });
+      // Section header
+      div.addChild(
+        "div",
+        {
+          class: "section-header",
+        },
+        (header) => {
+          header.addChild("h2", {
+            class: "section-title",
+            innerText: section.title,
+          });
+        }
+      );
+
+      // Section body
+      div.addChild(
+        "div",
+        {
+          class: "section-body section-body-paragraph",
+        },
+        (body) => {
+          body.addChild("p", {
+            innerText: section.body,
+          });
+        }
+      );
     });
 
     sectionBuilder.appendTo(this.dom.content);
@@ -659,56 +680,74 @@ class PortfolioController {
       id: `${section.section}-section`,
       class: this.config.classes.section,
     }).scope((div) => {
-      div.addChild("h2", {
-        class: this.config.classes.sectionTitle,
-        innerText: section.title,
-      });
-
+      // Section header
       div.addChild(
-        "ul",
+        "div",
         {
-          class: this.config.classes.sectionBodyList,
+          class: "section-header",
         },
-        (listBuilder) => {
-          // Build list items using scoped building
-          section.body.forEach((item) => {
-            listBuilder.addChild(
-              "li",
-              {
-                class: this.config.classes.sectionListItem,
-              },
-              (itemBuilder) => {
-                // Add item elements conditionally
-                if (item.header) {
-                  itemBuilder.addChild("h4", {
-                    class: this.config.classes.listItemHeader,
-                    innerText: item.header,
-                  });
-                }
-
-                if (item.subheader) {
-                  itemBuilder.addChild("h4", {
-                    class: this.config.classes.listItemSubheader,
-                    innerText: item.subheader,
-                  });
-                }
-
-                if (item.subsubheader) {
-                  itemBuilder.addChild("h6", {
-                    class: this.config.classes.listItemSubsubheader,
-                    innerText: item.subsubheader,
-                  });
-                }
-
-                if (item.main) {
-                  itemBuilder.addChild("p", {
-                    class: this.config.classes.listItemMain,
-                    innerHTML: item.main,
-                  });
-                }
-              }
-            );
+        (header) => {
+          header.addChild("h2", {
+            class: "section-title",
+            innerText: section.title,
           });
+        }
+      );
+
+      // Section body
+      div.addChild(
+        "div",
+        {
+          class: "section-body section-body-list",
+        },
+        (body) => {
+          body.addChild(
+            "ul",
+            {
+              class: this.config.classes.sectionBodyList,
+            },
+            (listBuilder) => {
+              // Build list items using scoped building
+              section.body.forEach((item) => {
+                listBuilder.addChild(
+                  "li",
+                  {
+                    class: this.config.classes.sectionListItem,
+                  },
+                  (itemBuilder) => {
+                    // Add item elements conditionally
+                    if (item.header) {
+                      itemBuilder.addChild("div", {
+                        class: this.config.classes.listItemHeader,
+                        innerText: item.header,
+                      });
+                    }
+
+                    if (item.subheader) {
+                      itemBuilder.addChild("div", {
+                        class: this.config.classes.listItemSubheader,
+                        innerText: item.subheader,
+                      });
+                    }
+
+                    if (item.subsubheader) {
+                      itemBuilder.addChild("div", {
+                        class: this.config.classes.listItemSubsubheader,
+                        innerText: item.subsubheader,
+                      });
+                    }
+
+                    if (item.main) {
+                      itemBuilder.addChild("div", {
+                        class: this.config.classes.listItemMain,
+                        innerHTML: item.main,
+                      });
+                    }
+                  }
+                );
+              });
+            }
+          );
         }
       );
     });
@@ -723,50 +762,105 @@ class PortfolioController {
   buildRsSection(section) {
     this.log(`Building resume section: ${section.section}`);
 
-    const isDesktop = window.innerWidth > this.mobileBreakpoint;
+    const sectionBuilder = new Builder("div", {
+      id: `${section.section}-section`,
+      class: this.config.classes.section,
+    }).scope((div) => {
+      // Section header
+      div.addChild(
+        "div",
+        {
+          class: "section-header",
+        },
+        (header) => {
+          header.addChild("h2", {
+            class: "section-title",
+            innerText: section.title,
+          });
+        }
+      );
 
-    // Desktop version with iframe
-    if (isDesktop) {
-      const desktopBuilder = new Builder("div", {
-        id: `${section.section}-section`,
-        class: `${this.config.classes.section} ${this.config.classes.mobileHide}`,
-      }).scope((div) => {
-        div.addChild("h2", {
-          class: this.config.classes.sectionTitle,
-          innerText: section.title,
-        });
-        div.addChild("iframe", {
-          src: `${section.file}#toolbar=0`,
-          class: this.config.classes.sectionBodyIframe,
-          id: "pdfFrame",
-          title: "Resume PDF",
-        });
-      });
+      // Section body with buttons
+      div.addChild(
+        "div",
+        {
+          class: "section-body",
+        },
+        (body) => {
+          // Button container
+          body.addChild(
+            "div",
+            {
+              class: "resume-actions",
+            },
+            (actions) => {
+              // Download button
+              actions.addChild("a", {
+                href: section.file,
+                innerText: "Download PDF",
+                download: "whitson_resume_25.pdf",
+                class: "btn btn-primary",
+              });
 
-      desktopBuilder.appendTo(this.dom.content);
-    }
+              // Preview button
+              actions.addChild("button", {
+                innerText: "Preview",
+                class: "btn btn-secondary",
+                id: "resume-preview-btn",
+              });
 
-    // Mobile version with download link
-    const mobileBuilder = new Builder("div", {
-      id: `${section.section}-section-mobile`,
-      class: `${this.config.classes.section} ${this.config.classes.mobile}`,
-    }).addChild(
-      "h2",
-      {
-        class: this.config.classes.sectionTitle,
-      },
-      (titleBuilder) => {
-        titleBuilder.addChild("a", {
-          href: section.file,
-          innerText: "Download Resume PDF",
-          download: "whitson_resume_25.pdf", // Updated filename
-        });
-      }
-    );
+              // Add event listener after DOM is built
+              this.addEventListenerAfterBuild("resume-preview-btn", "click", () => {
+                this.toggleResumePreview(section.file);
+              });
+            }
+          );
 
-    mobileBuilder.appendTo(this.dom.content);
+          // Hidden iframe container (will be shown when preview is clicked)
+          body.addChild("div", {
+            id: "resume-preview-container",
+            class: "resume-preview-container hidden",
+          });
+        }
+      );
+    });
+
+    sectionBuilder.appendTo(this.dom.content);
   }
 
+  /**
+   * Toggle resume preview iframe
+   * @param {string} fileUrl - URL of the resume file
+   */
+  toggleResumePreview(fileUrl) {
+    const container = document.getElementById("resume-preview-container");
+    const button = document.getElementById("resume-preview-btn");
+
+    if (!container || !button) {
+      this.logError("Resume preview elements not found");
+      return;
+    }
+
+    if (container.classList.contains("hidden")) {
+      // Show preview
+      container.innerHTML = "";
+      const iframe = document.createElement("iframe");
+      iframe.src = `${fileUrl}#toolbar=0`;
+      iframe.id = "pdfFrame";
+      iframe.title = "Resume PDF";
+      container.appendChild(iframe);
+
+      container.classList.remove("hidden");
+      button.innerText = "Hide Preview";
+      this.log("Resume preview shown");
+    } else {
+      // Hide preview
+      container.classList.add("hidden");
+      container.innerHTML = "";
+      button.innerText = "Preview";
+      this.log("Resume preview hidden");
+    }
+  } 
   // === PUBLIC API ===
 
   /**
@@ -830,6 +924,267 @@ class PortfolioController {
       this.logError("Error clearing content", error);
     }
   }
+
+  /**
+   * Add event listener to element after DOM is built (utility for Builder.js)
+   * @param {string} elementId - ID of the element to add listener to
+   * @param {string} event - Event type (e.g., 'click', 'change')
+   * @param {Function} handler - Event handler function
+   */
+  addEventListenerAfterBuild(elementId, event, handler) {
+    setTimeout(() => {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.addEventListener(event, handler);
+        this.log(`Event listener added to ${elementId} for ${event} event`);
+      } else {
+        this.logError(`Element not found: ${elementId}`);
+      }
+    }, 0);
+  }
+}
+
+/**
+ * ThemeController - Manages light/dark theme switching
+ *
+ * This class handles theme detection, switching, and persistence using CSS custom properties
+ * and data attributes. It respects system preferences and remembers user choices.
+ *
+ * @class ThemeController
+ * @since 1.0.0
+ */
+class ThemeController {
+  /**
+   * Create a new ThemeController instance
+   * @param {Object} options - Configuration options
+   * @param {boolean} [options.debug=false] - Enable debug logging
+   * @param {string} [options.storageKey="theme"] - localStorage key for theme preference
+   */
+  constructor(options = {}) {
+    this.debug = Boolean(options.debug);
+    this.storageKey = options.storageKey || "theme";
+
+    this.themes = Object.freeze({
+      LIGHT: "light",
+      DARK: "dark",
+    });
+
+    // Bind methods
+    this.init = this.init.bind(this);
+    this.setTheme = this.setTheme.bind(this);
+    this.toggleTheme = this.toggleTheme.bind(this);
+    this.handleSystemThemeChange = this.handleSystemThemeChange.bind(this);
+  }
+
+  /**
+   * Debug logging utility
+   * @param {...any} args - Arguments to log
+   */
+  log(...args) {
+    if (this.debug && args.length > 0) {
+      console.log("ThemeController:", ...args);
+    }
+  }
+
+  /**
+   * Initialize the theme controller
+   */
+  init() {
+    try {
+      this.log("Initializing theme controller...");
+
+      // Set initial theme
+      this.initializeTheme();
+
+      // Set up theme toggle button
+      this.setupThemeToggle();
+
+      // Listen for system theme changes
+      this.setupSystemThemeListener();
+
+      this.log("Theme controller initialized");
+    } catch (error) {
+      console.error("Failed to initialize theme controller:", error);
+    }
+  }
+
+  /**
+   * Initialize theme based on user preference or system setting
+   */
+  initializeTheme() {
+    const savedTheme = this.getSavedTheme();
+    const systemTheme = this.getSystemTheme();
+    const theme = savedTheme || systemTheme;
+
+    this.log(`Initializing theme: saved=${savedTheme}, system=${systemTheme}, final=${theme}`);
+    this.setTheme(theme);
+  }
+
+  /**
+   * Get saved theme from localStorage
+   * @returns {string|null} Saved theme or null if not found
+   */
+  getSavedTheme() {
+    try {
+      const saved = localStorage.getItem(this.storageKey);
+      if (saved && Object.values(this.themes).includes(saved)) {
+        return saved;
+      }
+    } catch (error) {
+      console.warn("Could not read theme from localStorage:", error);
+    }
+    return null;
+  }
+
+  /**
+   * Get system theme preference
+   * @returns {string} System theme preference
+   */
+  getSystemTheme() {
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return this.themes.DARK;
+    }
+    return this.themes.LIGHT;
+  }
+
+  /**
+   * Get current active theme
+   * @returns {string} Current theme
+   */
+  getCurrentTheme() {
+    const current = document.documentElement.getAttribute("data-theme");
+    return current || this.getSystemTheme();
+  }
+
+  /**
+   * Set the active theme
+   * @param {string} theme - Theme to set (light or dark)
+   */
+  setTheme(theme) {
+    if (!Object.values(this.themes).includes(theme)) {
+      console.warn(`Invalid theme: ${theme}`);
+      return;
+    }
+
+    this.log(`Setting theme to: ${theme}`);
+
+    // Set data attribute for CSS
+    document.documentElement.setAttribute("data-theme", theme);
+
+    // Save to localStorage
+    this.saveTheme(theme);
+
+    // Update theme toggle button
+    this.updateThemeToggleButton(theme);
+
+    // Dispatch custom event
+    window.dispatchEvent(
+      new CustomEvent("themechange", {
+        detail: { theme, previous: this.getCurrentTheme() },
+      })
+    );
+  }
+
+  /**
+   * Save theme preference to localStorage
+   * @param {string} theme - Theme to save
+   */
+  saveTheme(theme) {
+    try {
+      localStorage.setItem(this.storageKey, theme);
+    } catch (error) {
+      console.warn("Could not save theme to localStorage:", error);
+    }
+  }
+
+  /**
+   * Toggle between light and dark themes
+   */
+  toggleTheme() {
+    const currentTheme = this.getCurrentTheme();
+    const newTheme = currentTheme === this.themes.DARK ? this.themes.LIGHT : this.themes.DARK;
+    this.setTheme(newTheme);
+  }
+
+  /**
+   * Set up theme toggle button event listeners
+   */
+  setupThemeToggle() {
+    const toggleButton = document.querySelector(".theme-toggle-btn");
+    if (!toggleButton) {
+      console.warn("Theme toggle button not found");
+      return;
+    }
+
+    toggleButton.addEventListener("click", this.toggleTheme);
+
+    // Add keyboard support
+    toggleButton.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        this.toggleTheme();
+      }
+    });
+
+    this.log("Theme toggle button configured");
+  }
+
+  /**
+   * Update theme toggle button appearance
+   * @param {string} theme - Current theme
+   */
+  updateThemeToggleButton(theme) {
+    const button = document.querySelector(".theme-toggle-btn");
+    if (!button) return;
+
+    // Update button title/aria-label
+    const newLabel = theme === this.themes.DARK ? "Switch to light mode" : "Switch to dark mode";
+    button.setAttribute("aria-label", newLabel);
+    button.setAttribute("title", newLabel);
+  }
+
+  /**
+   * Set up system theme change listener
+   */
+  setupSystemThemeListener() {
+    if (!window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", this.handleSystemThemeChange);
+
+    this.log("System theme listener configured");
+  }
+
+  /**
+   * Handle system theme changes
+   * @param {MediaQueryListEvent} event - Media query change event
+   */
+  handleSystemThemeChange(event) {
+    // Only respond to system changes if user hasn't set a manual preference
+    const savedTheme = this.getSavedTheme();
+    if (savedTheme) {
+      this.log("Ignoring system theme change - user has manual preference");
+      return;
+    }
+
+    const newSystemTheme = event.matches ? this.themes.DARK : this.themes.LIGHT;
+    this.log(`System theme changed to: ${newSystemTheme}`);
+    this.setTheme(newSystemTheme);
+  }
+
+  /**
+   * Reset theme to system preference
+   */
+  resetToSystemTheme() {
+    try {
+      localStorage.removeItem(this.storageKey);
+      const systemTheme = this.getSystemTheme();
+      this.setTheme(systemTheme);
+      this.log("Theme reset to system preference");
+    } catch (error) {
+      console.warn("Could not reset theme:", error);
+    }
+  }
 }
 
 // === INITIALIZATION ===
@@ -885,13 +1240,30 @@ function initializePortfolio() {
       return;
     }
 
+    // Determine debug mode: auto-detect localhost or override with URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const debugMode = urlParams.has("debug")
+      ? urlParams.get("debug") !== "false" // ?debug or ?debug=true enables, ?debug=false disables
+      : isLocalhost; // Default to true on localhost, false in production
+
     // Create global portfolio controller instance
     window.portfolioController = new PortfolioController({
-      debug: true,
+      debug: debugMode,
     });
 
-    // Initialize the portfolio
-    window.portfolioController.init().catch((error) => {
+    // Create global theme controller instance
+    window.themeController = new ThemeController({
+      debug: debugMode,
+    });
+
+    // Initialize both controllers
+    const initPromises = [
+      window.portfolioController.init(),
+      Promise.resolve(window.themeController.init()), // Theme controller init is synchronous
+    ];
+
+    Promise.all(initPromises).catch((error) => {
       console.error("Failed to initialize portfolio:", error);
 
       // Attempt to show user-friendly error
