@@ -26,8 +26,12 @@
 <a href="https://home.brettwhitson.dev/docs/JSDocs"><img src="https://img.shields.io/badge/JSDoc-Documentation-blue" alt="JSDoc"></a>
 <a href="https://github.com/BrettWhitson/Builder-JS"><img src="https://img.shields.io/badge/BuilderJS-v0.0.3-orange" alt="BuilderJS"></a></p>
 <blockquote>
-<p>A modern, data-driven portfolio site built with vanilla JavaScript and custom BuilderJS library.</p>
+<p>A modern, data-driven portfolio site with contemporary design, featuring light/dark themes and built with vanilla JavaScript and custom BuilderJS library.</p>
 </blockquote>
+<h2>📝 TODOs</h2>
+<ul>
+<li>[ ] <strong>Portfolio content refactoring</strong> - Update and restructure portfolio sections and data architecture</li>
+</ul>
 <h2>🚀 Quick Links</h2>
 <table>
 <thead>
@@ -51,34 +55,61 @@
 </tr>
 </tbody>
 </table>
-<h2>✨ Recent Updates (v2.0.0)</h2>
+<h2>✨ Latest Updates (v3.0.0)</h2>
 <ul>
-<li>🏗️ Refactored to <strong>PortfolioController</strong> class architecture</li>
-<li>⚡ Upgraded to <strong>BuilderJS v0.0.3</strong> with new <code>scope()</code> method</li>
-<li>📚 Added professional JSDoc documentation with automated generation</li>
-<li>🛡️ Enhanced error handling and GitHub Pages compatibility</li>
+<li>🎨 <strong>Complete style overhaul</strong> - Modern, clean design system with professional aesthetics</li>
+<li>🌙 <strong>Light/Dark theme system</strong> - Automatic system detection with manual override</li>
+<li>📱 <strong>Responsive design</strong> - Mobile-first approach with CSS Grid and Flexbox</li>
+<li>📄 <strong>Interactive resume</strong> - Toggle-able PDF preview with download options</li>
+<li>🏗️ <strong>Modular SCSS architecture</strong> - Organized, maintainable styling system</li>
+<li>⚡ <strong>Enhanced animations</strong> - Smooth, contemporary transitions</li>
+</ul>
+<h2>🎨 Design Features</h2>
+<ul>
+<li><strong>Theme System</strong>: Light/dark modes with system preference detection</li>
+<li><strong>Modern UI</strong>: Clean typography, professional color palette, card-based layouts</li>
+<li><strong>Responsive</strong>: Mobile-first design with smooth breakpoint transitions</li>
+<li><strong>Accessibility</strong>: ARIA labels, keyboard navigation, high contrast support</li>
+<li><strong>Performance</strong>: CSS custom properties, optimized animations, minified assets</li>
 </ul>
 <h2>🛠️ Tech Stack</h2>
 <ul>
 <li><strong>Frontend</strong>: Vanilla JavaScript (ES6+)</li>
 <li><strong>DOM Library</strong>: BuilderJS v0.0.3</li>
-<li><strong>Styling</strong>: SCSS with custom mixins</li>
+<li><strong>Styling</strong>: SCSS with modular architecture</li>
 <li><strong>Icons</strong>: DevIcon library</li>
 <li><strong>Documentation</strong>: JSDoc 4.0.3</li>
 <li><strong>Deployment</strong>: GitHub Pages</li>
 </ul>
-<h2>📁 Key Files</h2>
+<h2>📁 Architecture</h2>
+<h3>Key Files</h3>
 <ul>
-<li><code>javascript/main.js</code> - PortfolioController application logic</li>
+<li><code>javascript/main.js</code> - PortfolioController and ThemeController classes</li>
 <li><code>data/data.json</code> - Content data source</li>
+<li><code>styles/scss/</code> - Modular SCSS architecture
+<ul>
+<li><code>abstracts/</code> - Variables, mixins, functions</li>
+<li><code>base/</code> - Reset, typography, utilities</li>
+<li><code>layout/</code> - Header, main, footer</li>
+<li><code>components/</code> - Buttons, cards, navigation</li>
+</ul>
+</li>
+</ul>
+<h3>Design System</h3>
+<ul>
+<li><strong>CSS Custom Properties</strong> - Dynamic theming support</li>
+<li><strong>Component Library</strong> - Reusable UI components</li>
+<li><strong>Utility Classes</strong> - Flexible layout and spacing</li>
+<li><strong>Responsive Mixins</strong> - Consistent breakpoint handling</li>
 </ul>
 <h2>📝 Changelog</h2>
-<h3>[2.0.0] - 2025-10-07</h3>
+<h3>[3.0.0] - 2025-10-07</h3>
 <ul>
-<li>Refactored to PortfolioController class architecture</li>
-<li>Upgraded to BuilderJS v0.0.3 with <code>scope()</code> method</li>
-<li>Added JSDoc documentation with automated generation</li>
-<li>Enhanced error handling and GitHub Pages compatibility</li>
+<li>Complete style overhaul with modern design system</li>
+<li>Light/dark theme system with automatic detection</li>
+<li>Modular SCSS architecture and responsive design</li>
+<li>Interactive resume preview functionality</li>
+<li>Enhanced ThemeController and event handling patterns</li>
 </ul>
 <p><em><a href="./CHANGELOG.md">Full changelog</a></em></p>
 <h2>🎯 Projects</h2>
@@ -150,13 +181,13 @@ Built with vanilla JavaScript and the custom BuilderJS DOM manipulation library.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="PortfolioController.html">PortfolioController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initializePortfolio">initializePortfolio</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="PortfolioController.html">PortfolioController</a></li><li><a href="ThemeController.html">ThemeController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initializePortfolio">initializePortfolio</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Oct 07 2025 16:29:06 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Oct 07 2025 18:52:50 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
