@@ -103,8 +103,8 @@
     }
   ],
   "icons": {
-    "languages": ["javascript", "python", "c", "cplusplus", "csharp", "java", "kotlin", "php", "haskell", "jquery", "html5", "css3", "go"],
-    "tools": ["vscode", "git", "github", "docker", "linux", "vim", "googlecloud", "firebase", "nodejs", "oracle"]
+    "languages": ["sqldeveloper", "python", "javascript", "c", "cplusplus", "csharp", "java", "kotlin", "php", "haskell", "jquery", "html5", "css3", "go"],
+    "tools": ["vscode", "git", "oracle", "github", "docker", "linux", "vim", "googlecloud", "firebase", "nodejs"]
   },
   "ext": {
     "linkedin": {

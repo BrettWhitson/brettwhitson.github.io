@@ -1,281 +1,106 @@
-@import "./fonts.scss";
-@import "./mixins.scss";
-@import "./colors.scss";
-*,
-html,
-body {
-	margin: 0;
-	padding: 0;
-	border: none;
-	box-sizing: border-box;
+// Modern Portfolio Styles - Main Entry Point
+// Import order is critical for proper CSS cascade
+
+// 1. Abstracts - Variables, functions, mixins
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+
+// 2. Base - Reset, typography, utilities
+@import "./base/reset";
+@import "./base/typography";
+@import "./base/utilities";
+
+// 3. Layout - Grid systems, header, main content, footer
+@import "./layout/header";
+@import "./layout/main";
+@import "./layout/footer";
+
+// 4. Components - Buttons, cards, navigation
+@import "./components/buttons";
+@import "./components/cards";
+@import "./components/navigation";
+
+// 5. Page-specific styles and animations
+// Entrance animations for content sections
+.section {
+  @include animate-fade-in-up(0.6s, 0.1s);
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  &:nth-child(5) {
+    animation-delay: 0.5s;
+  }
 }
 
-html {
-	scroll-behavior: smooth;
+.site-header {
+  @include animate-fade-in-down(0.5s, 0s);
 }
 
-body {
-	@include unsplash-background;
-}
-
-.section .list-no-style-inline {
-	.list-item-header {
-		margin-bottom: 10px;
-	}
-
-	list-style: none;
-	span:has([class*="devicon"]) {
-		position: relative;
-		padding-bottom: 10px;
-		i {
-			font-size: 2rem;
-			display: inline-block;
-			margin: 5px;
-			transition: all 300ms ease-in-out;
-			&:hover {
-				animation: pulse 1s ease-in-out infinite;
-				text-shadow: 2px 2px 2px rgb(0, 245, 255);
-				&::after {
-					content: attr(data-text);
-					position: absolute;
-					font-size: 1rem;
-					transform: translate(-40%, 30px);
-				}
-			}
-		}
-	}
-}
-
-.bounce:hover {
-	animation: bounce 1s ease-in-out infinite;
-}
-
-.icon-list {
-	color: white;
-	font-size: 3rem;
+// Responsive behavior for original class names (compatibility)
+.mobile-hide {
+  @include mobile-only {
+    display: none !important;
+  }
 }
 
 .mobile {
-	display: none;
+  display: none;
+
+  @include mobile-only {
+    display: block;
+  }
 }
 
-.linkbar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 30px;
-	padding: 5% 0 0 5px;
-	width: 250px;
-	box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.5);
-	background-color: rgba(12, 35, 63, 0.9);
-	.ext-links {
-		ul {
-			width: 100%;
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			font-size: 3rem;
-			a {
-				margin: 5px 10px;
-				text-decoration: none;
-				transition: all 100ms ease-in-out;
-				&:hover {
-					transform: translate(0, -2px);
-					text-shadow: 3px 2px 5px rgb(0, 245, 255);
-				}
-				&:visited {
-					color: white;
-				}
-			}
-		}
-	}
-	.linklist {
-		list-style-type: none;
-		@include indent(1);
-		a {
-			font-family: $font-family;
-			color: $font-main-color;
-			font-size: $font-size-linkbar;
-			font-weight: bold;
-			text-decoration: none;
-			transition: transform 150ms ease-in-out, color 150ms ease-in-out;
-			&:hover {
-				transform: scale(1.5);
-				color: $font-color-glitch-link-hover;
-			}
-		}
-	}
-	#portrait {
-		width: 80%;
-		margin: 0 auto;
-		border-radius: 20%;
-		display: block;
-	}
-	h1 {
-		font-family: $font-family;
-		font-size: 2.5rem;
-		color: $font-main-color;
-		white-space: nowrap;
-	}
-	.mailto {
-		font-family: $font-family;
-		color: $font-main-color;
-		display: block;
-		text-align: center;
-		margin-top: -10px;
-	}
+// Legacy class compatibility
+.bounce {
+  @include hover-lift(2px, var(--shadow-md));
 }
 
-#content {
-	font-family: $font-family;
-	font-size: 1.5rem;
-	color: $font-main-color;
-	margin-left: 300px;
-	background-color: transparent;
-	.section {
-		max-width: 70vw;
-		background-color: rgba(18, 26, 36, 0.5);
-		&::before {
-			content: " ";
-			display: block;
-			width: 100%;
-			height: 1px;
-			margin: 1rem 0;
-			background-color: white;
-		}
-		&::after {
-			content: " ";
-			display: block;
-			width: 100%;
-			height: 1px;
-			margin: 1rem 0;
-			background-color: white;
-		}
-		p {
-			font-size: 1.2rem;
-			font-family: $secondary-font-family;
-		}
-		a {
-			font-size: 2rem;
-			color: white;
-		}
-		.section-body {
-			@include indent(1);
-		}
-		.section-title {
-			letter-spacing: 5px;
-			font-size: 2rem;
-		}
-		.section-body-list {
-			list-style-type: none;
-			@include indent(1);
-			letter-spacing: 2px;
-			.section-list-item {
-				margin-bottom: 20px;
-				.list-item-header {
-					font-weight: bold;
-				}
-				.list-item-subheader {
-					@include indent(1);
-					font-size: 1.2rem;
-				}
-				.list-item-subsubheader {
-					@include indent(1);
-					font-size: 0.8rem;
-					font-style: italic;
-				}
-				.list-item-main {
-					@include indent(2);
-				}
-			}
-		}
-	}
+.glitched-list {
+  // Remove all glitch animations, replace with subtle effects
+  a {
+    transition: var(--transition-base);
+
+    &:hover {
+      transform: scale(1.05);
+      color: var(--color-primary);
+    }
+  }
 }
 
-#pdfFrame {
-	width: 800px;
-	zoom: 1;
-	height: 110vh;
-	box-shadow: 5px 5px 50px 0 rgba(0, 0, 0, 0.5);
+// Icon lists compatibility - styles defined in layout/_main.scss
+// Note: This placeholder prevents import errors for existing class references
+
+// Ensure smooth transitions for theme changes
+* {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: var(--transition-base);
+  transition-timing-function: ease-out;
 }
 
-.glitched-list a {
-	position: relative;
-	&:hover {
-		$glitch-time: 3000ms;
-		$fragment-glitch-time: 2000ms;
-		$fragment-shift-time: 750ms;
-		animation: glitch $glitch-time steps(3, jump-none) infinite, grow 1s forwards;
-		&::before {
-			content: attr(data-text);
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			animation: glitch $fragment-glitch-time steps(3, jump-none) infinite,
-				glitch-shift-first $fragment-shift-time steps(2, jump-none) infinite, grow 150ms forwards;
-		}
-		&::after {
-			content: attr(data-text);
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			animation: glitch $fragment-glitch-time steps(3, jump-none) infinite,
-				glitch-shift-second $fragment-shift-time steps(2, jump-none) infinite, grow 500ms forwards;
-		}
-	}
-}
+// Print styles
+@media print {
+  .site-header,
+  .theme-toggle,
+  .ext-links {
+    display: none !important;
+  }
 
-@media only screen and (max-width: 980px) {
-	.linkbar {
-		width: 100%;
-		height: 50px;
-		padding: 2px;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		position: static;
-		#portrait {
-			margin: 0;
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			display: inline-block;
-			order: 1;
-		}
-		.ext-links {
-			order: 2;
-			margin-top: 10px;
-			a {
-				font-size: 1.5rem;
-			}
-		}
-		h1 {
-			display: none;
-		}
-		.mailto {
-			order: 3;
-			margin-top: 10px;
-			font-size: 0.85rem;
-		}
-		.linklist {
-			display: none;
-		}
-	}
-	#content {
-		margin-top: 55px;
-		margin-left: 0;
-		.section {
-			max-width: unset;
-		}
-	}
-	.mobile-hide {
-		display: none;
-	}
-	.mobile {
-		display: block;
-	}
+  .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .section {
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
 }

@@ -1,0 +1,239 @@
+// Card Components
+
+.card {
+  @include card-base;
+  overflow: hidden;
+
+  &-interactive {
+    @include card-interactive;
+  }
+
+  &-header {
+    padding: var(--space-6) var(--space-6) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-elevated);
+
+    @include mobile-only {
+      padding: var(--space-4) var(--space-4) var(--space-3);
+    }
+
+    .card-title {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--color-text-primary);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+
+      @include mobile-only {
+        font-size: var(--text-xl);
+      }
+
+      &::before {
+        content: "";
+        width: 4px;
+        height: var(--text-2xl);
+        background: var(--color-primary);
+        border-radius: var(--radius-sm);
+
+        @include mobile-only {
+          height: var(--text-xl);
+        }
+      }
+    }
+
+    .card-subtitle {
+      font-size: var(--text-lg);
+      font-weight: var(--font-medium);
+      color: var(--color-text-secondary);
+      margin: var(--space-2) 0 0;
+
+      @include mobile-only {
+        font-size: var(--text-base);
+      }
+    }
+  }
+
+  &-body {
+    padding: var(--space-6);
+
+    @include mobile-only {
+      padding: var(--space-4);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-footer {
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+
+    @include mobile-only {
+      padding: var(--space-3) var(--space-4);
+    }
+  }
+
+  // Card variants
+  &-elevated {
+    box-shadow: var(--shadow-lg);
+
+    &:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-4px);
+    }
+  }
+
+  &-glass {
+    @include glass-morphism(0.9);
+  }
+
+  // Card sizes
+  &-sm {
+    .card-header {
+      padding: var(--space-4);
+
+      .card-title {
+        font-size: var(--text-lg);
+
+        &::before {
+          height: var(--text-lg);
+        }
+      }
+    }
+
+    .card-body {
+      padding: var(--space-4);
+    }
+
+    .card-footer {
+      padding: var(--space-3) var(--space-4);
+    }
+  }
+
+  &-lg {
+    .card-header {
+      padding: var(--space-8) var(--space-8) var(--space-6);
+
+      .card-title {
+        font-size: var(--text-3xl);
+
+        @include mobile-only {
+          font-size: var(--text-2xl);
+        }
+
+        &::before {
+          height: var(--text-3xl);
+
+          @include mobile-only {
+            height: var(--text-2xl);
+          }
+        }
+      }
+    }
+
+    .card-body {
+      padding: var(--space-8);
+
+      @include mobile-only {
+        padding: var(--space-6);
+      }
+    }
+
+    .card-footer {
+      padding: var(--space-6) var(--space-8);
+
+      @include mobile-only {
+        padding: var(--space-4) var(--space-6);
+      }
+    }
+  }
+}
+
+// Specialized cards for portfolio content
+.experience-card {
+  @extend .card;
+  @extend .card-interactive;
+
+  .experience-header {
+    @extend .card-header;
+
+    .company-name {
+      @extend .card-title;
+    }
+
+    .job-title {
+      @extend .card-subtitle;
+      color: var(--color-primary);
+    }
+
+    .duration {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      font-style: italic;
+      margin-top: var(--space-1);
+
+      @include mobile-only {
+        font-size: var(--text-xs);
+      }
+    }
+  }
+
+  .experience-body {
+    @extend .card-body;
+  }
+}
+
+.skill-card {
+  @extend .card;
+
+  .skill-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    transition: var(--transition-base);
+
+    &:hover {
+      transform: translateY(-4px);
+
+      .skill-icon-symbol {
+        color: var(--color-primary);
+        transform: scale(1.1);
+      }
+
+      .skill-label {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .skill-icon-symbol {
+      font-size: 2.5rem;
+      color: var(--color-text-secondary);
+      transition: var(--transition-base);
+
+      @include mobile-only {
+        font-size: 2rem;
+      }
+    }
+
+    .skill-label {
+      font-size: var(--text-xs);
+      font-weight: var(--font-medium);
+      color: var(--color-text-muted);
+      text-align: center;
+      opacity: 0.8;
+      transform: translateY(2px);
+      transition: var(--transition-base);
+
+      @include mobile-only {
+        font-size: 0.625rem;
+      }
+    }
+  }
+}

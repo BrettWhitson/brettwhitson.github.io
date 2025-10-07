@@ -1,0 +1,113 @@
+// Button Components
+
+.btn {
+  @include button-base;
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  line-height: var(--leading-tight);
+
+  &-sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  &-lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+  }
+
+  &-primary {
+    @include button-primary;
+  }
+
+  &-secondary {
+    @include button-secondary;
+  }
+
+  &-ghost {
+    @include button-ghost;
+  }
+
+  // Icon buttons
+  &-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    &.btn-sm {
+      width: 32px;
+      height: 32px;
+    }
+
+    &.btn-lg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  // Button with icon
+  .btn-icon-left {
+    margin-right: var(--space-2);
+  }
+
+  .btn-icon-right {
+    margin-left: var(--space-2);
+  }
+}
+
+// Theme toggle button specific styles
+.theme-toggle-btn {
+  @extend .btn;
+  @extend .btn-icon;
+  @extend .btn-secondary;
+
+  .theme-icon {
+    font-size: var(--text-lg);
+    transition: var(--transition-base);
+  }
+
+  &:hover .theme-icon {
+    transform: rotate(180deg);
+  }
+}
+
+// Resume Section Styles
+.resume-actions {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}
+
+.resume-preview-container {
+  margin-top: var(--space-4);
+  border-radius: var(--rounded-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--color-surface);
+  transition: var(--transition-base);
+
+  &.hidden {
+    display: none;
+  }
+
+  iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    display: block;
+
+    @media (max-width: 768px) {
+      height: 500px;
+    }
+
+    @media (max-width: 480px) {
+      height: 400px;
+    }
+  }
+}

@@ -8,24 +8,67 @@
   <link rel="stylesheet" href="/styles/min/styles.min.css">
   <script src="https://cdn.jsdelivr.net/gh/brettwhitson/builder-js@main/builder.js"></script>
   <script src="/javascript/main.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <!-- Preload key fonts for better performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 
 <body>
-  <div>
-  </div>
-  <div class="linkbar">
-    <div class="ext-links">
-      <ul class="ext-icon-list"></ul>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="profile-section">
+        <img id="portrait" src="./data/images/me.jpg" alt="Brett Whitson Profile">
+        <div class="profile-info">
+          <h1>Brett Whitson</h1>
+          <a href="mailto:brett.whitson.dev@gmail.com" class="mailto">Brett.Whitson.Dev@gmail.com</a>
+        </div>
+      </div>
+      <nav class="navigation">
+        <ul class="nav-list linklist"></ul>
+      </nav>
+      <div class="header-actions">
+        <div class="ext-links">
+          <ul class="ext-icon-list"></ul>
+        </div>
+        <div class="theme-toggle">
+          <button class="theme-toggle-btn" aria-label="Toggle theme">
+            <span class="theme-icon theme-icon-sun">☀️</span>
+            <span class="theme-icon theme-icon-moon">🌙</span>
+          </button>
+        </div>
+      </div>
     </div>
-    <img id="portrait" src="./data/images/me.jpg" alt="portrait">
-    <h1>Brett Whitson</h1>
-    <a href="mailto:brett.whitson.dev@gmail.com" class="mailto">Brett.Whitson.Dev@gmail.com</a>
-    <ul class="linklist glitched-list"></ul>
-  </div>
-  <div id="content"></div>
+  </header>
 
+  <main class="main-content">
+    <div class="content-container">
+      <div id="content" class="content-grid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p class="footer-copyright">
+            © 2025 Brett Whitson. All rights reserved.
+          </p>
+          <p class="footer-built">
+            Built with vanilla JavaScript, BuilderJS v0.0.3, and modern CSS
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/BrettWhitson/brettwhitson.github.io" target="_blank" rel="noopener noreferrer"
+            class="footer-link">
+            <span>View Source</span>
+            <i class="devicon-github-original" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
