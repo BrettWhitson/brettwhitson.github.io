@@ -1,6 +1,54 @@
 /**
+ * @fileoverview Main portfolio controller implementing a modern JavaScript architecture
+ * @description This file contains the PortfolioController class which manages the entire
+ * portfolio site lifecycle including data loading, DOM manipulation, and responsive behavior.
+ * Built with vanilla JavaScript and the custom BuilderJS DOM manipulation library.
+ *
+ * @author Brett Whitson
+ * @version 1.0.0
+ * @since 1.0.0
+ * @license MIT
+ *
+ * @requires BuilderJS - Custom DOM manipulation library
+ * @see {@link https://brettwhitson.github.io} Portfolio Site
+ * @see {@link https://github.com/BrettWhitson/brettwhitson.github.io} Source Code
+ *
+ * @example
+ * // Initialize the portfolio controller
+ * const portfolio = new PortfolioController({
+ *   debug: true,
+ *   dataUrl: "./data/data.json"
+ * });
+ *
+ * // Initialize the portfolio
+ * await portfolio.init();
+ */
+
+/**
  * PortfolioController - Main controller class for managing the portfolio site
- * Uses BuilderJS v0.0.3 for modern DOM manipulation
+ *
+ * This class provides a complete architecture for managing a data-driven portfolio site.
+ * It handles data loading, DOM caching, section building, responsive behavior, and error handling.
+ *
+ * @class PortfolioController
+ * @classdesc Professional portfolio site controller with comprehensive error handling and modern DOM manipulation
+ * @since 1.0.0
+ *
+ * @example
+ * // Create a new portfolio instance
+ * const portfolio = new PortfolioController({
+ *   debug: true,
+ *   dataUrl: "./data/portfolio.json",
+ *   mobileBreakpoint: 768
+ * });
+ *
+ * // Initialize and build the portfolio
+ * try {
+ *   await portfolio.init();
+ *   console.log('Portfolio loaded successfully');
+ * } catch (error) {
+ *   console.error('Portfolio failed to load:', error);
+ * }
  */
 class PortfolioController {
   /**
@@ -787,7 +835,41 @@ class PortfolioController {
 // === INITIALIZATION ===
 
 /**
- * Initialize portfolio when DOM is ready with proper error handling
+ * Initialize portfolio when DOM is ready with comprehensive error handling
+ *
+ * This function serves as the main entry point for the portfolio application.
+ * It performs environment checks, prevents duplicate initialization, creates
+ * the global portfolio controller instance, and provides user-friendly error
+ * handling with visual feedback.
+ *
+ * @function initializePortfolio
+ * @global
+ * @since 1.0.0
+ * @author Brett Whitson
+ *
+ * @description
+ * - Checks for browser environment compatibility
+ * - Prevents duplicate initialization attempts
+ * - Creates global PortfolioController instance with debug enabled
+ * - Provides visual error notifications for users
+ * - Handles both synchronous and asynchronous initialization errors
+ *
+ * @example
+ * // Function is called automatically when DOM loads
+ * // Manual call (if needed):
+ * initializePortfolio();
+ *
+ * @example
+ * // Access the global controller after initialization
+ * if (window.portfolioController) {
+ *   console.log('Portfolio data:', window.portfolioController.getData());
+ *   await window.portfolioController.refresh();
+ * }
+ *
+ * @throws {Error} Critical initialization errors are logged but don't stop execution
+ *
+ * @see {@link PortfolioController} Main controller class
+ * @see {@link PortfolioController#init} Controller initialization method
  */
 function initializePortfolio() {
   try {
