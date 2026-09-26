@@ -23,11 +23,11 @@
     <section>
         <article><h1>Brett Whitson Portfolio</h1>
 <p><a href="https://home.brettwhitson.dev"><img src="https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen" alt="GitHub Pages"></a>
-<a href="https://home.brettwhitson.dev/docs/JSDocs"><img src="https://img.shields.io/badge/JSDoc-Documentation-blue" alt="JSDoc"></a>
-<a href="https://github.com/BrettWhitson/Builder-JS"><img src="https://img.shields.io/badge/BuilderJS-v0.0.3-orange" alt="BuilderJS"></a></p>
-<p>Personal site and resume, live at <strong><a href="https://home.brettwhitson.dev">home.brettwhitson.dev</a></strong>. A data-driven single
-page built with vanilla JavaScript and <a href="https://github.com/BrettWhitson/Builder-JS">BuilderJS</a>, with light and dark
-themes.</p>
+<a href="https://home.brettwhitson.dev/docs/JSDocs"><img src="https://img.shields.io/badge/JSDoc-Documentation-blue" alt="JSDoc"></a></p>
+<p>Personal site and resume, live at <strong><a href="https://home.brettwhitson.dev">home.brettwhitson.dev</a></strong>. Content lives in one
+JSON file; a zero-dependency Node script renders it to static HTML, so the page is complete for search engines, link
+previews, and visitors without JavaScript. The browser script only adds enhancements (theme toggle, inline resume
+preview).</p>
 <table>
 <thead>
 <tr>
@@ -52,11 +52,11 @@ themes.</p>
 </table>
 <h2>Tech Stack</h2>
 <ul>
-<li><strong>Frontend</strong>: Vanilla JavaScript (ES6+), BuilderJS v0.0.3</li>
+<li><strong>Build</strong>: Node.js (no dependencies) renders <code>data/data.json</code> into <code>index.html</code></li>
+<li><strong>Frontend</strong>: Vanilla JavaScript (ES2020+), progressive enhancement only</li>
 <li><strong>Styling</strong>: SCSS, compiled with Dart Sass</li>
 <li><strong>Icons</strong>: devicon 2.17.0</li>
 <li><strong>Resume</strong>: LaTeX</li>
-<li><strong>Docs</strong>: JSDoc 4.0.3</li>
 <li><strong>Hosting</strong>: GitHub Pages</li>
 </ul>
 <h2>Layout</h2>
@@ -69,50 +69,53 @@ themes.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>index.html</code></td>
-<td>Page shell and metadata</td>
+<td><code>data/data.json</code></td>
+<td>All page content: site metadata, sections, icons, links</td>
 </tr>
 <tr>
-<td><code>data/data.json</code></td>
-<td>All page content: sections, skill icons, profile links</td>
+<td><code>templates/index.html</code></td>
+<td>Page shell with <code>{{slot}}</code> placeholders</td>
+</tr>
+<tr>
+<td><code>scripts/build.mjs</code></td>
+<td>Renders the page, writes <code>sitemap.xml</code>, compiles the SCSS</td>
+</tr>
+<tr>
+<td><code>index.html</code></td>
+<td>Generated output. Don't edit by hand</td>
 </tr>
 <tr>
 <td><code>javascript/main.js</code></td>
-<td><code>PortfolioController</code> and <code>ThemeController</code></td>
+<td><code>ThemeController</code> and <code>ResumePreview</code></td>
 </tr>
 <tr>
 <td><code>styles/scss/</code></td>
 <td>Source styles (abstracts, base, layout, components)</td>
 </tr>
 <tr>
-<td><code>styles/min/styles.min.css</code></td>
-<td>Compiled stylesheet the page loads</td>
-</tr>
-<tr>
 <td><code>resume/whitson_resume.tex</code></td>
-<td>Resume source</td>
-</tr>
-<tr>
-<td><code>data/whitson_resume.pdf</code></td>
-<td>Built resume served by the site</td>
+<td>Resume source, built to <code>data/whitson_resume.pdf</code></td>
 </tr>
 </tbody>
 </table>
 <h2>Editing content</h2>
-<p>Everything on the page comes from <code>data/data.json</code>. Each section has a <code>type</code>:</p>
+<p>Everything on the page comes from <code>data/data.json</code>. <code>site</code> holds the name, headline, description, and URLs used for
+the header, meta tags, and JSON-LD. Each entry in <code>sections</code> has a <code>type</code>:</p>
 <ul>
 <li><code>pg</code> - a paragraph (<code>body</code> is a string)</li>
-<li><code>ls</code> - a list of cards. Each item takes <code>header</code>, <code>subheader</code>, <code>subsubheader</code>, <code>main</code> (HTML), an optional
-<code>link</code> (<code>{ href, label }</code>), and optional <code>roles</code> (<code>[{ title, dates, bullets }]</code>) for several positions at one
-organization</li>
+<li><code>ls</code> - a list of cards. Each item takes <code>header</code>, <code>subheader</code>, <code>subsubheader</code>, <code>main</code> (HTML), <code>icons</code> (the name of
+a group in <code>icons</code>), <code>link</code> (<code>{ href, label }</code>), and <code>roles</code> (<code>[{ title, dates, bullets }]</code>) for several positions at
+one organization. All optional</li>
 <li><code>rs</code> - the resume download and preview (<code>file</code> points at the PDF)</li>
 </ul>
-<p>Skill icons are <code>{ &quot;icon&quot;: &quot;&lt;devicon class suffix&gt;&quot;, &quot;label&quot;: &quot;&lt;display name&gt;&quot; }</code>, e.g.
-<code>{ &quot;icon&quot;: &quot;python-plain&quot;, &quot;label&quot;: &quot;Python&quot; }</code>.</p>
+<p>Skill icons are <code>{ &quot;icon&quot;: &quot;&lt;devicon class suffix&gt;&quot;, &quot;label&quot;: &quot;&lt;display name&gt;&quot; }</code>.</p>
 <h2>Building</h2>
-<p>Styles:</p>
-<pre class="prettyprint source lang-bash"><code>sass --no-source-map --style=compressed styles/scss/styles.scss styles/min/styles.min.css
-sass --no-source-map styles/scss/styles.scss styles/css/styles.css
+<p>Requires Node 20+ and Dart Sass (<code>npm install -g sass</code>).</p>
+<pre class="prettyprint source lang-bash"><code>node scripts/build.mjs
+</code></pre>
+<p>Renders <code>index.html</code> and <code>sitemap.xml</code> and compiles <code>styles/css/styles.css</code> and <code>styles/min/styles.min.css</code>.
+<code>--html</code> skips the CSS; <code>--check</code> exits non-zero if <code>index.html</code> is out of date.</p>
+<pre class="prettyprint source lang-bash"><code>node --test scripts/
 </code></pre>
 <p>Resume (MiKTeX or TeX Live):</p>
 <pre class="prettyprint source lang-bash"><code>cd resume && pdflatex whitson_resume.tex && cp whitson_resume.pdf ../data/
@@ -131,17 +134,11 @@ sass --no-source-map styles/scss/styles.scss styles/css/styles.css
 <article>
     <div class="container-overview">
 
-            <div class="description"><p>This file contains the PortfolioController class which manages the entire
-portfolio site lifecycle including data loading, DOM manipulation, and responsive behavior.
-Built with vanilla JavaScript and the custom BuilderJS DOM manipulation library.</p></div>
+            <div class="description"><p>The page content is rendered to HTML at build time (scripts/build.mjs), so
+everything here is optional behavior layered on top: the theme toggle and the inline
+resume preview. The page is fully readable with this script disabled.</p></div>
 
 <dl class="details">
-
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version"><ul class="dummy"><li>1.0.0</li></ul></dd>
-
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>1.0.0</li></ul></dd>
 
     <dt class="tag-author">Author:</dt>
     <dd class="tag-author">
@@ -156,25 +153,13 @@ Built with vanilla JavaScript and the custom BuilderJS DOM manipulation library.
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="https://brettwhitson.github.io">https://brettwhitson.github.io</a> Portfolio Site</li>
-
             <li><a href="https://github.com/BrettWhitson/brettwhitson.github.io">https://github.com/BrettWhitson/brettwhitson.github.io</a> Source Code</li>
         </ul>
     </dd>
 
 </dl>
 
-            <h3>Example</h3>
-
-    <pre class="prettyprint"><code>// Initialize the portfolio controllerconst portfolio = new PortfolioController({  debug: true,  dataUrl: "./data/data.json"});// Initialize the portfolioawait portfolio.init();</code></pre>
-
     </div>
-
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li>module:BuilderJS</li>
-        </ul>
 
 </article>
 
@@ -183,13 +168,13 @@ Built with vanilla JavaScript and the custom BuilderJS DOM manipulation library.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="PortfolioController.html">PortfolioController</a></li><li><a href="ThemeController.html">ThemeController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initializePortfolio">initializePortfolio</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ResumePreview.html">ResumePreview</a></li><li><a href="ThemeController.html">ThemeController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initializePage">initializePage</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Sep 25 2026 22:27:31 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Sep 25 2026 22:35:55 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

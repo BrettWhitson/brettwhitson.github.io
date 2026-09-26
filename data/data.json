@@ -1,10 +1,22 @@
 {
+  "site": {
+    "name": "Brett Whitson",
+    "headline": "Oracle DBA and Banner Systems Administrator",
+    "email": "brett.whitson.dev@gmail.com",
+    "url": "https://home.brettwhitson.dev/",
+    "image": "https://home.brettwhitson.dev/data/images/me.jpg",
+    "description": "Brett Whitson is an Oracle DBA and Ellucian Banner systems administrator at the University of Tennessee at Martin, with a background in software development.",
+    "jobTitle": "Oracle DBA and Banner Systems Administrator",
+    "worksFor": "University of Tennessee at Martin",
+    "alumniOf": "University of Tennessee at Martin",
+    "sourceUrl": "https://github.com/BrettWhitson/brettwhitson.github.io"
+  },
   "sections": [
     {
       "section": "about",
       "title": "About",
       "type": "pg",
-      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science and still build things for fun on the side, like BuilderJS, the small DOM library this site runs on."
+      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science and still build things on the side, like BuilderJS, a small DOM-building library, and the static build behind this site."
     },
     {
       "section": "experience",
@@ -71,8 +83,11 @@
         {
           "header": "BuilderJS",
           "subheader": "2025 - JavaScript",
-          "main": "Open-source DOM-building library with a scoped, chainable API and HTML tag validation. This site is built with it.",
-          "link": { "href": "https://github.com/BrettWhitson/Builder-JS", "label": "View on GitHub" }
+          "main": "Open-source DOM-building library with a scoped, chainable API and HTML tag validation.",
+          "link": {
+            "href": "https://github.com/BrettWhitson/Builder-JS",
+            "label": "View on GitHub"
+          }
         },
         {
           "header": "WebDocker",
@@ -102,11 +117,11 @@
         },
         {
           "header": "Languages",
-          "main": "<ul class=\"lang-icon-list list-no-style-inline\"></ul>"
+          "icons": "languages"
         },
         {
           "header": "Tools",
-          "main": "<ul class=\"tool-icon-list list-no-style-inline\"></ul>"
+          "icons": "tools"
         }
       ]
     },
@@ -138,25 +153,76 @@
   ],
   "icons": {
     "languages": [
-      { "icon": "oracle-original", "label": "SQL / PL/SQL" },
-      { "icon": "bash-plain", "label": "Bash" },
-      { "icon": "python-plain", "label": "Python" },
-      { "icon": "javascript-plain", "label": "JavaScript" },
-      { "icon": "html5-plain", "label": "HTML" },
-      { "icon": "css3-plain", "label": "CSS" },
-      { "icon": "csharp-plain", "label": "C#" },
-      { "icon": "java-plain", "label": "Java" },
-      { "icon": "c-plain", "label": "C" },
-      { "icon": "cplusplus-plain", "label": "C++" }
+      {
+        "icon": "oracle-original",
+        "label": "SQL / PL/SQL"
+      },
+      {
+        "icon": "bash-plain",
+        "label": "Bash"
+      },
+      {
+        "icon": "python-plain",
+        "label": "Python"
+      },
+      {
+        "icon": "javascript-plain",
+        "label": "JavaScript"
+      },
+      {
+        "icon": "html5-plain",
+        "label": "HTML"
+      },
+      {
+        "icon": "css3-plain",
+        "label": "CSS"
+      },
+      {
+        "icon": "csharp-plain",
+        "label": "C#"
+      },
+      {
+        "icon": "java-plain",
+        "label": "Java"
+      },
+      {
+        "icon": "c-plain",
+        "label": "C"
+      },
+      {
+        "icon": "cplusplus-plain",
+        "label": "C++"
+      }
     ],
     "tools": [
-      { "icon": "linux-plain", "label": "Linux" },
-      { "icon": "sqldeveloper-plain", "label": "SQL Developer" },
-      { "icon": "git-plain", "label": "Git" },
-      { "icon": "github-original", "label": "GitHub" },
-      { "icon": "docker-plain", "label": "Docker" },
-      { "icon": "vscode-plain", "label": "VS Code" },
-      { "icon": "vim-plain", "label": "Vim" }
+      {
+        "icon": "linux-plain",
+        "label": "Linux"
+      },
+      {
+        "icon": "sqldeveloper-plain",
+        "label": "SQL Developer"
+      },
+      {
+        "icon": "git-plain",
+        "label": "Git"
+      },
+      {
+        "icon": "github-original",
+        "label": "GitHub"
+      },
+      {
+        "icon": "docker-plain",
+        "label": "Docker"
+      },
+      {
+        "icon": "vscode-plain",
+        "label": "VS Code"
+      },
+      {
+        "icon": "vim-plain",
+        "label": "Vim"
+      }
     ]
   },
   "ext": {

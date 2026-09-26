@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{url}}">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="{{image}}">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">{{jsonLd}}</script>
+
+  <!-- Apply a saved theme before first paint; without one the CSS follows prefers-color-scheme -->
+  <script>
+    try {
+      const theme = localStorage.getItem("theme");
+      if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+    } catch {}
+  </script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/styles/min/styles.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.17.0/devicon.min.css">
+  <script src="/javascript/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="profile-section">
+        <img id="portrait" src="/data/images/me-192.webp" width="48" height="48" alt="Portrait of {{name}}">
+        <div class="profile-info">
+          <p class="profile-name">{{name}}</p>
+          <a href="mailto:{{email}}" class="mailto">{{email}}</a>
+        </div>
+      </div>
+      <nav class="navigation" aria-label="Sections">
+        <ul class="nav-list">
+{{nav}}
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <ul class="ext-icon-list">
+{{extLinks}}
+        </ul>
+        <div class="theme-toggle">
+          <button type="button" class="theme-toggle-btn" aria-label="Toggle theme">
+            <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="content" class="main-content">
+    <div class="content-container">
+      <h1 class="visually-hidden">{{name}} - {{headline}}</h1>
+      <div class="content-grid">
+{{sections}}
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p class="footer-copyright">&copy; {{name}}</p>
+          <p class="footer-built">Static HTML generated from JSON with a small Node build script</p>
+        </div>
+        <div class="footer-links">
+          <a href="{{sourceUrl}}" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <span>View Source</span>
+            <i class="devicon-github-original" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

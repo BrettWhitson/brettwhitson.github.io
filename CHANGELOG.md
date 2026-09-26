@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.0.0] - 2026-09-25
+
+### Changed
+
+- **Static HTML** - The page is rendered at build time by `scripts/build.mjs` from `data/data.json` and
+  `templates/index.html` instead of being assembled in the browser. Search engines, link previews, and no-JS visitors
+  now get the full content
+- **Runtime script** - `main.js` is down to `ThemeController` and `ResumePreview`; `PortfolioController` and the
+  BuilderJS runtime dependency are gone
+- Section anchors are now `#about`, `#experience`, etc. (were `#about-section`)
+- Semantic markup: `section`/`h2`/`h3` headings, a single `h1`, skip link, list markup for skill tiles and profile links
+
+### Added
+
+- JSON-LD `Person` data, `sitemap.xml`, and `robots.txt`
+- Saved theme applied before first paint (no flash of the wrong theme)
+- Resume preview falls back to opening the PDF on narrow screens, where mobile browsers can't show a PDF in an iframe
+- Tests for the build script (`node --test scripts/`)
+
+---
+
 ## [3.1.0] - 2026-09-25
 
 ### Added

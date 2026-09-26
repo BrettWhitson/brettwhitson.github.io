@@ -61,7 +61,7 @@
       flex-direction: column;
       align-items: flex-start;
 
-      h1 {
+      .profile-name {
         font-size: var(--text-xl);
         font-weight: var(--font-bold);
         color: var(--color-text-primary);

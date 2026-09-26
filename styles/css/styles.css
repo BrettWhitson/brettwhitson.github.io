@@ -1259,6 +1259,33 @@ ol li:last-child {
   padding: 0 var(--space-4);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: calc(var(--z-sticky) + 1);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -1319,7 +1346,7 @@ ol li:last-child {
   flex-direction: column;
   align-items: flex-start;
 }
-.site-header .profile-section .profile-info h1 {
+.site-header .profile-section .profile-info .profile-name {
   font-size: var(--text-xl);
   font-weight: var(--font-bold);
   color: var(--color-text-primary);
@@ -1327,7 +1354,7 @@ ol li:last-child {
   line-height: var(--leading-tight);
 }
 @media (max-width: 768px) {
-  .site-header .profile-section .profile-info h1 {
+  .site-header .profile-section .profile-info .profile-name {
     font-size: var(--text-lg);
   }
 }
