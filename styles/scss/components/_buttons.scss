@@ -54,3 +54,16 @@
     margin-left: var(--space-2);
   }
 }
+
+// Download buttons: the arrow dips on hover
+.btn-download {
+  gap: var(--space-2);
+
+  .btn-glyph {
+    transition: transform var(--transition-base);
+  }
+
+  &:hover .btn-glyph {
+    transform: translateY(2px);
+  }
+}

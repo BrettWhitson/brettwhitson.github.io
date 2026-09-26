@@ -90,6 +90,7 @@ export function formatHtml(markup, baseIndent) {
 const ICONS = {
   linkedin: `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4z"/></svg>`,
   github: `<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>`,
+  download: `<svg class="btn-glyph" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>`,
   code: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>`,
 };
 
@@ -122,7 +123,7 @@ export function highlightSql(sql) {
 const renderQuery = (query) =>
   query &&
   html`
-<figure class="query" aria-hidden="true">
+<figure class="query" style="--i: 4" aria-hidden="true">
   <pre class="query-sql"><code>${highlightSql(query.sql)}</code></pre>
   <table class="query-result">
     <thead>
@@ -189,7 +190,7 @@ const renderListItem = (item, names) => html`
 const renderStats = (stats) =>
   stats?.length > 0 &&
   html`
-<dl class="stats">
+<dl class="stats" data-stagger>
   ${stats.map((s) => html`<div class="stat"><dt>${s.label}</dt><dd>${s.value}</dd></div>`)}
 </dl>`;
 
@@ -202,7 +203,7 @@ const bodies = {
 
   ls: (section, data) => html`
 <div class="section-body">
-  <ul class="section-body-list${section.layout === "rows" ? " rows" : ""}">
+  <ul class="section-body-list${section.layout === "rows" ? " rows" : ""}" data-stagger>
     ${section.body.map((item) => renderListItem(item, skillNames(data)))}
   </ul>
 </div>`,
@@ -213,7 +214,7 @@ const bodies = {
     <thead>
       <tr><th scope="col">skill_group</th><th scope="col">members</th></tr>
     </thead>
-    <tbody>
+    <tbody data-stagger>
       ${section.body.map(
         (group) => html`<tr>
         <th scope="row">${group.group}</th>
@@ -233,7 +234,7 @@ const bodies = {
   rs: (section) => html`
 <div class="section-body">
   <div class="resume-actions">
-    <a class="btn btn-primary" href="${section.file}" download="${path.basename(section.file)}">Download PDF</a>
+    <a class="btn btn-primary btn-download" href="${section.file}" download="${path.basename(section.file)}">Download PDF${icon("download")}</a>
     <a class="btn btn-secondary" id="resume-preview-btn" href="${section.file}" target="_blank" rel="noopener" aria-controls="resume-preview-container" aria-expanded="false">Preview</a>
   </div>
   <div id="resume-preview-container" class="resume-preview-container hidden"></div>

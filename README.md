@@ -18,7 +18,7 @@ preview).
 
 - **Build**: Node.js (no dependencies) renders `data/data.json` into `index.html`
 - **Frontend**: Vanilla JavaScript (ES2020+), progressive enhancement only
-- **Styling**: SCSS, compiled with Dart Sass; Inter, JetBrains Mono, and Newsreader from Google Fonts
+- **Styling**: SCSS, compiled with Dart Sass; Geist and Geist Mono from Google Fonts
 - **Icons**: Inline monochrome SVG
 - **Resume**: LaTeX
 - **Hosting**: GitHub Pages
@@ -31,7 +31,7 @@ preview).
 | `templates/index.html`       | Page shell with `{{slot}}` placeholders                       |
 | `scripts/build.mjs`          | Renders the page, writes `sitemap.xml`, compiles the SCSS     |
 | `index.html`                 | Generated output. Don't edit by hand                          |
-| `javascript/main.js`         | Theme, query typing, copy email, scroll-spy, skill linking    |
+| `javascript/main.js`         | Theme, parallax, reveals, query typing, scroll-spy, skills    |
 | `styles/scss/`               | Source styles: `layout/_shell.scss` and `components/`         |
 | `resume/whitson_resume.tex`  | Resume source, built to `data/whitson_resume.pdf`             |
 

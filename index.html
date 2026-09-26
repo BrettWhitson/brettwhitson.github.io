@@ -35,7 +35,7 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/styles/min/styles.min.css">
   <script src="/javascript/main.js" defer></script>
 </head>
@@ -43,14 +43,23 @@
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
 
+  <!-- Decorative backdrop; main.js moves its layers at different speeds as the page scrolls -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-grid"></div>
+    <div class="backdrop-glow glow-1"></div>
+    <div class="backdrop-glow glow-2"></div>
+    <div class="backdrop-glow glow-3"></div>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
   <div class="layout">
     <header class="sidebar">
       <div class="intro">
-        <img class="intro-portrait" src="/data/images/me-192.webp" width="72" height="72" alt="Portrait of Brett Whitson">
-        <h1 class="intro-name">Brett Whitson</h1>
-        <p class="intro-role">Oracle DBA and Banner Systems Administrator</p>
-        <p class="intro-org">University of Tennessee at Martin, Martin, TN</p>
-          <figure class="query" aria-hidden="true">
+        <img class="intro-portrait" style="--i: 0" src="/data/images/me-192.webp" width="72" height="72" alt="Portrait of Brett Whitson">
+        <h1 class="intro-name" style="--i: 1">Brett Whitson</h1>
+        <p class="intro-role" style="--i: 2">Oracle DBA and Banner Systems Administrator</p>
+        <p class="intro-org" style="--i: 3">University of Tennessee at Martin, Martin, TN</p>
+          <figure class="query" style="--i: 4" aria-hidden="true">
             <pre class="query-sql"><code><span class="sql-keyword">SELECT</span> specialty&#10;       <span class="sql-keyword">FROM</span> brett.profile&#10;      <span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> 1;</code></pre>
             <table class="query-result">
               <thead>
@@ -64,7 +73,7 @@
             </table>
             <figcaption class="query-caption">3 rows selected.</figcaption>
           </figure>
-        <div class="intro-contact">
+        <div class="intro-contact" style="--i: 5">
           <a class="intro-email" href="mailto:brett.whitson.dev@gmail.com">brett.whitson.dev@gmail.com</a>
           <button type="button" class="icon-button copy-button" data-copy="brett.whitson.dev@gmail.com" aria-label="Copy email address" title="Copy email address" hidden>
             <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -72,8 +81,8 @@
           </button>
           <span class="copy-status" role="status"></span>
         </div>
-        <div class="intro-actions">
-          <a class="btn btn-primary" href="./data/whitson_resume.pdf" download>Download resume</a>
+        <div class="intro-actions" style="--i: 6">
+          <a class="btn btn-primary btn-download" href="./data/whitson_resume.pdf" download>Download resume<svg class="btn-glyph" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
           <ul class="profile-links">
             <li><a class="icon-button" href="https://www.linkedin.com/in/brett-whitson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4z"/></svg></a></li>
             <li><a class="icon-button" href="https://github.com/brettwhitson" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
@@ -106,7 +115,7 @@
           <h2 id="about-title" class="section-title"><span class="section-index" aria-hidden="true">01 /</span> About</h2>
           <div class="section-body section-body-paragraph">
             <p>I&#39;m an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I&#39;ve spent the last five years keeping the university&#39;s Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love full-stack work: this site is hand-built with vanilla JavaScript, SCSS, and a small Node build.</p>
-            <dl class="stats">
+            <dl class="stats" data-stagger>
               <div class="stat"><dt>years in university IT</dt><dd>8</dd></div>
               <div class="stat"><dt>years on Banner and Oracle</dt><dd>5</dd></div>
               <div class="stat"><dt>roles, help desk to DBA</dt><dd>4</dd></div>
@@ -116,7 +125,7 @@
         <section id="experience" class="section reveal" aria-labelledby="experience-title">
           <h2 id="experience-title" class="section-title"><span class="section-index" aria-hidden="true">02 /</span> Experience</h2>
           <div class="section-body">
-            <ul class="section-body-list">
+            <ul class="section-body-list" data-stagger>
               <li class="section-list-item">
                 <div class="list-item-body">
                   <h3 class="list-item-header">University of Tennessee at Martin</h3>
@@ -212,7 +221,7 @@
               <thead>
                 <tr><th scope="col">skill_group</th><th scope="col">members</th></tr>
               </thead>
-              <tbody>
+              <tbody data-stagger>
                 <tr>
                   <th scope="row">Database &amp; Systems</th>
                   <td>
@@ -263,7 +272,7 @@
         <section id="projects" class="section reveal" aria-labelledby="projects-title">
           <h2 id="projects-title" class="section-title"><span class="section-index" aria-hidden="true">04 /</span> Projects</h2>
           <div class="section-body">
-            <ul class="section-body-list rows">
+            <ul class="section-body-list rows" data-stagger>
               <li class="section-list-item">
                 <p class="list-item-date">Fall 2019</p>
                 <div class="list-item-body">
@@ -309,7 +318,7 @@
         <section id="education" class="section reveal" aria-labelledby="education-title">
           <h2 id="education-title" class="section-title"><span class="section-index" aria-hidden="true">05 /</span> Education</h2>
           <div class="section-body">
-            <ul class="section-body-list rows">
+            <ul class="section-body-list rows" data-stagger>
               <li class="section-list-item">
                 <p class="list-item-date">May 2020</p>
                 <div class="list-item-body">
@@ -330,7 +339,7 @@
           <h2 id="resume-title" class="section-title"><span class="section-index" aria-hidden="true">07 /</span> Resume</h2>
           <div class="section-body">
             <div class="resume-actions">
-              <a class="btn btn-primary" href="./data/whitson_resume.pdf" download="whitson_resume.pdf">Download PDF</a>
+              <a class="btn btn-primary btn-download" href="./data/whitson_resume.pdf" download="whitson_resume.pdf">Download PDF<svg class="btn-glyph" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
               <a class="btn btn-secondary" id="resume-preview-btn" href="./data/whitson_resume.pdf" target="_blank" rel="noopener" aria-controls="resume-preview-container" aria-expanded="false">Preview</a>
             </div>
             <div id="resume-preview-container" class="resume-preview-container hidden"></div>

@@ -1,5 +1,27 @@
 # Changelog
 
+## [5.2.0] - 2026-09-25
+
+### Added
+
+- **Parallax backdrop** - A faint dot grid and soft amber glows behind the page, each layer drifting at its own
+  rate as you scroll; the glows slowly breathe
+- **Reading progress** line along the top edge
+- **Staggered reveals** - Rows, stats, and skill groups enter one after another as their section appears, and
+  section heading rules draw out from the label
+- **Count-up stats** in About
+- **Intro entrance** - The name wipes in and the rest of the intro follows in order; the SQL starts typing once its
+  box is in
+- **Theme switch** grows the new theme outward from the toggle in a circle (View Transitions API, where supported)
+- Download buttons carry an arrow that dips on hover; linked skill chips lift slightly
+
+### Changed
+
+- Fonts: Geist and Geist Mono replace Newsreader, Inter, and JetBrains Mono
+- The intro's dot grid moved into the page-wide backdrop
+
+---
+
 ## [5.1.0] - 2026-09-25
 
 ### Changed

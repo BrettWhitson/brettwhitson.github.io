@@ -100,7 +100,27 @@ class ThemeController {
 
   /** Switch between light and dark, saving the choice. */
   toggleTheme() {
-    this.setTheme(this.getCurrentTheme() === this.themes.DARK ? this.themes.LIGHT : this.themes.DARK);
+    const next = this.getCurrentTheme() === this.themes.DARK ? this.themes.LIGHT : this.themes.DARK;
+    const motionOk = document.documentElement.classList.contains("motion-ok");
+
+    if (!document.startViewTransition || !motionOk || !this.button) {
+      this.setTheme(next);
+      return;
+    }
+
+    // Grow the new theme outward from the toggle button in a circle
+    const { left, top, width, height } = this.button.getBoundingClientRect();
+    const x = left + width / 2;
+    const y = top + height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+    const transition = document.startViewTransition(() => this.setTheme(next));
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 550, easing: "cubic-bezier(0.4, 0, 0.2, 1)", pseudoElement: "::view-transition-new(root)" }
+      );
+    });
   }
 
   /** Forget the saved choice and follow the operating system again. */
@@ -283,7 +303,17 @@ class Reveal {
   }
 
   init() {
-    const reveal = (el) => el.classList.add("is-visible");
+    // Number the children of stagger lists so CSS can delay each one; long lists cap out
+    // so the last items don't lag seconds behind
+    const lists = document.querySelectorAll("[data-stagger]");
+    lists.forEach((list) => [...list.children].forEach((child, i) => child.style.setProperty("--i", Math.min(i, 8))));
+
+    const reveal = (el) => {
+      el.classList.add("is-visible");
+      el.dispatchEvent(new CustomEvent("reveal"));
+      // After the entrance, drop the stagger delay so hover feedback is immediate
+      setTimeout(() => el.querySelectorAll("[data-stagger]").forEach((list) => list.classList.add("is-settled")), 1400);
+    };
 
     if (!("IntersectionObserver" in window)) {
       this.elements.forEach(reveal);
@@ -306,6 +336,91 @@ class Reveal {
 }
 
 /**
+ * Parallax - Drives the backdrop layers and the reading-progress line from scroll position
+ *
+ * One passive scroll listener, throttled to animation frames, writes two custom properties;
+ * the layers' own CSS decides how fast each one moves. The backdrop stays still under
+ * reduced motion, but the progress line still tracks.
+ *
+ * @class Parallax
+ */
+class Parallax {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.backdrop=".backdrop"]
+   * @param {string} [options.progress=".scroll-progress"]
+   */
+  constructor({ backdrop = ".backdrop", progress = ".scroll-progress" } = {}) {
+    this.backdrop = document.querySelector(backdrop);
+    this.progress = document.querySelector(progress);
+    this.moveBackdrop = document.documentElement.classList.contains("motion-ok");
+    this.pending = false;
+  }
+
+  init() {
+    if (!this.backdrop && !this.progress) return;
+    const schedule = () => {
+      if (this.pending) return;
+      this.pending = true;
+      requestAnimationFrame(() => this.update());
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    this.update();
+  }
+
+  update() {
+    this.pending = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (this.moveBackdrop && this.backdrop) this.backdrop.style.setProperty("--scroll-y", y.toFixed(1));
+    if (this.progress) this.progress.style.setProperty("--progress", max > 0 ? (y / max).toFixed(4) : 0);
+  }
+}
+
+/**
+ * CountUp - Counts the About stats up from zero the first time they're revealed
+ *
+ * The real numbers are in the HTML; this only animates to them, and does nothing under
+ * reduced motion.
+ *
+ * @class CountUp
+ */
+class CountUp {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.selector=".stat dd"]
+   * @param {number} [options.duration=1100]
+   */
+  constructor({ selector = ".stat dd", duration = 1100 } = {}) {
+    this.numbers = [...document.querySelectorAll(selector)].filter((el) => /^\d+$/.test(el.textContent.trim()));
+    this.duration = duration;
+  }
+
+  init() {
+    if (!this.numbers.length || !document.documentElement.classList.contains("motion-ok")) return;
+    const section = this.numbers[0].closest(".reveal");
+    if (!section) return;
+
+    const targets = this.numbers.map((el) => Number(el.textContent));
+    section.addEventListener("reveal", () => this.run(targets), { once: true });
+  }
+
+  run(targets) {
+    const start = performance.now();
+    // Ease out so the numbers settle rather than stop dead
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const frame = (now) => {
+      const t = Math.min(1, (now - start) / this.duration);
+      this.numbers.forEach((el, i) => (el.textContent = String(Math.round(targets[i] * ease(t)))));
+      if (t < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+}
+
+/**
  * QueryTyper - Types out the intro's SQL once, then "runs" it to reveal the result rows
  *
  * Untyped characters stay in the DOM as transparent text, so the box is laid out at its
@@ -319,10 +434,17 @@ class QueryTyper {
    * @param {string} [options.selector=".query"]
    * @param {number} [options.duration=900] - Milliseconds to type the whole query
    */
-  constructor({ selector = ".query", duration = 900 } = {}) {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.selector=".query"]
+   * @param {number} [options.duration=900] - Milliseconds to type the whole query
+   * @param {number} [options.delay=550] - Wait for the intro entrance to bring the box in first
+   */
+  constructor({ selector = ".query", duration = 900, delay = 550 } = {}) {
     this.figure = document.querySelector(selector);
     this.code = this.figure?.querySelector("code");
     this.duration = duration;
+    this.delay = delay;
   }
 
   init() {
@@ -352,7 +474,7 @@ class QueryTyper {
     this.caret.setAttribute("aria-hidden", "true");
 
     this.start = null;
-    requestAnimationFrame((t) => this.frame(t));
+    setTimeout(() => requestAnimationFrame((t) => this.frame(t)), this.delay);
   }
 
   frame(time) {
@@ -562,6 +684,8 @@ function initializePage() {
   new ResumePreview().init();
   new ScrollSpy().init();
   new SkillLinks().init();
+  new Parallax().init();
+  new CountUp().init();
   new Reveal().init();
 }
 
