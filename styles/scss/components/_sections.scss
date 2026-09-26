@@ -238,21 +238,29 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: 1.6;
-  color: var(--color-link);
-  background: color-mix(in srgb, var(--color-link) 12%, transparent);
-  transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-base);
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast),
+    opacity var(--transition-base);
 
   // main.js makes chips focusable buttons that link skills to roles
   &[role="button"] {
     cursor: pointer;
     user-select: none;
+
+    &:hover {
+      color: var(--color-text-primary);
+      box-shadow: inset 0 0 0 1px var(--color-border-hover);
+    }
   }
 
   @include focus-ring();
 
   &.is-linked {
-    color: var(--color-background);
-    background: var(--color-link);
+    color: var(--color-link);
+    background: color-mix(in srgb, var(--color-link) 12%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-link) 55%, transparent);
   }
 }
 

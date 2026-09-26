@@ -1,28 +1,29 @@
 // CSS Custom Properties for Theme System
 :root {
-  // Color System - Light Theme (Default)
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-secondary: #64748b;
-  --color-accent: #059669;
-  --color-link: #1d4ed8;
+  // Color System - Light Theme (Default): graphite neutrals with an amber accent.
+  // "primary" is ink for solid buttons; "link"/"accent" is the amber used on small details.
+  --color-primary: #18181b;
+  --color-primary-hover: #3f3f46;
+  --color-secondary: #71717a;
+  --color-accent: #b45309;
+  --color-link: #b45309;
 
   // Surface Colors
-  --color-background: #ffffff;
-  --color-surface: #f8fafc;
+  --color-background: #fafafa;
+  --color-surface: #f4f4f5;
   --color-surface-elevated: #ffffff;
-  --color-surface-inverse: #0f172a;
+  --color-surface-inverse: #18181b;
 
   // Text Colors
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #64748b;
-  --color-text-inverse: #f1f5f9;
+  --color-text-primary: #18181b;
+  --color-text-secondary: #3f3f46;
+  --color-text-muted: #71717a;
+  --color-text-inverse: #fafafa;
 
   // Border & Divider Colors
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
-  --color-divider: #f1f5f9;
+  --color-border: #e4e4e7;
+  --color-border-hover: #d4d4d8;
+  --color-divider: #f4f4f5;
 
   // Shadow System
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -98,27 +99,27 @@
   --container-content: 60rem;
 }
 
-// Dark Theme Variables
-[data-theme="dark"] {
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-secondary: #94a3b8;
-  --color-accent: #34d399;
-  --color-link: #60a5fa;
+// Dark Theme Variables, shared by the explicit toggle and the OS preference
+@mixin dark-tokens {
+  --color-primary: #fafafa;
+  --color-primary-hover: #d4d4d8;
+  --color-secondary: #a1a1aa;
+  --color-accent: #f59e0b;
+  --color-link: #f59e0b;
 
-  --color-background: #0f172a;
-  --color-surface: #1e293b;
-  --color-surface-elevated: #334155;
-  --color-surface-inverse: #ffffff;
+  --color-background: #0c0c0e;
+  --color-surface: #18181b;
+  --color-surface-elevated: #27272a;
+  --color-surface-inverse: #fafafa;
 
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
-  --color-text-inverse: #0f172a;
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #d4d4d8;
+  --color-text-muted: #a1a1aa;
+  --color-text-inverse: #0c0c0e;
 
-  --color-border: #334155;
-  --color-border-hover: #475569;
-  --color-divider: #334155;
+  --color-border: #27272a;
+  --color-border-hover: #3f3f46;
+  --color-divider: #27272a;
 
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
@@ -127,34 +128,13 @@
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
 }
 
-// System preference media queries
+[data-theme="dark"] {
+  @include dark-tokens;
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --color-primary: #3b82f6;
-    --color-primary-hover: #2563eb;
-    --color-secondary: #94a3b8;
-    --color-accent: #34d399;
-    --color-link: #60a5fa;
-
-    --color-background: #0f172a;
-    --color-surface: #1e293b;
-    --color-surface-elevated: #334155;
-    --color-surface-inverse: #ffffff;
-
-    --color-text-primary: #f1f5f9;
-    --color-text-secondary: #cbd5e1;
-    --color-text-muted: #94a3b8;
-    --color-text-inverse: #0f172a;
-
-    --color-border: #334155;
-    --color-border-hover: #475569;
-    --color-divider: #334155;
-
-    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    @include dark-tokens;
   }
 }
 

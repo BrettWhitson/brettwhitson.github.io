@@ -1,5 +1,20 @@
 # Changelog
 
+## [5.1.0] - 2026-09-25
+
+### Changed
+
+- **Palette** - Graphite neutrals with an amber accent replace the slate and blue. The main button is solid ink
+  (near-black in light, near-white in dark); amber marks section numbers, the active nav item, SQL keywords, the
+  current role, and linked skills
+- Skill chips are neutral until linked
+- The intro query is laid out on three aligned lines and returns specialties: Banner ERP administration,
+  Full-stack development, Oracle database administration
+- About text says full-stack rather than front-end
+- Dark theme tokens are defined once and shared by the toggle and the OS preference
+
+---
+
 ## [5.0.0] - 2026-09-25
 
 ### Changed

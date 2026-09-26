@@ -51,15 +51,15 @@
         <p class="intro-role">Oracle DBA and Banner Systems Administrator</p>
         <p class="intro-org">University of Tennessee at Martin, Martin, TN</p>
           <figure class="query" aria-hidden="true">
-            <pre class="query-sql"><code><span class="sql-keyword">SELECT</span> role <span class="sql-keyword">FROM</span> brett <span class="sql-keyword">WHERE</span> focus <span class="sql-keyword">IN</span> (<span class="sql-string">&#39;oracle&#39;</span>, <span class="sql-string">&#39;banner&#39;</span>, <span class="sql-string">&#39;front_end&#39;</span>);</code></pre>
+            <pre class="query-sql"><code><span class="sql-keyword">SELECT</span> specialty&#10;       <span class="sql-keyword">FROM</span> brett.profile&#10;      <span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> 1;</code></pre>
             <table class="query-result">
               <thead>
-                <tr><th>ROLE</th></tr>
+                <tr><th>SPECIALTY</th></tr>
               </thead>
               <tbody>
-                <tr style="--i: 0"><td>Oracle DBA</td></tr>
-                <tr style="--i: 1"><td>Banner Systems Administrator</td></tr>
-                <tr style="--i: 2"><td>Front-end developer</td></tr>
+                <tr style="--i: 0"><td>Banner ERP administration</td></tr>
+                <tr style="--i: 1"><td>Full-stack development</td></tr>
+                <tr style="--i: 2"><td>Oracle database administration</td></tr>
               </tbody>
             </table>
             <figcaption class="query-caption">3 rows selected.</figcaption>
@@ -105,7 +105,7 @@
         <section id="about" class="section reveal" aria-labelledby="about-title">
           <h2 id="about-title" class="section-title"><span class="section-index" aria-hidden="true">01 /</span> About</h2>
           <div class="section-body section-body-paragraph">
-            <p>I&#39;m an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I&#39;ve spent the last five years keeping the university&#39;s Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love front-end work: this site is hand-built with vanilla JavaScript and SCSS.</p>
+            <p>I&#39;m an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I&#39;ve spent the last five years keeping the university&#39;s Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love full-stack work: this site is hand-built with vanilla JavaScript, SCSS, and a small Node build.</p>
             <dl class="stats">
               <div class="stat"><dt>years in university IT</dt><dd>8</dd></div>
               <div class="stat"><dt>years on Banner and Oracle</dt><dd>5</dd></div>

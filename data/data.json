@@ -12,12 +12,12 @@
     "alumniOf": "University of Tennessee at Martin",
     "sourceUrl": "https://github.com/BrettWhitson/brettwhitson.github.io",
     "query": {
-      "sql": "SELECT role FROM brett WHERE focus IN ('oracle', 'banner', 'front_end');",
-      "column": "ROLE",
+      "sql": "SELECT specialty\n       FROM brett.profile\n      ORDER BY 1;",
+      "column": "SPECIALTY",
       "rows": [
-        "Oracle DBA",
-        "Banner Systems Administrator",
-        "Front-end developer"
+        "Banner ERP administration",
+        "Full-stack development",
+        "Oracle database administration"
       ]
     },
     "stats": [
@@ -40,7 +40,7 @@
       "section": "about",
       "title": "About",
       "type": "pg",
-      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love front-end work: this site is hand-built with vanilla JavaScript and SCSS."
+      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love full-stack work: this site is hand-built with vanilla JavaScript, SCSS, and a small Node build."
     },
     {
       "section": "experience",

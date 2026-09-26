@@ -1,21 +1,21 @@
 @charset "UTF-8";
 :root {
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-secondary: #64748b;
-  --color-accent: #059669;
-  --color-link: #1d4ed8;
-  --color-background: #ffffff;
-  --color-surface: #f8fafc;
+  --color-primary: #18181b;
+  --color-primary-hover: #3f3f46;
+  --color-secondary: #71717a;
+  --color-accent: #b45309;
+  --color-link: #b45309;
+  --color-background: #fafafa;
+  --color-surface: #f4f4f5;
   --color-surface-elevated: #ffffff;
-  --color-surface-inverse: #0f172a;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #64748b;
-  --color-text-inverse: #f1f5f9;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
-  --color-divider: #f1f5f9;
+  --color-surface-inverse: #18181b;
+  --color-text-primary: #18181b;
+  --color-text-secondary: #3f3f46;
+  --color-text-muted: #71717a;
+  --color-text-inverse: #fafafa;
+  --color-border: #e4e4e7;
+  --color-border-hover: #d4d4d8;
+  --color-divider: #f4f4f5;
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -76,22 +76,22 @@
 }
 
 [data-theme=dark] {
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-secondary: #94a3b8;
-  --color-accent: #34d399;
-  --color-link: #60a5fa;
-  --color-background: #0f172a;
-  --color-surface: #1e293b;
-  --color-surface-elevated: #334155;
-  --color-surface-inverse: #ffffff;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
-  --color-text-inverse: #0f172a;
-  --color-border: #334155;
-  --color-border-hover: #475569;
-  --color-divider: #334155;
+  --color-primary: #fafafa;
+  --color-primary-hover: #d4d4d8;
+  --color-secondary: #a1a1aa;
+  --color-accent: #f59e0b;
+  --color-link: #f59e0b;
+  --color-background: #0c0c0e;
+  --color-surface: #18181b;
+  --color-surface-elevated: #27272a;
+  --color-surface-inverse: #fafafa;
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #d4d4d8;
+  --color-text-muted: #a1a1aa;
+  --color-text-inverse: #0c0c0e;
+  --color-border: #27272a;
+  --color-border-hover: #3f3f46;
+  --color-divider: #27272a;
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
@@ -101,22 +101,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --color-primary: #3b82f6;
-    --color-primary-hover: #2563eb;
-    --color-secondary: #94a3b8;
-    --color-accent: #34d399;
-    --color-link: #60a5fa;
-    --color-background: #0f172a;
-    --color-surface: #1e293b;
-    --color-surface-elevated: #334155;
-    --color-surface-inverse: #ffffff;
-    --color-text-primary: #f1f5f9;
-    --color-text-secondary: #cbd5e1;
-    --color-text-muted: #94a3b8;
-    --color-text-inverse: #0f172a;
-    --color-border: #334155;
-    --color-border-hover: #475569;
-    --color-divider: #334155;
+    --color-primary: #fafafa;
+    --color-primary-hover: #d4d4d8;
+    --color-secondary: #a1a1aa;
+    --color-accent: #f59e0b;
+    --color-link: #f59e0b;
+    --color-background: #0c0c0e;
+    --color-surface: #18181b;
+    --color-surface-elevated: #27272a;
+    --color-surface-inverse: #fafafa;
+    --color-text-primary: #f4f4f5;
+    --color-text-secondary: #d4d4d8;
+    --color-text-muted: #a1a1aa;
+    --color-text-inverse: #0c0c0e;
+    --color-border: #27272a;
+    --color-border-hover: #3f3f46;
+    --color-divider: #27272a;
     --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
@@ -269,6 +269,11 @@ button {
 
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-link) 25%, transparent);
+  color: var(--color-text-primary);
 }
 
 :root {
@@ -1263,7 +1268,7 @@ a:focus-visible {
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-md);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-text-inverse);
   transform: translateY(-200%);
 }
 .skip-link:focus {
@@ -1773,7 +1778,7 @@ html:not(.js) .theme-toggle-btn {
   font-weight: var(--font-medium);
 }
 .query-sql .sql-string {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 .query-sql .ghost {
   color: transparent;
@@ -2126,13 +2131,18 @@ html:not(.js) .theme-toggle-btn {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: 1.6;
-  color: var(--color-link);
-  background: color-mix(in srgb, var(--color-link) 12%, transparent);
-  transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-base);
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-base);
 }
 .chip[role=button] {
   cursor: pointer;
   user-select: none;
+}
+.chip[role=button]:hover {
+  color: var(--color-text-primary);
+  box-shadow: inset 0 0 0 1px var(--color-border-hover);
 }
 .chip:focus-visible {
   outline: 2px solid var(--color-primary);
@@ -2140,8 +2150,9 @@ html:not(.js) .theme-toggle-btn {
   border-radius: var(--radius-sm);
 }
 .chip.is-linked {
-  color: var(--color-background);
-  background: var(--color-link);
+  color: var(--color-link);
+  background: color-mix(in srgb, var(--color-link) 12%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-link) 55%, transparent);
 }
 
 .is-linking .chip:not(.is-linked) {

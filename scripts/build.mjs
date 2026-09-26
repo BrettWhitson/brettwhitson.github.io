@@ -102,7 +102,11 @@ const icon = (name) => {
 
 const SQL_TOKENS = /('(?:[^']|'')*')|\b(SELECT|FROM|WHERE|IN|AND|OR|ORDER|BY|AS)\b/gi;
 
-/** Wrap SQL keywords and string literals in spans for highlighting; everything else is escaped. */
+/**
+ * Wrap SQL keywords and string literals in spans for highlighting; everything else is escaped.
+ * Line breaks become &#10; so the query stays on one source line and formatHtml can't strip
+ * the alignment spaces inside the <pre>.
+ */
 export function highlightSql(sql) {
   let out = "";
   let last = 0;
@@ -111,7 +115,7 @@ export function highlightSql(sql) {
     out += `<span class="${match[1] ? "sql-string" : "sql-keyword"}">${esc(match[0])}</span>`;
     last = match.index + match[0].length;
   }
-  return raw(out + esc(sql.slice(last)));
+  return raw((out + esc(sql.slice(last))).replace(/\r?\n/g, "&#10;"));
 }
 
 // Decorative: the role line above already says the same thing in plain words, so it's hidden from assistive tech

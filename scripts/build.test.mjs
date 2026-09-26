@@ -147,3 +147,9 @@ test("a role with an empty bullet list renders no list and no stray text", () =>
   assert.doesNotMatch(role, /list-item-bullets/);
   assert.doesNotMatch(role, />\s*0\s*</);
 });
+
+test("multi-line SQL keeps its alignment on a single source line", () => {
+  const out = String(highlightSql("SELECT a\n       FROM t;"));
+  assert.doesNotMatch(out, /\n/);
+  assert.match(out, /a&#10;       <span class="sql-keyword">FROM<\/span>/);
+});
