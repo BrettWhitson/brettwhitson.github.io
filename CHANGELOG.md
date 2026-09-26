@@ -1,5 +1,36 @@
 # Changelog
 
+## [3.1.0] - 2026-09-25
+
+### Added
+
+- **Projects section** - BuilderJS, WebDocker (ACM first place), DockerUI, and the bipartite graph checker
+- **Grouped roles** - Experience entries can list several `roles`, each with its own dates and bullet points
+- **Resume source** - `resume/whitson_resume.tex`; the built PDF is published as `data/whitson_resume.pdf`
+- **Page metadata** - Description, canonical URL, and Open Graph tags for search and link previews
+- `noscript` fallback linking the resume PDF
+
+### Changed
+
+- **Content refresh** - Current Oracle DBA role, rewritten About, bullet points for every role, skills refocused on the database stack
+- **Resume** - Updated for 2026 and reworked to one page
+- **Mobile header** - Two compact rows with a horizontally scrolling nav (218px down to 104px tall)
+- **Skill icons** - Data now carries the full devicon class and a display label ("VS Code", not "Vscode")
+- **Theme toggle** - Inline SVG icons instead of emoji
+- **Portrait** - 192px WebP (7 KB) instead of the 960px JPEG (280 KB)
+- devicon pinned to 2.17.0
+
+### Fixed
+
+- Theme stopped following the OS setting after the first visit, because the initial theme was saved as if the user had chosen it
+- `themechange` event reported the new theme as `previous`
+- Nav links had no `nav-item`/`nav-link` classes, so the nav styles never applied
+- Section headings hidden under the sticky header after clicking a nav link
+- Desktop header overflowed horizontally between roughly 770px and 1100px wide
+- Resume download filename was hardcoded
+
+---
+
 ## [3.0.0] - 2025-10-07
 
 ### Added

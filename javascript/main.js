@@ -465,8 +465,9 @@ class PortfolioController {
         }
 
         // Create the li element and use scope to add the a child
-        const listItem = new Builder("li").scope((listItem) => {
+        const listItem = new Builder("li", { class: "nav-item" }).scope((listItem) => {
           listItem.addChild("a", {
+            class: "nav-link",
             href: `#${section.section}-section`,
             innerText: section.title,
             "data-text": section.title,
@@ -601,26 +602,26 @@ class PortfolioController {
 
   /**
    * Build a set of icons
-   * @param {Array} icons - Array of icon names
+   * @param {Array<{icon: string, label: string}>} icons - Devicon class suffix (e.g. "python-plain") and display label
    * @param {HTMLElement} container - Container element
    */
   buildIconSet(icons, container) {
-    icons.forEach((icon) => {
+    icons.forEach(({ icon, label }) => {
       try {
-        const iconBuilder = new Builder("span").scope((span) => {
-          span.addChild("i", {
-            class: `devicon-${icon}-plain`,
-            title: icon,
+        const iconBuilder = new Builder("li").scope((item) => {
+          item.addChild("i", {
+            class: `devicon-${icon}`,
+            "aria-hidden": "true",
           });
-          span.addChild("span", {
+          item.addChild("span", {
             class: "icon-label",
-            innerText: icon.charAt(0).toUpperCase() + icon.slice(1),
+            innerText: label,
           });
         });
 
         iconBuilder.appendTo(container);
       } catch (error) {
-        this.logError(`Failed to build icon for ${icon}`, error);
+        this.logError(`Failed to build icon for ${label}`, error);
       }
     });
   }
@@ -743,6 +744,41 @@ class PortfolioController {
                         innerHTML: item.main,
                       });
                     }
+
+                    // Several positions held at one organization
+                    if (Array.isArray(item.roles)) {
+                      item.roles.forEach((role) => {
+                        itemBuilder.addChild("div", { class: "list-item-role" }, (roleBuilder) => {
+                          roleBuilder.addChild("div", {
+                            class: "list-item-role-title",
+                            innerText: role.title,
+                          });
+                          if (role.dates) {
+                            roleBuilder.addChild("div", {
+                              class: this.config.classes.listItemSubsubheader,
+                              innerText: role.dates,
+                            });
+                          }
+                          if (Array.isArray(role.bullets) && role.bullets.length > 0) {
+                            roleBuilder.addChild("ul", { class: "list-item-bullets" }, (bulletList) => {
+                              role.bullets.forEach((bullet) => {
+                                bulletList.addChild("li", { innerText: bullet });
+                              });
+                            });
+                          }
+                        });
+                      });
+                    }
+
+                    if (item.link?.href) {
+                      itemBuilder.addChild("a", {
+                        class: "list-item-link",
+                        href: item.link.href,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        innerText: item.link.label || item.link.href,
+                      });
+                    }
                   }
                 );
               });
@@ -798,7 +834,7 @@ class PortfolioController {
               actions.addChild("a", {
                 href: section.file,
                 innerText: "Download PDF",
-                download: "whitson_resume_25.pdf",
+                download: section.file.split("/").pop(),
                 class: "btn btn-primary",
               });
 
@@ -1017,7 +1053,8 @@ class ThemeController {
     const theme = savedTheme || systemTheme;
 
     this.log(`Initializing theme: saved=${savedTheme}, system=${systemTheme}, final=${theme}`);
-    this.setTheme(theme);
+    // Not persisted: only an explicit toggle should stop the page following the OS setting
+    this.setTheme(theme, { persist: false });
   }
 
   /**
@@ -1059,8 +1096,10 @@ class ThemeController {
   /**
    * Set the active theme
    * @param {string} theme - Theme to set (light or dark)
+   * @param {Object} [options]
+   * @param {boolean} [options.persist=true] - Save the choice to localStorage
    */
-  setTheme(theme) {
+  setTheme(theme, { persist = true } = {}) {
     if (!Object.values(this.themes).includes(theme)) {
       console.warn(`Invalid theme: ${theme}`);
       return;
@@ -1068,11 +1107,14 @@ class ThemeController {
 
     this.log(`Setting theme to: ${theme}`);
 
+    const previous = this.getCurrentTheme();
+
     // Set data attribute for CSS
     document.documentElement.setAttribute("data-theme", theme);
 
-    // Save to localStorage
-    this.saveTheme(theme);
+    if (persist) {
+      this.saveTheme(theme);
+    }
 
     // Update theme toggle button
     this.updateThemeToggleButton(theme);
@@ -1080,7 +1122,7 @@ class ThemeController {
     // Dispatch custom event
     window.dispatchEvent(
       new CustomEvent("themechange", {
-        detail: { theme, previous: this.getCurrentTheme() },
+        detail: { theme, previous },
       })
     );
   }
@@ -1169,7 +1211,7 @@ class ThemeController {
 
     const newSystemTheme = event.matches ? this.themes.DARK : this.themes.LIGHT;
     this.log(`System theme changed to: ${newSystemTheme}`);
-    this.setTheme(newSystemTheme);
+    this.setTheme(newSystemTheme, { persist: false });
   }
 
   /**
@@ -1179,7 +1221,7 @@ class ThemeController {
     try {
       localStorage.removeItem(this.storageKey);
       const systemTheme = this.getSystemTheme();
-      this.setTheme(systemTheme);
+      this.setTheme(systemTheme, { persist: false });
       this.log("Theme reset to system preference");
     } catch (error) {
       console.warn("Could not reset theme:", error);

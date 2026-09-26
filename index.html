@@ -2,30 +2,39 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="UTF-8">
-  <title>Brett Whitson</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brett Whitson - Oracle DBA and Banner Systems Administrator</title>
+  <meta name="description"
+    content="Brett Whitson is an Oracle DBA and Ellucian Banner systems administrator at the University of Tennessee at Martin, with a background in software development.">
+  <link rel="canonical" href="https://home.brettwhitson.dev/">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://home.brettwhitson.dev/">
+  <meta property="og:title" content="Brett Whitson - Oracle DBA and Banner Systems Administrator">
+  <meta property="og:description"
+    content="Oracle DBA and Ellucian Banner systems administrator at the University of Tennessee at Martin. Experience, projects, and resume.">
+  <meta property="og:image" content="https://home.brettwhitson.dev/data/images/me.jpg">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/styles/min/styles.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.17.0/devicon.min.css">
   <script src="https://cdn.jsdelivr.net/gh/brettwhitson/builder-js@0.0.3-beta/builder.js"></script>
   <script src="/javascript/main.js"></script>
-  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-  <!-- Preload key fonts for better performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 
 <body>
   <header class="site-header">
     <div class="header-container">
       <div class="profile-section">
-        <img id="portrait" src="./data/images/me.jpg" alt="Brett Whitson Profile">
+        <img id="portrait" src="./data/images/me-192.webp" width="48" height="48" alt="Portrait of Brett Whitson">
         <div class="profile-info">
           <h1>Brett Whitson</h1>
-          <a href="mailto:brett.whitson.dev@gmail.com" class="mailto">Brett.Whitson.Dev@gmail.com</a>
+          <a href="mailto:brett.whitson.dev@gmail.com" class="mailto">brett.whitson.dev@gmail.com</a>
         </div>
       </div>
-      <nav class="navigation">
+      <nav class="navigation" aria-label="Sections">
         <ul class="nav-list linklist"></ul>
       </nav>
       <div class="header-actions">
@@ -33,9 +42,16 @@
           <ul class="ext-icon-list"></ul>
         </div>
         <div class="theme-toggle">
-          <button class="theme-toggle-btn" aria-label="Toggle theme">
-            <span class="theme-icon theme-icon-sun">☀️</span>
-            <span class="theme-icon theme-icon-moon">🌙</span>
+          <button type="button" class="theme-toggle-btn" aria-label="Toggle theme">
+            <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
           </button>
         </div>
       </div>
@@ -45,6 +61,10 @@
   <main class="main-content">
     <div class="content-container">
       <div id="content" class="content-grid"></div>
+      <noscript>
+        <p>This page needs JavaScript to show its content. My resume is available as a
+          <a href="./data/whitson_resume.pdf">PDF</a>.</p>
+      </noscript>
     </div>
   </main>
 
@@ -52,11 +72,9 @@
     <div class="footer-container">
       <div class="footer-content">
         <div class="footer-info">
-          <p class="footer-copyright">
-            © 2025 Brett Whitson. All rights reserved.
-          </p>
+          <p class="footer-copyright">&copy; Brett Whitson</p>
           <p class="footer-built">
-            Built with vanilla JavaScript, BuilderJS v0.0.3, and modern CSS
+            Built with vanilla JavaScript, BuilderJS, and SCSS
           </p>
         </div>
         <div class="footer-links">

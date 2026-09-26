@@ -24,6 +24,8 @@
 // Entrance animations for content sections
 .section {
   @include animate-fade-in-up(0.6s, 0.1s);
+  // Keep nav-link targets clear of the sticky header
+  scroll-margin-top: 120px;
 
   &:nth-child(2) {
     animation-delay: 0.2s;
