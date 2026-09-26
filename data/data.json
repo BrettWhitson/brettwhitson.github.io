@@ -17,7 +17,7 @@
       "section": "about",
       "title": "About",
       "type": "pg",
-      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science and still build things on the side, like BuilderJS, a small DOM-building library, and the static build behind this site."
+      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love front-end work: this site is hand-built with vanilla JavaScript and SCSS."
     },
     {
       "section": "experience",
@@ -82,28 +82,29 @@
       "type": "ls",
       "body": [
         {
-          "header": "BuilderJS",
-          "subheader": "2025 - JavaScript",
-          "main": "Open-source DOM-building library with a scoped, chainable API and HTML tag validation.",
-          "link": {
-            "href": "https://github.com/BrettWhitson/Builder-JS",
-            "label": "View on GitHub"
-          }
-        },
-        {
           "header": "WebDocker",
-          "subheader": "2019 - First Place, Undergraduate Presentations, ACM Mid-Southeast Conference",
-          "main": "Team-built web application for managing Docker containers from the browser."
+          "subheader": "Fall 2019 - First Place, Undergraduate Presentations, ACM Mid-Southeast Conference",
+          "main": "Built with two teammates: a web application for managing virtualized services (Docker containers) from the browser."
         },
         {
           "header": "DockerUI",
-          "subheader": "2019 - Electron, Express.js",
-          "main": "Desktop interface for managing local Docker containers, built as part of a three-person team."
+          "subheader": "Fall 2019 - Electron, Express.js",
+          "main": "Built with two teammates: a desktop interface for managing local Docker containers."
         },
         {
           "header": "Bipartite Graph Checker",
-          "subheader": "2019",
-          "main": "A DFS bipartite-graph algorithm implemented in four programming paradigms: procedural, object-oriented, functional, and logic."
+          "subheader": "Spring 2019",
+          "main": "A DFS algorithm that decides whether a graph is bipartite, implemented in four paradigms: procedural, object-oriented, functional, and logic."
+        },
+        {
+          "header": "Pseudo-Theremin",
+          "subheader": "Fall 2018 - Python, Ruby, Raspberry Pi",
+          "main": "Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi, with sound from Sonic Pi."
+        },
+        {
+          "header": "Financial/Budgeting Application",
+          "subheader": "Fall 2017 - C#, MS Access",
+          "main": "Pair-programmed application for tracking spending and building budget plans."
         }
       ]
     },

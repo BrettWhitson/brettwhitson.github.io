@@ -20,10 +20,10 @@
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
 \addtolength{\topmargin}{-0.6in}
-\addtolength{\textheight}{1.1in}
+\addtolength{\textheight}{1.2in}
 
 \titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large}{}{0em}{}[\titlerule\vspace{-4pt}]
-\titlespacing*{\section}{0pt}{8pt}{6pt}
+\titlespacing*{\section}{0pt}{6pt}{5pt}
 
 %-------------------------
 % Custom commands
@@ -47,7 +47,7 @@
 
 \newcommand{\resumeItem}[2]{\item \small{\textbf{#1}: #2}}
 
-\newenvironment{entries}{\begin{itemize}[leftmargin=0in, label={}, itemsep=2pt, topsep=0pt]}{\end{itemize}}
+\newenvironment{entries}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, topsep=0pt]}{\end{itemize}}
 \newenvironment{bullets}{\begin{itemize}[leftmargin=0.2in, itemsep=0pt, topsep=1pt, parsep=0pt, label=\textbullet]\small}{\end{itemize}}
 
 %-------------------------------------------
@@ -142,14 +142,16 @@ and Linux server management.
 %-----------PROJECTS-----------------
 \section{Projects}
 \begin{entries}
-  \resumeItem{BuilderJS (2025)}{Open-source JavaScript DOM-building library with a scoped, chainable API and
-    HTML tag validation.}
   \resumeItem{WebDocker (2019)}{\textit{First Place, Undergraduate Presentations, ACM Mid-Southeast Conference.}
     Team-built web application for managing Docker containers from the browser.}
   \resumeItem{DockerUI (2019)}{Desktop interface for managing local Docker containers, built with Electron and
     Express.js as part of a three-person team.}
   \resumeItem{Bipartite Graph Checker (2019)}{Implemented a DFS bipartite-graph algorithm in four programming
     paradigms: procedural, object-oriented, functional, and logic.}
+  \resumeItem{Pseudo-Theremin (2018)}{Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi,
+    with Python, Ruby, and Sonic Pi.}
+  \resumeItem{Financial/Budgeting Application (2017)}{Pair-programmed C\# application with an MS Access database
+    for tracking spending and building budget plans.}
 \end{entries}
 
 \end{document}

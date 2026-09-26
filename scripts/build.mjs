@@ -97,7 +97,7 @@ const renderRole = (role, index) => html`
 <div class="list-item-role" style="--i: ${index}">
   <h4 class="list-item-role-title">${role.title}</h4>
   ${role.dates && html`<p class="list-item-subsubheader">${role.dates}</p>`}
-  ${role.bullets?.length &&
+  ${role.bullets?.length > 0 &&
   html`<ul class="list-item-bullets">
     ${role.bullets.map((bullet) => html`<li>${bullet}</li>`)}
   </ul>`}
@@ -158,7 +158,9 @@ function renderSection(section, data) {
 
 function validate(data) {
   const problems = [];
-  if (!data.site?.name) problems.push("site.name is required");
+  ["name", "headline", "email", "url", "description", "image"].forEach((field) => {
+    if (!data.site?.[field]) problems.push(`site.${field} is required`);
+  });
   if (!data.sections?.some?.((s) => s.type === "rs")) problems.push("a resume section (type \"rs\") is required for the hero download link");
   if (!Array.isArray(data.sections) || data.sections.length === 0) problems.push("sections must be a non-empty array");
 

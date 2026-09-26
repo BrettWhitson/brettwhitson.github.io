@@ -6,7 +6,15 @@ import { esc, html, raw, formatHtml, renderPage } from "./build.mjs";
 const template = "<!DOCTYPE html>\n<title>{{title}}</title>\n<nav>{{nav}}</nav>\n<main>{{sections}}</main>\n<script>{{jsonLd}}</script>\n";
 
 const minimal = (overrides = {}) => ({
-  site: { name: "Jane Doe", headline: "Engineer", url: "https://example.com/", ...overrides.site },
+  site: {
+    name: "Jane Doe",
+    headline: "Engineer",
+    email: "jane@example.com",
+    url: "https://example.com/",
+    description: "Jane's site",
+    image: "https://example.com/me.jpg",
+    ...overrides.site,
+  },
   sections: overrides.sections ?? [
     { section: "about", title: "About", type: "pg", body: "Hello" },
     { section: "resume", title: "Resume", type: "rs", file: "./cv.pdf" },
@@ -78,4 +86,24 @@ test("the real data.json renders every section", async () => {
     assert.match(page, new RegExp(`href="#${section.section}"`));
   }
   assert.doesNotMatch(page, /\{\{\w+\}\}/);
+});
+
+test("missing site metadata is reported instead of rendering empty tags", () => {
+  assert.throws(() => renderPage(minimal({ site: { email: "", url: undefined } }), template), (error) => {
+    assert.match(error.message, /site\.email is required/);
+    assert.match(error.message, /site\.url is required/);
+    return true;
+  });
+});
+
+test("a role with an empty bullet list renders no list and no stray text", () => {
+  const data = minimal({
+    sections: [
+      { section: "exp", title: "Experience", type: "ls", body: [{ header: "Org", roles: [{ title: "Role", bullets: [] }] }] },
+      { section: "resume", title: "Resume", type: "rs", file: "./cv.pdf" },
+    ],
+  });
+  const role = renderPage(data, "{{sections}}").match(/<div class="list-item-role"[\s\S]*?<\/div>/)[0];
+  assert.doesNotMatch(role, /list-item-bullets/);
+  assert.doesNotMatch(role, />\s*0\s*</);
 });

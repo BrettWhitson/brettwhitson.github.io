@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.1.1] - 2026-09-25
+
+### Changed
+
+- Removed BuilderJS from projects and the About text; projects are back to the original five from the resume
+
+### Fixed
+
+- A role with an empty `bullets` array rendered a stray "0"
+- Build now fails when required `site` metadata (email, url, description, image, headline) is missing, instead of
+  writing empty meta tags
+
+---
+
 ## [4.1.0] - 2026-09-25
 
 ### Added
