@@ -1,5 +1,37 @@
 # Changelog
 
+## [4.1.0] - 2026-09-25
+
+### Added
+
+- **Hero** - Large portrait, name, role, and resume/email actions above the fold
+- **Experience timeline** - Roles at one organization hang off a vertical rail, current role highlighted; the rail
+  draws and the dots appear in order when the section scrolls into view
+- **Scroll-spy** - The nav underlines the section being read and keeps it visible in the scrolling mobile nav
+- **Scroll reveal** - Sections fade up once as they enter the viewport
+- Header shows the name and a border only after the hero scrolls away
+- Source Serif 4 for the name and section titles
+
+### Changed
+
+- Sections are open blocks with the title in a sticky left column, instead of boxed cards
+- Projects are two-up cards; skill tiles are smaller
+- Header is a slim bar; profile links move to the hero below 1024px
+- Content column narrowed to 60rem for readable line lengths
+- Dark mode links use a lighter blue for contrast
+
+### Removed
+
+- Global `* { transition }` rule, hover lift on non-interactive sections, load-time staggered section animations
+- Unused card components and color tokens
+
+### Fixed
+
+- Keyframe animations now respect `prefers-reduced-motion`; scripted motion is skipped entirely when reduced motion
+  is requested or JavaScript is off, so content is never left hidden
+
+---
+
 ## [4.0.0] - 2026-09-25
 
 ### Changed

@@ -17,15 +17,24 @@
 
   <script type="application/ld+json">{{jsonLd}}</script>
 
-  <!-- Apply a saved theme before first paint; without one the CSS follows prefers-color-scheme -->
+  <!-- Before first paint: apply a saved theme (otherwise CSS follows prefers-color-scheme) and
+       flag that scripted motion can run, so nothing starts hidden when JS is off -->
   <script>
-    try {
-      const theme = localStorage.getItem("theme");
-      if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
-    } catch {}
+    (() => {
+      const root = document.documentElement;
+      root.classList.add("js");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) root.classList.add("motion-ok");
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+      } catch {}
+    })();
   </script>
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
   <link rel="stylesheet" href="/styles/min/styles.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.17.0/devicon.min.css">
   <script src="/javascript/main.js" defer></script>
@@ -36,13 +45,7 @@
 
   <header class="site-header">
     <div class="header-container">
-      <div class="profile-section">
-        <img id="portrait" src="/data/images/me-192.webp" width="48" height="48" alt="Portrait of {{name}}">
-        <div class="profile-info">
-          <p class="profile-name">{{name}}</p>
-          <a href="mailto:{{email}}" class="mailto">{{email}}</a>
-        </div>
-      </div>
+      <a class="brand" href="#top">{{name}}</a>
       <nav class="navigation" aria-label="Sections">
         <ul class="nav-list">
 {{nav}}
@@ -71,10 +74,22 @@
 
   <main id="content" class="main-content">
     <div class="content-container">
-      <h1 class="visually-hidden">{{name}} - {{headline}}</h1>
-      <div class="content-grid">
-{{sections}}
+      <div id="top" class="hero">
+        <img class="hero-portrait" src="/data/images/me-192.webp" width="144" height="144" alt="Portrait of {{name}}">
+        <div class="hero-text">
+          <h1 class="hero-name" style="--i: 0">{{name}}</h1>
+          <p class="hero-role" style="--i: 1">{{headline}}</p>
+          <p class="hero-org" style="--i: 2">{{org}}</p>
+          <div class="hero-actions" style="--i: 3">
+            <a class="btn btn-primary" href="{{resumeFile}}" download>Download resume</a>
+            <a class="btn btn-secondary" href="mailto:{{email}}">Email me</a>
+            <ul class="hero-links">
+{{heroLinks}}
+            </ul>
+          </div>
+        </div>
       </div>
+{{sections}}
     </div>
   </main>
 

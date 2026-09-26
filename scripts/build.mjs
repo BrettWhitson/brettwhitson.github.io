@@ -92,8 +92,9 @@ const renderIcons = (icons = []) => html`
   )}
 </ul>`;
 
-const renderRole = (role) => html`
-<div class="list-item-role">
+// --i orders the timeline animation (see components/_timeline.scss)
+const renderRole = (role, index) => html`
+<div class="list-item-role" style="--i: ${index}">
   <h4 class="list-item-role-title">${role.title}</h4>
   ${role.dates && html`<p class="list-item-subsubheader">${role.dates}</p>`}
   ${role.bullets?.length &&
@@ -109,7 +110,7 @@ const renderListItem = (item, data) => html`
   ${item.subsubheader && html`<p class="list-item-subsubheader">${item.subsubheader}</p>`}
   ${item.main && html`<div class="list-item-main">${raw(item.main)}</div>`}
   ${item.icons && renderIcons(data.icons?.[item.icons])}
-  ${item.roles?.map(renderRole)}
+  ${item.roles?.map((role, i) => renderRole(role, i))}
   ${item.link?.href &&
   html`<a class="list-item-link" href="${item.link.href}" target="_blank" rel="noopener noreferrer">${
     item.link.label || item.link.href
@@ -123,7 +124,7 @@ const bodies = {
 </div>`,
 
   ls: (section, data) => html`
-<div class="section-body section-body-list">
+<div class="section-body">
   <ul class="section-body-list">
     ${section.body.map((item) => renderListItem(item, data))}
   </ul>
@@ -145,7 +146,7 @@ function renderSection(section, data) {
   if (!body) throw new Error(`Section "${section.section}" has unknown type "${section.type}"`);
 
   return html`
-<section id="${section.section}" class="section" aria-labelledby="${section.section}-title">
+<section id="${section.section}" class="section reveal" aria-labelledby="${section.section}-title">
   <div class="section-header">
     <h2 id="${section.section}-title" class="section-title">${section.title}</h2>
   </div>
@@ -158,6 +159,7 @@ function renderSection(section, data) {
 function validate(data) {
   const problems = [];
   if (!data.site?.name) problems.push("site.name is required");
+  if (!data.sections?.some?.((s) => s.type === "rs")) problems.push("a resume section (type \"rs\") is required for the hero download link");
   if (!Array.isArray(data.sections) || data.sections.length === 0) problems.push("sections must be a non-empty array");
 
   const ids = new Set();
@@ -197,9 +199,16 @@ function jsonLd({ site, ext }) {
   return JSON.stringify(person).replace(/</g, "\\u003c");
 }
 
+const renderIconLinks = (entries) => html`${entries.map(
+  ([label, { icon, link }]) =>
+    html`<li><a class="icon-button" href="${link}" target="_blank" rel="noopener noreferrer" aria-label="${label}" title="${label}"><i class="devicon-${icon}" aria-hidden="true"></i></a></li>`
+)}`;
+
 export function renderPage(data, template) {
   validate(data);
   const { site } = data;
+  const links = Object.entries(data.ext ?? {});
+  const resume = data.sections.find((s) => s.type === "rs");
 
   const slots = {
     title: esc(`${site.name} - ${site.headline}`),
@@ -208,21 +217,19 @@ export function renderPage(data, template) {
     image: esc(site.image),
     name: esc(site.name),
     headline: esc(site.headline),
+    org: esc(site.org),
     email: esc(site.email),
     sourceUrl: esc(site.sourceUrl),
+    resumeFile: esc(resume?.file ?? ""),
     jsonLd: jsonLd(data),
     nav: formatHtml(
       html`${data.sections.map((s) => html`<li class="nav-item"><a class="nav-link" href="#${s.section}">${s.title}</a></li>`)}`,
       10
     ),
-    extLinks: formatHtml(
-      html`${Object.entries(data.ext ?? {}).map(
-        ([label, { icon, link }]) =>
-          html`<li><a href="${link}" target="_blank" rel="noopener noreferrer" aria-label="${label}" title="${label}"><i class="devicon-${icon}" aria-hidden="true"></i></a></li>`
-      )}`,
-      10
-    ),
-    sections: formatHtml(html`${data.sections.map((s) => renderSection(s, data))}`, 8),
+    extLinks: formatHtml(renderIconLinks(links), 10),
+    // The hero shows profiles only, not this repo
+    heroLinks: formatHtml(renderIconLinks(links.filter(([, { link }]) => link !== site.sourceUrl)), 14),
+    sections: formatHtml(html`${data.sections.map((s) => renderSection(s, data))}`, 6),
   };
 
   const page = template.replace(/\{\{(\w+)\}\}/g, (match, key) => {

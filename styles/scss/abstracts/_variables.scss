@@ -4,10 +4,8 @@
   --color-primary: #2563eb;
   --color-primary-hover: #1d4ed8;
   --color-secondary: #64748b;
-  --color-accent: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-success: #22c55e;
+  --color-accent: #059669;
+  --color-link: #1d4ed8;
 
   // Surface Colors
   --color-background: #ffffff;
@@ -97,6 +95,7 @@
   --container-lg: 1024px;
   --container-xl: 1200px;
   --container-2xl: 1400px;
+  --container-content: 60rem;
 }
 
 // Dark Theme Variables
@@ -105,9 +104,7 @@
   --color-primary-hover: #2563eb;
   --color-secondary: #94a3b8;
   --color-accent: #34d399;
-  --color-warning: #fbbf24;
-  --color-error: #f87171;
-  --color-success: #4ade80;
+  --color-link: #60a5fa;
 
   --color-background: #0f172a;
   --color-surface: #1e293b;
@@ -137,6 +134,7 @@
     --color-primary-hover: #2563eb;
     --color-secondary: #94a3b8;
     --color-accent: #34d399;
+    --color-link: #60a5fa;
 
     --color-background: #0f172a;
     --color-surface: #1e293b;

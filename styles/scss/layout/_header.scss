@@ -1,289 +1,119 @@
-// Site Header Component
+// Site Header
+// Slim sticky bar: name, section nav, and actions. The hero below carries the full intro.
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-background) 85%, transparent);
+  border-bottom: 1px solid transparent;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: var(--transition-base);
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+
+  // Set by main.js once the hero scrolls away
+  &.is-stuck {
+    border-bottom-color: var(--color-border);
+  }
 
   .header-container {
-    max-width: var(--container-xl);
+    max-width: var(--container-content);
     margin: 0 auto;
-    padding: var(--space-4) var(--space-4);
+    padding: var(--space-3) var(--space-4);
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
     gap: var(--space-6);
 
-    // Two compact rows on phones (identity + actions, then a scrolling nav) so the sticky header stays short
-    @media (max-width: 768px) {
+    // Two rows on phones: name + actions, then a scrolling nav
+    @include mobile-only {
       grid-template-columns: 1fr auto;
-      gap: var(--space-2) var(--space-3);
-      padding: var(--space-2) var(--space-4);
+      gap: var(--space-1) var(--space-3);
+      padding: var(--space-2) var(--space-4) 0;
     }
   }
 
-  .profile-section {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
+  .brand {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity var(--transition-base), transform var(--transition-base);
 
-    @media (max-width: 768px) {
-      order: 1;
-      min-width: 0;
-    }
+    @include focus-ring();
+  }
 
-    #portrait {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-full);
-      object-fit: cover;
-      border: 2px solid var(--color-border);
-      transition: var(--transition-base);
-
-      &:hover {
-        border-color: var(--color-primary);
-        transform: scale(1.05);
-      }
-
-      @media (max-width: 768px) {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      .profile-name {
-        font-size: var(--text-xl);
-        font-weight: var(--font-bold);
-        color: var(--color-text-primary);
-        margin: 0;
-        line-height: var(--leading-tight);
-
-        @media (max-width: 768px) {
-          font-size: var(--text-lg);
-        }
-      }
-
-      .mailto {
-        font-size: var(--text-sm);
-        color: var(--color-text-muted);
-        text-decoration: none;
-        transition: var(--transition-fast);
-
-        &:hover {
-          color: var(--color-primary);
-        }
-
-        @media (max-width: 768px) {
-          font-size: var(--text-xs);
-        }
-      }
-    }
+  // With JS, the name only appears in the bar once the hero's own name is out of view
+  .js &:not(.is-stuck) .brand {
+    opacity: 0;
+    transform: translateY(4px);
   }
 
   .navigation {
     justify-self: center;
     min-width: 0;
     max-width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
 
-    @media (max-width: 768px) {
+    @include mobile-only {
       order: 3;
       grid-column: 1 / -1;
       justify-self: stretch;
-      overflow-x: auto;
-      scrollbar-width: none;
       margin: 0 calc(-1 * var(--space-4));
-      padding: 0 var(--space-4);
-    }
-
-    .nav-list {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      gap: var(--space-1);
-
-      @media (max-width: 768px) {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-      }
-
-      .nav-item {
-        .nav-link {
-          display: block;
-          font-size: var(--text-base);
-          font-weight: var(--font-medium);
-          color: var(--color-text-secondary);
-          text-decoration: none;
-          padding: var(--space-2) var(--space-3);
-          border-radius: var(--radius-md);
-          position: relative;
-          white-space: nowrap;
-          transition: var(--transition-base);
-
-          @media (max-width: 768px) {
-            font-size: var(--text-sm);
-            padding: var(--space-1) var(--space-2);
-          }
-
-          &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--color-primary);
-            transform: translateX(-50%);
-            transition: var(--transition-base);
-          }
-
-          &:hover {
-            color: var(--color-primary);
-            background: var(--color-surface-elevated);
-
-            &::after {
-              width: calc(100% - var(--space-6));
-            }
-          }
-
-          &.active {
-            color: var(--color-primary);
-            font-weight: var(--font-semibold);
-
-            &::after {
-              width: calc(100% - var(--space-6));
-            }
-          }
-        }
-      }
     }
   }
 
   .header-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-2);
 
-    @media (max-width: 768px) {
+    @include mobile-only {
       order: 2;
-      gap: var(--space-2);
     }
 
-    .ext-links {
-      display: flex;
-      gap: var(--space-3);
-
+    // Profile links are repeated in the hero; narrower screens give the room to the nav
+    @media (max-width: 1023px) {
       .ext-icon-list {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: var(--space-3);
-
-        li {
-          a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-md);
-            color: var(--color-text-secondary);
-            font-size: var(--text-xl);
-            transition: var(--transition-base);
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-
-            @media (max-width: 768px) {
-              width: 36px;
-              height: 36px;
-              font-size: var(--text-lg);
-            }
-
-            &:hover {
-              color: var(--color-primary);
-              background: var(--color-surface-elevated);
-              border-color: var(--color-primary);
-              transform: translateY(-2px);
-              box-shadow: var(--shadow-md);
-            }
-
-            &:visited {
-              color: var(--color-text-secondary);
-            }
-
-            &:hover:visited {
-              color: var(--color-primary);
-            }
-          }
-        }
-      }
-    }
-
-    .theme-toggle {
-      .theme-toggle-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: var(--radius-md);
-        background: var(--color-surface);
-        border: 1px solid var(--color-border);
-        color: var(--color-text-secondary);
-        font-size: var(--text-lg);
-        cursor: pointer;
-        transition: var(--transition-base);
-
-        @media (max-width: 768px) {
-          width: 36px;
-          height: 36px;
-          font-size: var(--text-base);
-        }
-
-        &:hover {
-          color: var(--color-primary);
-          background: var(--color-surface-elevated);
-          border-color: var(--color-primary);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-md);
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--color-primary);
-          outline-offset: 2px;
-        }
-
-        .theme-icon {
-          transition: var(--transition-base);
-        }
-
-        .theme-icon-sun {
-          display: block;
-        }
-
-        .theme-icon-moon {
-          display: none;
-        }
+        display: none;
       }
     }
   }
 }
 
-// Dark theme adjustments
-[data-theme="dark"] .site-header .theme-toggle .theme-toggle-btn {
+.icon-button,
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-link);
+    border-color: var(--color-border);
+    background: var(--color-surface);
+  }
+
+  @include focus-ring();
+}
+
+.theme-toggle-btn {
+  .theme-icon-moon {
+    display: none;
+  }
+}
+
+[data-theme="dark"] .theme-toggle-btn {
   .theme-icon-sun {
     display: none;
   }
@@ -291,4 +121,9 @@
   .theme-icon-moon {
     display: block;
   }
+}
+
+// The toggle needs JavaScript; without it the page just follows the OS theme
+html:not(.js) .theme-toggle {
+  display: none;
 }

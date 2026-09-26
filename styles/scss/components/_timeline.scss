@@ -1,0 +1,78 @@
+// Experience timeline: roles at one organization hang off a vertical rail,
+// so the progression from help desk to DBA reads at a glance.
+
+#experience .section-body-list {
+  gap: var(--space-12);
+}
+
+.list-item-role {
+  --dot: 11px;
+  --rail-x: calc(var(--dot) / 2);
+
+  position: relative;
+  padding-left: var(--space-8);
+  padding-top: var(--space-4);
+
+  // Rail segment from this dot down to the next role
+  &:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--rail-x) - 1px);
+    top: calc(var(--space-4) + 0.8em);
+    bottom: calc(-1 * var(--space-4) - 0.8em);
+    width: 2px;
+    background: var(--color-border);
+    transform-origin: top;
+  }
+
+  // Dot, aligned with the role title
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(var(--space-4) + 0.8em - var(--dot) / 2);
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: var(--radius-full);
+    background: var(--color-background);
+    border: 2px solid var(--color-text-muted);
+  }
+
+  // Current role
+  &:first-of-type::after {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+}
+
+.list-item-role-title {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+// Draw the rail and pop the dots in order when the section scrolls into view
+.motion-ok #experience {
+  .list-item-role::before {
+    transform: scaleY(0);
+    transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 120ms + 150ms);
+  }
+
+  .list-item-role::after {
+    transform: scale(0);
+    transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+
+  &.is-visible .list-item-role::before {
+    transform: scaleY(1);
+  }
+
+  &.is-visible .list-item-role::after {
+    transform: scale(1);
+  }
+}

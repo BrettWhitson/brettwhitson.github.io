@@ -7,7 +7,10 @@ const template = "<!DOCTYPE html>\n<title>{{title}}</title>\n<nav>{{nav}}</nav>\
 
 const minimal = (overrides = {}) => ({
   site: { name: "Jane Doe", headline: "Engineer", url: "https://example.com/", ...overrides.site },
-  sections: overrides.sections ?? [{ section: "about", title: "About", type: "pg", body: "Hello" }],
+  sections: overrides.sections ?? [
+    { section: "about", title: "About", type: "pg", body: "Hello" },
+    { section: "resume", title: "Resume", type: "rs", file: "./cv.pdf" },
+  ],
   icons: overrides.icons ?? {},
   ext: overrides.ext ?? {},
 });
@@ -32,7 +35,7 @@ test("formatHtml indents by nesting depth and skips void tags", () => {
 });
 
 test("section text is escaped in the rendered page", () => {
-  const page = renderPage(minimal({ sections: [{ section: "about", title: "A & B", type: "pg", body: "<script>x</script>" }] }), template);
+  const page = renderPage(minimal({ sections: [{ section: "about", title: "A & B", type: "pg", body: "<script>x</script>" }, { section: "r", title: "R", type: "rs", file: "x.pdf" }] }), template);
   assert.match(page, /A &amp; B/);
   assert.doesNotMatch(page, /<script>x<\/script>/);
 });
@@ -47,7 +50,7 @@ test("JSON-LD cannot close its script tag", () => {
 test("invalid data is rejected with every problem listed", () => {
   const data = minimal({
     sections: [
-      { section: "a", title: "A", type: "pg", body: "" },
+      { section: "a", title: "A", type: "rs", file: "x.pdf" },
       { section: "a", title: "", type: "nope", body: [{ icons: "missing" }] },
     ],
   });

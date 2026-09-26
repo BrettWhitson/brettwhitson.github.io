@@ -1,0 +1,31 @@
+// Scroll reveal. main.js adds .motion-ok to <html> only when JavaScript runs and the
+// visitor hasn't asked for reduced motion, so content is never hidden otherwise.
+
+.motion-ok .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms ease-out, transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Theme switches fade instead of snapping; scoped to the elements that carry the colors
+body,
+.site-header,
+.site-footer {
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

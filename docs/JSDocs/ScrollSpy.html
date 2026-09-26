@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSDoc: Class: ResumePreview</title>
+    <title>JSDoc: Class: ScrollSpy</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -16,32 +16,83 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ResumePreview</h1>
+    <h1 class="page-title">Class: ScrollSpy</h1>
 
 <section>
 
 <header>
 
-        <h2><span class="attribs"><span class="type-signature"></span></span>ResumePreview<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScrollSpy<span class="signature">()</span><span class="type-signature"></span></h2>
 
 </header>
 
 <article>
     <div class="container-overview">
 
-    <h4 class="name" id="ResumePreview"><span class="type-signature"></span>new ResumePreview<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ScrollSpy"><span class="type-signature"></span>new ScrollSpy<span class="signature">()</span><span class="type-signature"></span></h4>
 
 <div class="description">
-    <p>ResumePreview - Upgrades the resume &quot;Preview&quot; link to an inline PDF viewer</p>
-<p>Without JavaScript, or on narrow screens where mobile browsers can't render a PDF inside
-an iframe, the link simply opens the PDF.</p>
+    <p>ScrollSpy - Marks the nav link for the section currently being read</p>
+<p>A section counts as current while it crosses a thin band just below the sticky header.
+On phones the nav scrolls sideways, so the active link is also kept in view.</p>
 </div>
 
     </div>
 
-        <h3 class="subsection-title">Members</h3>
+        <h3 class="subsection-title">Methods</h3>
 
-<h4 class="name" id="isOpen"><span class="type-signature"></span>isOpen<span class="type-signature"></span></h4>
+    <h4 class="name" id="checkBottom"><span class="type-signature"></span>checkBottom<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+<h5>Returns:</h5>
+
+<div class="param-desc">
+    <p>Whether the page is scrolled to the end (and the last section was made active)</p>
+</div>
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">boolean</span>
+
+    </dd>
+</dl>
+
+    <h4 class="name" id="setActive"><span class="type-signature"></span>setActive<span class="signature">(section)</span><span class="type-signature"></span></h4>
+
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+        <th>Type</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+                <td class="name"><code>section</code></td>
+
+            <td class="type">
+
+<span class="param-type">HTMLElement</span>
+
+            </td>
+
+            <td class="description last"><p>A tracked section, or any other element to clear the highlight</p></td>
+        </tr>
+
+    </tbody>
+</table>
 
 </article>
 
@@ -51,14 +102,14 @@ an iframe, the link simply opens the PDF.</p>
 
 <header>
 
-        <h2><span class="attribs"><span class="type-signature"></span></span>ResumePreview<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ScrollSpy<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
 
 </header>
 
 <article>
     <div class="container-overview">
 
-    <h4 class="name" id="ResumePreview"><span class="type-signature"></span>new ResumePreview<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ScrollSpy"><span class="type-signature"></span>new ScrollSpy<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     <h5>Parameters:</h5>
 
@@ -117,7 +168,7 @@ an iframe, the link simply opens the PDF.</p>
 
         <tr>
 
-                <td class="name"><code>buttonId</code></td>
+                <td class="name"><code>linkSelector</code></td>
 
             <td class="type">
 
@@ -133,16 +184,16 @@ an iframe, the link simply opens the PDF.</p>
 
                 <td class="default">
 
-                    "resume-preview-btn"
+                    ".nav-link"
 
                 </td>
 
-            <td class="description last"></td>
+            <td class="description last"><p>Links whose href is &quot;#section-id&quot;</p></td>
         </tr>
 
         <tr>
 
-                <td class="name"><code>containerId</code></td>
+                <td class="name"><code>activeClass</code></td>
 
             <td class="type">
 
@@ -158,36 +209,11 @@ an iframe, the link simply opens the PDF.</p>
 
                 <td class="default">
 
-                    "resume-preview-container"
+                    "active"
 
                 </td>
 
             <td class="description last"></td>
-        </tr>
-
-        <tr>
-
-                <td class="name"><code>inlineQuery</code></td>
-
-            <td class="type">
-
-<span class="param-type">string</span>
-
-            </td>
-
-                <td class="attributes">
-
-                    &lt;optional><br>
-
-                </td>
-
-                <td class="default">
-
-                    "(min-width: 769px)"
-
-                </td>
-
-            <td class="description last"><p>When to preview inline</p></td>
         </tr>
 
     </tbody>
@@ -201,9 +227,60 @@ an iframe, the link simply opens the PDF.</p>
 
     </div>
 
-        <h3 class="subsection-title">Members</h3>
+        <h3 class="subsection-title">Methods</h3>
 
-<h4 class="name" id="isOpen"><span class="type-signature"></span>isOpen<span class="type-signature"></span></h4>
+    <h4 class="name" id="checkBottom"><span class="type-signature"></span>checkBottom<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+<h5>Returns:</h5>
+
+<div class="param-desc">
+    <p>Whether the page is scrolled to the end (and the last section was made active)</p>
+</div>
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+<span class="param-type">boolean</span>
+
+    </dd>
+</dl>
+
+    <h4 class="name" id="setActive"><span class="type-signature"></span>setActive<span class="signature">(section)</span><span class="type-signature"></span></h4>
+
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+        <th>Type</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+
+                <td class="name"><code>section</code></td>
+
+            <td class="type">
+
+<span class="param-type">HTMLElement</span>
+
+            </td>
+
+            <td class="description last"><p>A tracked section, or any other element to clear the highlight</p></td>
+        </tr>
+
+    </tbody>
+</table>
 
 </article>
 

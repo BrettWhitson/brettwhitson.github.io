@@ -173,6 +173,153 @@ class ResumePreview {
 }
 
 /**
+ * ScrollSpy - Marks the nav link for the section currently being read
+ *
+ * A section counts as current while it crosses a thin band just below the sticky header.
+ * On phones the nav scrolls sideways, so the active link is also kept in view.
+ *
+ * @class ScrollSpy
+ */
+class ScrollSpy {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.linkSelector=".nav-link"] - Links whose href is "#section-id"
+   * @param {string} [options.activeClass="active"]
+   */
+  constructor({ linkSelector = ".nav-link", activeClass = "active" } = {}) {
+    this.activeClass = activeClass;
+    this.links = new Map(
+      [...document.querySelectorAll(linkSelector)]
+        .map((link) => [document.getElementById(link.hash.slice(1)), link])
+        .filter(([section]) => section)
+    );
+    this.current = null;
+  }
+
+  init() {
+    if (!this.links.size || !("IntersectionObserver" in window)) return;
+
+    // The band sits 25-35% down the viewport, below the header on any screen
+    const observer = new IntersectionObserver((entries) => this.onIntersect(entries), {
+      rootMargin: "-25% 0px -65% 0px",
+    });
+    this.links.forEach((_, section) => observer.observe(section));
+
+    // Nothing is active while the intro above the first section is being read
+    const intro = document.querySelector(".hero");
+    if (intro) observer.observe(intro);
+
+    // The last section is often too short to reach the band before the page ends
+    window.addEventListener("scroll", () => this.checkBottom(), { passive: true });
+
+    // A clicked link stays active through the jump, even for a section near the end of the
+    // page that can't scroll up to the band; the visitor's own scrolling hands control back
+    this.links.forEach((link, section) => {
+      link.addEventListener("click", () => {
+        this.pinned = section;
+        this.setActive(section);
+      });
+    });
+    const unpin = () => (this.pinned = null);
+    ["wheel", "touchstart", "keydown"].forEach((type) => window.addEventListener(type, unpin, { passive: true }));
+  }
+
+  onIntersect(entries) {
+    if (this.pinned || this.checkBottom()) return;
+    const entry = entries.filter((e) => e.isIntersecting).at(-1);
+    if (entry) this.setActive(entry.target);
+  }
+
+  /** @returns {boolean} Whether the page is scrolled to the end (and the last section was made active) */
+  checkBottom() {
+    if (this.pinned) return false;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) this.setActive([...this.links.keys()].at(-1));
+    return atBottom;
+  }
+
+  /** @param {HTMLElement} section - A tracked section, or any other element to clear the highlight */
+  setActive(section) {
+    if (section === this.current) return;
+    this.current = section;
+
+    this.links.forEach((link, s) => {
+      const active = s === section;
+      link.classList.toggle(this.activeClass, active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+
+    // Keep the active tab visible in the horizontally scrolling mobile nav, without moving the page
+    const link = this.links.get(section);
+    const nav = link?.closest(".navigation");
+    if (nav && nav.scrollWidth > nav.clientWidth) {
+      nav.scrollTo({ left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2, behavior: "smooth" });
+    }
+  }
+}
+
+/**
+ * Reveal - Adds `is-visible` to elements as they scroll into view, once
+ *
+ * The CSS only hides `.reveal` elements when <html> has `motion-ok`, which the head script
+ * sets when JavaScript runs and reduced motion isn't requested.
+ *
+ * @class Reveal
+ */
+class Reveal {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.selector=".reveal"]
+   * @param {number} [options.threshold=0.12] - Fraction visible before revealing
+   */
+  constructor({ selector = ".reveal", threshold = 0.12 } = {}) {
+    this.elements = document.querySelectorAll(selector);
+    this.threshold = threshold;
+  }
+
+  init() {
+    const reveal = (el) => el.classList.add("is-visible");
+
+    if (!("IntersectionObserver" in window)) {
+      this.elements.forEach(reveal);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry) => {
+            reveal(entry.target);
+            observer.unobserve(entry.target);
+          });
+      },
+      { threshold: this.threshold, rootMargin: "0px 0px -5% 0px" }
+    );
+    this.elements.forEach((el) => observer.observe(el));
+  }
+}
+
+/**
+ * Toggle `is-stuck` on the header once the hero has scrolled out from under it.
+ * @param {string} [headerSelector=".site-header"]
+ * @param {string} [heroSelector=".hero-name"]
+ */
+function watchHeader(headerSelector = ".site-header", heroSelector = ".hero-name") {
+  const header = document.querySelector(headerSelector);
+  const hero = document.querySelector(heroSelector);
+  if (!header || !hero || !("IntersectionObserver" in window)) {
+    header?.classList.add("is-stuck");
+    return;
+  }
+
+  new IntersectionObserver(([entry]) => header.classList.toggle("is-stuck", !entry.isIntersecting), {
+    rootMargin: `-${header.offsetHeight}px 0px 0px 0px`,
+  }).observe(hero);
+}
+
+/**
  * Start the page enhancements once the DOM is parsed.
  * @function initializePage
  * @global
@@ -182,6 +329,9 @@ function initializePage() {
   window.themeController.init();
 
   new ResumePreview().init();
+  new ScrollSpy().init();
+  new Reveal().init();
+  watchHeader();
 }
 
 if (document.readyState === "loading") {
