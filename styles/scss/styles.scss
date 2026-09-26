@@ -1,106 +1,53 @@
-// Modern Portfolio Styles - Main Entry Point
+// Portfolio Styles - Main Entry Point
 // Import order is critical for proper CSS cascade
 
 // 1. Abstracts - Variables, functions, mixins
 @import "./abstracts/variables";
 @import "./abstracts/mixins";
 
-// 2. Base - Reset, typography, utilities
+// 2. Base - Reset, typography, utilities, motion
 @import "./base/reset";
 @import "./base/typography";
 @import "./base/utilities";
+@import "./base/motion";
 
-// 3. Layout - Grid systems, header, main content, footer
-@import "./layout/header";
-@import "./layout/main";
-@import "./layout/footer";
+// 3. Layout
+@import "./layout/shell";
 
-// 4. Components - Buttons, cards, navigation
+// 4. Components
 @import "./components/buttons";
-@import "./components/cards";
 @import "./components/navigation";
+@import "./components/intro";
+@import "./components/sections";
+@import "./components/timeline";
+@import "./components/backdrop";
 
-// 5. Page-specific styles and animations
-// Entrance animations for content sections
-.section {
-  @include animate-fade-in-up(0.6s, 0.1s);
-
-  &:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-  &:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-  &:nth-child(4) {
-    animation-delay: 0.4s;
-  }
-  &:nth-child(5) {
-    animation-delay: 0.5s;
-  }
-}
-
-.site-header {
-  @include animate-fade-in-down(0.5s, 0s);
-}
-
-// Responsive behavior for original class names (compatibility)
-.mobile-hide {
-  @include mobile-only {
-    display: none !important;
-  }
-}
-
-.mobile {
-  display: none;
-
-  @include mobile-only {
-    display: block;
-  }
-}
-
-// Legacy class compatibility
-.bounce {
-  @include hover-lift(2px, var(--shadow-md));
-}
-
-.glitched-list {
-  // Remove all glitch animations, replace with subtle effects
-  a {
-    transition: var(--transition-base);
-
-    &:hover {
-      transform: scale(1.05);
-      color: var(--color-primary);
-    }
-  }
-}
-
-// Icon lists compatibility - styles defined in layout/_main.scss
-// Note: This placeholder prevents import errors for existing class references
-
-// Ensure smooth transitions for theme changes
-* {
-  transition-property: background-color, border-color, color, box-shadow;
-  transition-duration: var(--transition-base);
-  transition-timing-function: ease-out;
-}
-
-// Print styles
+// Print: just the content, in black on white
 @media print {
-  .site-header,
-  .theme-toggle,
-  .ext-links {
+  .nav-bar,
+  .backdrop,
+  .scroll-progress,
+  .intro-actions,
+  .copy-button,
+  .resume-actions,
+  .skip-link {
     display: none !important;
   }
 
-  .main-content {
-    margin: 0 !important;
-    padding: 0 !important;
+  // Sections that were never scrolled to would otherwise print blank
+  .reveal,
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .section {
-    page-break-inside: avoid;
-    box-shadow: none !important;
-    border: 1px solid #ccc !important;
+    break-inside: avoid;
+    padding: var(--space-6) 0;
+  }
+
+  .sidebar {
+    position: static !important;
+    height: auto !important;
   }
 }

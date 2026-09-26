@@ -1,0 +1,254 @@
+// Intro: who, the "query" that sums up the role, contact, and the resume action
+
+.intro {
+  position: relative;
+  isolation: isolate;
+
+  @media (max-width: 1023px) {
+    padding: var(--space-12) 0 var(--space-8);
+  }
+}
+
+.intro-portrait {
+  width: 72px;
+  height: 72px;
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  box-shadow: 0 0 0 3px var(--color-background), 0 0 0 4px var(--color-border);
+
+  // Short laptop screens: the sticky column needs the room for the section index
+  @media (min-width: 1024px) and (max-height: 959px) {
+    display: none;
+  }
+}
+
+.intro-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.25rem);
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--color-text-primary);
+}
+
+.intro-role {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+}
+
+.intro-org {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+// === The query ===
+
+.query {
+  margin: var(--space-6) 0 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.query-sql {
+  margin: 0;
+  white-space: pre-wrap;
+  font: inherit;
+
+  // Leading prompt, SQL*Plus style
+  &::before {
+    content: "SQL> ";
+    color: var(--color-text-muted);
+  }
+
+  .sql-keyword {
+    color: var(--color-link);
+    font-weight: var(--font-medium);
+  }
+
+  .sql-string {
+    color: var(--color-text-primary);
+  }
+
+  // Untyped characters keep their space so the box never reflows while typing
+  .ghost {
+    color: transparent;
+  }
+
+  .caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-bottom: -0.2em;
+    background: var(--color-link);
+    animation: caret-blink 1s steps(1) infinite;
+  }
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.query-result {
+  margin-top: var(--space-3);
+  border-collapse: collapse;
+  font: inherit;
+
+  th {
+    padding: 0 var(--space-6) 2px 0;
+    text-align: left;
+    font-weight: var(--font-medium);
+    color: var(--color-text-muted);
+    border-bottom: 1px dashed var(--color-border-hover);
+  }
+
+  td {
+    padding: 2px var(--space-6) 0 0;
+    color: var(--color-text-primary);
+  }
+}
+
+.query-caption {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+// Rows arrive one by one after the query "runs" (main.js adds .is-run)
+.motion-ok .query:not(.is-run) {
+  .query-result tbody tr,
+  .query-caption {
+    opacity: 0;
+  }
+}
+
+.motion-ok .query.is-run {
+  .query-result tbody tr,
+  .query-caption {
+    animation: fade-in 300ms ease-out both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  .query-caption {
+    animation-delay: 300ms;
+  }
+}
+
+// === Contact and actions ===
+
+.intro-contact {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.intro-email {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+
+  &:hover {
+    color: var(--color-link);
+  }
+
+  @include focus-ring();
+}
+
+.copy-button {
+  width: 30px;
+  height: 30px;
+
+  .check-icon {
+    display: none;
+  }
+
+  &.is-copied {
+    color: var(--color-accent);
+
+    .copy-icon {
+      display: none;
+    }
+
+    .check-icon {
+      display: block;
+    }
+  }
+}
+
+.copy-status {
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+}
+
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.profile-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-1);
+}
+
+// Very short laptop screens: keep the query line but drop its result rows
+@media (min-width: 1024px) and (max-height: 799px) {
+  .query-result,
+  .query-caption {
+    display: none;
+  }
+
+  .query {
+    margin-top: var(--space-4);
+  }
+
+  .intro-contact,
+  .intro-actions {
+    margin-top: var(--space-4);
+  }
+}
+
+// === Entrance on load ===
+// Children of the intro rise in order (--i is set in the template); the name wipes in.
+
+.motion-ok .intro > * {
+  animation: fade-in-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 80ms + 60ms);
+}
+
+.motion-ok .intro-name {
+  animation-name: name-wipe;
+  animation-duration: 900ms;
+}
+
+@keyframes name-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-8px);
+  }
+
+  to {
+    clip-path: inset(0 -2% 0 0);
+    transform: none;
+  }
+}

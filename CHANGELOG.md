@@ -1,5 +1,227 @@
 # Changelog
 
+## [5.3.2] - 2026-09-25
+
+### Removed
+
+- Interests section
+
+---
+
+## [5.3.1] - 2026-09-25
+
+### Fixed
+
+- If `main.js` was blocked or failed to load, every section stayed invisible, because the head script had already
+  opted the page into entrance animations. The head script now drops those flags when the script errors or hasn't
+  run within 4 seconds; `main.js` marks itself with `js-ready` as soon as it executes
+- Scroll reveal could never trigger for a section taller than about eight screens (e.g. Experience on a short
+  landscape phone); it now reveals on any overlap past a 10% margin
+- Sections never scrolled to printed blank
+- The copy button showed, inert, without JavaScript: a component display rule overrode the `hidden` attribute
+- Un-pinning a skill by clicking it again cleared the highlight even while the pointer was still on it
+- The sidebar now fades with the rest of the page on theme change (a leftover `.site-header` selector missed it)
+
+### Changed
+
+- Screen readers get the intro query's result as a plain sentence (the styled query stays hidden from them)
+- Removed about 30 unused design tokens
+- README build notes match the current output
+
+---
+
+## [5.3.0] - 2026-09-25
+
+### Accessibility (WCAG 2.2 AA)
+
+- Light-theme muted text darkened to `#6b6b74` so it passes 4.5:1 on every surface
+- Hover and skill-linking now quiet other content with the muted text color instead of opacity, which had dropped
+  dimmed text to about 2-3:1
+- Skill chips meet the 24px minimum target size
+- The footer is now a page-level landmark, outside `main`
+- Links that open a new tab say so to screen readers; the resume Preview link acts as a button when it opens inline
+- Section numbers in the nav are hidden from screen readers
+- Keyboard focus and anchor targets stay clear of the sticky bar on narrow screens
+- The backdrop glows no longer animate on their own; all background motion is driven by scrolling
+- Links in running text are underlined, so they don't rely on color alone
+
+### Removed
+
+- Published JSDoc pages and their toolchain; the doc comments stay in the source
+- Unused CSS outputs (`styles/css/`, empty and legacy files in `styles/min/`); the build writes only
+  `styles/min/styles.min.css`
+- Unused utility classes, typography classes, button variants, and mixins
+
+### Changed
+
+- `.gitignore` is now tracked (its old `.git*` pattern ignored itself) and covers editor, OS, Node, and LaTeX files
+- Added `.nojekyll` so GitHub Pages serves the site as-is
+
+---
+
+## [5.2.0] - 2026-09-25
+
+### Added
+
+- **Parallax backdrop** - A faint dot grid and soft amber glows behind the page, each layer drifting at its own
+  rate as you scroll; the glows slowly breathe
+- **Reading progress** line along the top edge
+- **Staggered reveals** - Rows, stats, and skill groups enter one after another as their section appears, and
+  section heading rules draw out from the label
+- **Count-up stats** in About
+- **Intro entrance** - The name wipes in and the rest of the intro follows in order; the SQL starts typing once its
+  box is in
+- **Theme switch** grows the new theme outward from the toggle in a circle (View Transitions API, where supported)
+- Download buttons carry an arrow that dips on hover; linked skill chips lift slightly
+
+### Changed
+
+- Fonts: Geist and Geist Mono replace Newsreader, Inter, and JetBrains Mono
+- The intro's dot grid moved into the page-wide backdrop
+
+---
+
+## [5.1.0] - 2026-09-25
+
+### Changed
+
+- **Palette** - Graphite neutrals with an amber accent replace the slate and blue. The main button is solid ink
+  (near-black in light, near-white in dark); amber marks section numbers, the active nav item, SQL keywords, the
+  current role, and linked skills
+- Skill chips are neutral until linked
+- The intro query is laid out on three aligned lines and returns specialties: Banner ERP administration,
+  Full-stack development, Oracle database administration
+- About text says full-stack rather than front-end
+- Dark theme tokens are defined once and shared by the toggle and the OS preference
+
+---
+
+## [5.0.0] - 2026-09-25
+
+### Changed
+
+- **New design** - Two-column layout: a sticky intro and numbered section index on the left, content on the
+  right. Below 1024px the intro scrolls away and the index becomes a sticky horizontal bar
+- **Database-flavored details** - The intro "runs" a SQL query whose result rows are the roles; monospace
+  `01 / section` labels; a `skill_group | members` skills table; a faint dot grid behind the intro
+- Type: Newsreader for the name, Inter for body text, JetBrains Mono for labels, dates, and code
+- Projects and education are rows with the date in its own column; hovering a row quiets the others
+- Skills moved directly under Experience
+- Profile icons are inline SVG; the devicon font is no longer loaded
+
+### Added
+
+- **Skill linking** - Each role lists the skills it used. Hovering, focusing, or tapping a skill highlights
+  the roles that used it, dims the rest, and spells it out under the skills table
+- **Copy email** button with inline confirmation
+- About section stats (years in university IT, years on Banner and Oracle, roles)
+- Organization captions such as "4 roles, 2018 to present", computed from the role dates
+- Build validation for unknown skill keys and icon names
+
+### Removed
+
+- Global list margins that doubled up spacing in every list
+
+---
+
+## [4.1.1] - 2026-09-25
+
+### Changed
+
+- Removed BuilderJS from projects and the About text; projects are back to the original five from the resume
+
+### Fixed
+
+- A role with an empty `bullets` array rendered a stray "0"
+- Build now fails when required `site` metadata (email, url, description, image, headline) is missing, instead of
+  writing empty meta tags
+
+---
+
+## [4.1.0] - 2026-09-25
+
+### Added
+
+- **Hero** - Large portrait, name, role, and resume/email actions above the fold
+- **Experience timeline** - Roles at one organization hang off a vertical rail, current role highlighted; the rail
+  draws and the dots appear in order when the section scrolls into view
+- **Scroll-spy** - The nav underlines the section being read and keeps it visible in the scrolling mobile nav
+- **Scroll reveal** - Sections fade up once as they enter the viewport
+- Header shows the name and a border only after the hero scrolls away
+- Source Serif 4 for the name and section titles
+
+### Changed
+
+- Sections are open blocks with the title in a sticky left column, instead of boxed cards
+- Projects are two-up cards; skill tiles are smaller
+- Header is a slim bar; profile links move to the hero below 1024px
+- Content column narrowed to 60rem for readable line lengths
+- Dark mode links use a lighter blue for contrast
+
+### Removed
+
+- Global `* { transition }` rule, hover lift on non-interactive sections, load-time staggered section animations
+- Unused card components and color tokens
+
+### Fixed
+
+- Keyframe animations now respect `prefers-reduced-motion`; scripted motion is skipped entirely when reduced motion
+  is requested or JavaScript is off, so content is never left hidden
+
+---
+
+## [4.0.0] - 2026-09-25
+
+### Changed
+
+- **Static HTML** - The page is rendered at build time by `scripts/build.mjs` from `data/data.json` and
+  `templates/index.html` instead of being assembled in the browser. Search engines, link previews, and no-JS visitors
+  now get the full content
+- **Runtime script** - `main.js` is down to `ThemeController` and `ResumePreview`; `PortfolioController` and the
+  BuilderJS runtime dependency are gone
+- Section anchors are now `#about`, `#experience`, etc. (were `#about-section`)
+- Semantic markup: `section`/`h2`/`h3` headings, a single `h1`, skip link, list markup for skill tiles and profile links
+
+### Added
+
+- JSON-LD `Person` data, `sitemap.xml`, and `robots.txt`
+- Saved theme applied before first paint (no flash of the wrong theme)
+- Resume preview falls back to opening the PDF on narrow screens, where mobile browsers can't show a PDF in an iframe
+- Tests for the build script (`node --test scripts/`)
+
+---
+
+## [3.1.0] - 2026-09-25
+
+### Added
+
+- **Projects section** - BuilderJS, WebDocker (ACM first place), DockerUI, and the bipartite graph checker
+- **Grouped roles** - Experience entries can list several `roles`, each with its own dates and bullet points
+- **Resume source** - `resume/whitson_resume.tex`; the built PDF is published as `data/whitson_resume.pdf`
+- **Page metadata** - Description, canonical URL, and Open Graph tags for search and link previews
+- `noscript` fallback linking the resume PDF
+
+### Changed
+
+- **Content refresh** - Current Oracle DBA role, rewritten About, bullet points for every role, skills refocused on the database stack
+- **Resume** - Updated for 2026 and reworked to one page
+- **Mobile header** - Two compact rows with a horizontally scrolling nav (218px down to 104px tall)
+- **Skill icons** - Data now carries the full devicon class and a display label ("VS Code", not "Vscode")
+- **Theme toggle** - Inline SVG icons instead of emoji
+- **Portrait** - 192px WebP (7 KB) instead of the 960px JPEG (280 KB)
+- devicon pinned to 2.17.0
+
+### Fixed
+
+- Theme stopped following the OS setting after the first visit, because the initial theme was saved as if the user had chosen it
+- `themechange` event reported the new theme as `previous`
+- Nav links had no `nav-item`/`nav-link` classes, so the nav styles never applied
+- Section headings hidden under the sticky header after clicking a nav link
+- Desktop header overflowed horizontally between roughly 770px and 1100px wide
+- Resume download filename was hardcoded
+
+---
+
 ## [3.0.0] - 2025-10-07
 
 ### Added
@@ -55,7 +277,7 @@
 
 ---
 
-## [2.0.0] - 2025-10-07 🚀 **Major Architecture Overhaul**
+## [2.0.0] - 2025-10-07 **Major Architecture Overhaul**
 
 ### Added
 

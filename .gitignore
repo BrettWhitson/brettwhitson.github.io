@@ -1,0 +1,17 @@
+# Editor and OS
+/.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node, if a package.json is ever added
+node_modules/
+
+# LaTeX build output; the published PDF is copied to data/
+/resume/*.aux
+/resume/*.log
+/resume/*.out
+/resume/*.pdf
+/resume/*.fls
+/resume/*.fdb_latexmk
+/resume/*.synctex.gz

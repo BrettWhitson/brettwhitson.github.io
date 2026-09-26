@@ -1,0 +1,75 @@
+// Parallax backdrop: a faint dot grid and a few soft amber glows behind the page. main.js
+// sets --scroll-y on .backdrop and each layer drifts at its own rate, so the page reads as
+// having depth. Static under reduced motion or without JavaScript.
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  // Strongest behind the intro column, fading toward the reading column
+  mask-image: linear-gradient(100deg, #000 0%, rgb(0 0 0 / 0.55) 45%, rgb(0 0 0 / 0.3) 100%);
+}
+
+.backdrop-grid,
+.backdrop-glow {
+  position: absolute;
+  will-change: transform;
+}
+
+.backdrop-grid {
+  // Tall enough to keep covering the viewport after it has drifted up
+  inset: 0 0 -120vh;
+  background-image: radial-gradient(color-mix(in srgb, var(--color-text-muted) 38%, transparent) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.06px), 0);
+}
+
+.backdrop-glow {
+  width: 46rem;
+  height: 46rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-link) 20%, transparent), transparent);
+  opacity: 0.55;
+
+  [data-theme="dark"] & {
+    opacity: 0.4;
+  }
+}
+
+// Spaced down a "virtual" page; the slower they move, the later they drift into view
+.glow-1 {
+  top: -18rem;
+  left: -14rem;
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.12px), 0);
+}
+
+.glow-2 {
+  top: 85vh;
+  right: -18rem;
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.3px), 0);
+}
+
+.glow-3 {
+  top: 190vh;
+  left: 30%;
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.42px), 0);
+}
+
+// Reading progress along the top edge
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: calc(var(--z-sticky) + 1);
+  height: 2px;
+  background: var(--color-link);
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+
+  html:not(.js-ready) & {
+    display: none;
+  }
+}

@@ -1,0 +1,90 @@
+// Experience timeline: roles at one organization hang off a vertical rail, so the
+// progression from help desk to DBA reads at a glance.
+
+#experience .section-body-list {
+  gap: var(--space-12);
+}
+
+.roles {
+  margin-top: var(--space-2);
+}
+
+.list-item-role {
+  --dot: 11px;
+  --title-mid: calc(var(--space-5) + 0.8em);
+
+  position: relative;
+  padding: var(--space-5) 0 0 var(--space-8);
+
+  .list-item-bullets {
+    transition: color var(--transition-base);
+  }
+
+  // Rail segment from this dot down to the next role
+  &:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--dot) / 2 - 1px);
+    top: var(--title-mid);
+    bottom: calc(-1 * var(--title-mid));
+    width: 2px;
+    background: var(--color-border);
+    transform-origin: top;
+  }
+
+  // Dot, centered on the role title
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(var(--title-mid) - var(--dot) / 2);
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: var(--radius-full);
+    background: var(--color-background);
+    border: 2px solid var(--color-text-muted);
+  }
+
+  // Current role
+  &.is-current::after {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+
+  .list-item-date {
+    margin-top: 2px;
+  }
+}
+
+.list-item-role-title {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast);
+}
+
+// Draw the rail and pop the dots in order when the section scrolls into view
+.motion-ok #experience {
+  .list-item-role::before {
+    transform: scaleY(0);
+    transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 120ms + 150ms);
+  }
+
+  .list-item-role::after {
+    transform: scale(0);
+    transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+
+  &.is-visible .list-item-role::before {
+    transform: scaleY(1);
+  }
+
+  &.is-visible .list-item-role::after {
+    transform: scale(1);
+  }
+}

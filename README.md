@@ -1,84 +1,74 @@
 # Brett Whitson Portfolio
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://home.brettwhitson.dev)
-[![JSDoc](https://img.shields.io/badge/JSDoc-Documentation-blue)](https://home.brettwhitson.dev/docs/JSDocs)
-[![BuilderJS](https://img.shields.io/badge/BuilderJS-v0.0.3-orange)](https://github.com/BrettWhitson/Builder-JS)
 
-> A modern, data-driven portfolio site with contemporary design, featuring light/dark themes and built with vanilla JavaScript and custom BuilderJS library.
-
-## 📝 TODOs
-
-- [ ] **Portfolio content refactoring** - Update and restructure portfolio sections and data architecture
-
-## 🚀 Quick Links
+Personal site and resume, live at **[home.brettwhitson.dev](https://home.brettwhitson.dev)**. Content lives in one
+JSON file; a zero-dependency Node script renders it to static HTML, so the page is complete for search engines, link
+previews, and visitors without JavaScript. The browser script only adds enhancements (theme toggle, inline resume
+preview).
 
 | Link                                                      | Description         |
 | --------------------------------------------------------- | ------------------- |
-| **[Portfolio](https://home.brettwhitson.dev)**            | Live portfolio site |
-| **[API Docs](https://home.brettwhitson.dev/docs/JSDocs)** | JSDoc documentation |
+| **[Site](https://home.brettwhitson.dev)**                 | Live site           |
 | **[Changelog](./CHANGELOG.md)**                           | Version history     |
 
-## ✨ Latest Updates (v3.0.0)
+## Tech Stack
 
-- 🎨 **Complete style overhaul** - Modern, clean design system with professional aesthetics
-- 🌙 **Light/Dark theme system** - Automatic system detection with manual override
-- 📱 **Responsive design** - Mobile-first approach with CSS Grid and Flexbox
-- 📄 **Interactive resume** - Toggle-able PDF preview with download options
-- 🏗️ **Modular SCSS architecture** - Organized, maintainable styling system
-- ⚡ **Enhanced animations** - Smooth, contemporary transitions
+- **Build**: Node.js (no dependencies) renders `data/data.json` into `index.html`
+- **Frontend**: Vanilla JavaScript (ES2020+), progressive enhancement only
+- **Styling**: SCSS, compiled with Dart Sass; Geist and Geist Mono from Google Fonts
+- **Icons**: Inline monochrome SVG
+- **Resume**: LaTeX
+- **Hosting**: GitHub Pages
 
-## 🎨 Design Features
+## Layout
 
-- **Theme System**: Light/dark modes with system preference detection
-- **Modern UI**: Clean typography, professional color palette, card-based layouts
-- **Responsive**: Mobile-first design with smooth breakpoint transitions
-- **Accessibility**: ARIA labels, keyboard navigation, high contrast support
-- **Performance**: CSS custom properties, optimized animations, minified assets
+| Path                         | What                                                          |
+| ---------------------------- | ------------------------------------------------------------- |
+| `data/data.json`             | All page content: site metadata, intro query, sections, links |
+| `templates/index.html`       | Page shell with `{{slot}}` placeholders                       |
+| `scripts/build.mjs`          | Renders the page, writes `sitemap.xml`, compiles the SCSS     |
+| `index.html`                 | Generated output. Don't edit by hand                          |
+| `javascript/main.js`         | Theme, parallax, reveals, query typing, scroll-spy, skills    |
+| `styles/scss/`               | Source styles: `layout/_shell.scss` and `components/`         |
+| `resume/whitson_resume.tex`  | Resume source, built to `data/whitson_resume.pdf`             |
 
-## 🛠️ Tech Stack
+## Editing content
 
-- **Frontend**: Vanilla JavaScript (ES6+)
-- **DOM Library**: BuilderJS v0.0.3
-- **Styling**: SCSS with modular architecture
-- **Icons**: DevIcon library
-- **Documentation**: JSDoc 4.0.3
-- **Deployment**: GitHub Pages
+Everything on the page comes from `data/data.json`.
 
-## 📁 Architecture
+- `site` - name, headline, org, email, URLs, and description for the intro, meta tags, and JSON-LD.
+  `site.query` is the SQL shown in the intro (`sql`, result `column`, and `rows`); `site.stats` are the
+  numbers under About
+- `ext` - profile links. `icon` is one of `linkedin`, `github`, `code` (inline SVGs in `build.mjs`)
+- `sections` - rendered in order, numbered automatically. Each has a `type`:
+  - `pg` - a paragraph (`body` is a string)
+  - `ls` - a list. Items take `header`, `subheader`, `subsubheader` (shown as the date), `main` (HTML),
+    `link` (`{ href, label }`), and `roles` (`[{ title, dates, bullets, stack }]`) for several positions at
+    one organization. `"layout": "rows"` puts the date in a column beside each item
+  - `skills` - groups of `{ key, name }`. A role's `stack` lists skill keys; hovering or tapping a skill
+    highlights the roles that list it. The build fails if a role uses a key the skills section doesn't define
+  - `rs` - the resume download and preview (`file` points at the PDF)
 
-### Key Files
+## Building
 
-- `javascript/main.js` - PortfolioController and ThemeController classes
-- `data/data.json` - Content data source
-- `styles/scss/` - Modular SCSS architecture
-  - `abstracts/` - Variables, mixins, functions
-  - `base/` - Reset, typography, utilities
-  - `layout/` - Header, main, footer
-  - `components/` - Buttons, cards, navigation
+Requires Node 20+ and Dart Sass (`npm install -g sass`).
 
-### Design System
+```bash
+node scripts/build.mjs
+```
 
-- **CSS Custom Properties** - Dynamic theming support
-- **Component Library** - Reusable UI components
-- **Utility Classes** - Flexible layout and spacing
-- **Responsive Mixins** - Consistent breakpoint handling
+Renders `index.html` and `sitemap.xml` and compiles `styles/min/styles.min.css`.
+`--html` skips the CSS; `--check` exits non-zero if `index.html` is out of date.
 
-## 📝 Changelog
+```bash
+node --test scripts/
+```
 
-### [3.0.0] - 2025-10-07
+Resume (MiKTeX or TeX Live):
 
-- Complete style overhaul with modern design system
-- Light/dark theme system with automatic detection
-- Modular SCSS architecture and responsive design
-- Interactive resume preview functionality
-- Enhanced ThemeController and event handling patterns
+```bash
+cd resume && pdflatex whitson_resume.tex && cp whitson_resume.pdf ../data/
+```
 
-_[Full changelog](./CHANGELOG.md)_
-
-## 🎯 Projects
-
-### BuilderJS
-
-**[Repository](https://github.com/BrettWhitson/Builder-JS)** | **[Showcase](https://home.brettwhitson.dev/Builder-JS/development-showcase.html)**
-
-Modern DOM manipulation library for clean, readable JavaScript without navigation complexity.
+Preview locally with any static server from the repo root, e.g. `python -m http.server 5501`.

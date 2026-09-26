@@ -1,168 +1,107 @@
-// Navigation Components
+// Section navigation. Desktop: a vertical index whose rule stretches for the section in view.
+// Phones: a horizontal strip in the sticky bar, with the trailing edge faded to show it scrolls.
 
-.nav-list {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: var(--space-6);
+.navigation {
+  @media (max-width: 1023px) {
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-left: var(--space-5);
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
 
-  @include mobile-only {
-    gap: var(--space-4);
-    flex-wrap: wrap;
-    justify-content: center;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
-.nav-item {
-  position: relative;
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: 1024px) {
+    display: grid;
+  }
+
+  @media (max-width: 1023px) {
+    display: flex;
+    gap: var(--space-1);
+  }
 }
 
 .nav-link {
-  display: block;
-  font-size: var(--text-base);
-  font-weight: var(--font-medium);
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md);
-  position: relative;
-  transition: var(--transition-base);
-
-  @include mobile-only {
-    font-size: var(--text-sm);
-    padding: var(--space-1) var(--space-2);
-  }
-
-  // Underline effect
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transform: translateX(-50%);
-    transition: var(--transition-base);
-  }
-
-  &:hover {
-    color: var(--color-primary);
-    background: var(--color-surface-elevated);
-
-    &::after {
-      width: calc(100% - var(--space-6));
-    }
-  }
-
-  &.active {
-    color: var(--color-primary);
-    font-weight: var(--font-semibold);
-
-    &::after {
-      width: calc(100% - var(--space-6));
-    }
-  }
-
-  @include focus-ring();
-}
-
-// Mobile navigation adjustments
-@include mobile-only {
-  .nav-list {
-    .nav-item {
-      .nav-link {
-        white-space: nowrap;
-      }
-    }
-  }
-}
-
-// External links navigation
-.ext-icon-list {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: var(--space-3);
-
-  li {
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
-      color: var(--color-text-secondary);
-      font-size: var(--text-xl);
-      text-decoration: none;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      transition: var(--transition-base);
-
-      @include mobile-only {
-        width: 36px;
-        height: 36px;
-        font-size: var(--text-lg);
-      }
-
-      @include hover-lift(2px, var(--shadow-md));
-
-      &:hover {
-        color: var(--color-primary);
-        background: var(--color-surface-elevated);
-        border-color: var(--color-primary);
-      }
-
-      &:visited {
-        color: var(--color-text-secondary);
-      }
-
-      &:hover:visited {
-        color: var(--color-primary);
-      }
-
-      @include focus-ring();
-    }
-  }
-}
-
-// Breadcrumb navigation (if needed)
-.breadcrumb {
   display: flex;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: var(--space-2);
+  gap: var(--space-3);
+  padding: 6px 0;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--transition-fast);
 
-  .breadcrumb-item {
-    display: flex;
-    align-items: center;
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
+  @include focus-ring();
 
-    &:not(:last-child)::after {
-      content: "/";
-      margin-left: var(--space-2);
-      color: var(--color-text-muted);
+  .nav-index {
+    font-family: var(--font-mono);
+    font-weight: var(--font-medium);
+    letter-spacing: 0;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-line {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--transition-base), background-color var(--transition-fast);
+  }
+
+  &:hover,
+  &.active {
+    color: var(--color-text-primary);
+
+    .nav-line {
+      width: 4rem;
+    }
+  }
+
+  &.active .nav-index {
+    color: var(--color-link);
+  }
+
+  @media (max-width: 1023px) {
+    position: relative;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-2);
+
+    .nav-line {
+      display: none;
     }
 
-    a {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      transition: var(--transition-fast);
-
-      &:hover {
-        color: var(--color-primary);
-      }
+    &::after {
+      content: "";
+      position: absolute;
+      left: var(--space-2);
+      right: var(--space-2);
+      bottom: 0;
+      height: 2px;
+      background: var(--color-link);
+      transform: scaleX(0);
+      transition: transform var(--transition-base);
     }
 
-    &:last-child {
-      color: var(--color-text-primary);
-      font-weight: var(--font-medium);
+    &.active::after {
+      transform: scaleX(1);
     }
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 799px) {
+  .nav-link {
+    padding: 4px 0;
   }
 }

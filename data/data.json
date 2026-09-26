@@ -1,10 +1,46 @@
 {
+  "site": {
+    "name": "Brett Whitson",
+    "headline": "Oracle DBA and Banner Systems Administrator",
+    "org": "University of Tennessee at Martin, Martin, TN",
+    "email": "brett.whitson.dev@gmail.com",
+    "url": "https://home.brettwhitson.dev/",
+    "image": "https://home.brettwhitson.dev/data/images/me.jpg",
+    "description": "Brett Whitson is an Oracle DBA and Ellucian Banner systems administrator at the University of Tennessee at Martin, with a background in software development.",
+    "jobTitle": "Oracle DBA and Banner Systems Administrator",
+    "worksFor": "University of Tennessee at Martin",
+    "alumniOf": "University of Tennessee at Martin",
+    "sourceUrl": "https://github.com/BrettWhitson/brettwhitson.github.io",
+    "query": {
+      "sql": "SELECT specialty\n       FROM brett.profile\n      ORDER BY 1;",
+      "column": "SPECIALTY",
+      "rows": [
+        "Banner ERP administration",
+        "Full-stack development",
+        "Oracle database administration"
+      ]
+    },
+    "stats": [
+      {
+        "value": "8",
+        "label": "years in university IT"
+      },
+      {
+        "value": "5",
+        "label": "years on Banner and Oracle"
+      },
+      {
+        "value": "4",
+        "label": "roles, help desk to DBA"
+      }
+    ]
+  },
   "sections": [
     {
       "section": "about",
-      "title": "About Me",
+      "title": "About",
       "type": "pg",
-      "body": "I'm a dedicated computer scientist and full-stack developer with a strong drive for learning and growth. I thrive in both team and solo settings, bringing attention to detail, analytical thinking, and creative problem-solving to every project. My passion lies in building robust solutions and continuously expanding my technical expertise."
+      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love full-stack work: this site is hand-built with vanilla JavaScript, SCSS, and a small Node build."
     },
     {
       "section": "experience",
@@ -13,35 +49,228 @@
       "body": [
         {
           "header": "University of Tennessee at Martin",
-          "subheader": "IT Admin IV - Oracle DBA and Banner Systems Administrator",
-          "subsubheader": "June 2025 - Present",
-          "main": ""
+          "roles": [
+            {
+              "title": "IT Administrator IV - Oracle DBA and Banner Systems Administrator",
+              "dates": "June 2025 - Present",
+              "bullets": [
+                "Administer the Oracle databases behind the university's Ellucian Banner ERP: installation, configuration, patching, backup and recovery, and user access management.",
+                "Plan and apply Banner and Oracle upgrades and patch sets, coordinating testing and downtime with campus stakeholders and Ellucian support.",
+                "Monitor and tune database performance, and automate routine administration with SQL, PL/SQL, and shell scripting on Linux."
+              ],
+              "stack": [
+                "oracle",
+                "banner",
+                "plsql",
+                "sql",
+                "tuning",
+                "backup",
+                "linux",
+                "bash"
+              ]
+            },
+            {
+              "title": "Programmer/Analyst",
+              "dates": "July 2021 - June 2025",
+              "bullets": [
+                "Designed, built, and maintained software supporting university operations on the Ellucian Banner ERP system.",
+                "Wrote and optimized SQL queries, PL/SQL packages, and stored procedures for complex data operations, with a focus on data integrity and performance.",
+                "Maintained and extended Banner modules, including custom integrations with third-party applications and APIs.",
+                "Gathered requirements with stakeholders across departments and delivered solutions that improved efficiency for staff and students."
+              ],
+              "stack": [
+                "banner",
+                "plsql",
+                "sql",
+                "oracle",
+                "sqldeveloper",
+                "git"
+              ]
+            },
+            {
+              "title": "IT Technician III",
+              "dates": "October 2020 - July 2021",
+              "bullets": [
+                "Resolved escalated hardware, software, and local network issues from the student help desk, and helped run the ticket queue and equipment inventory."
+              ],
+              "stack": [
+                "networking"
+              ]
+            },
+            {
+              "title": "Student Technician - IT Help Desk, Field Services, Config/Install",
+              "dates": "April 2018 - August 2020",
+              "bullets": [
+                "Deployed PC and Mac workstations for faculty and staff, provided in-person and phone support, and trained new student workers."
+              ],
+              "stack": [
+                "networking"
+              ]
+            }
+          ]
         },
         {
-          "header": "University of Tennessee at Martin",
-          "subheader": "Programmer/Analyst",
-          "subsubheader": "July 2021 - June 2025",
-          "main": ""
-        },
-        {
-          "header": "University of Tennessee at Martin",
-          "subheader": "IT Technician III",
-          "subsubheader": "October 2020 - July 2021",
-          "main": ""
-        },
-        {
-          "header": "Joint Accounts",
-          "subheader": "Part Time App/Web Developer",
-          "subsubheader": "January 2021 - July 2021",
-          "main": ""
-        },
-        {
-          "header": "University of Tennessee at Martin",
-          "subheader": "Help Desk & Config/Install Student Technician",
-          "subsubheader": " April 2018 - August 2020",
-          "main": ""
+          "header": "JointAccounts",
+          "roles": [
+            {
+              "title": "Part-time App/Web Developer",
+              "dates": "January 2021 - July 2021",
+              "bullets": [
+                "Built front-end components from provided designs, and developed, tested, and documented back-end functionality."
+              ],
+              "stack": [
+                "javascript",
+                "html",
+                "css",
+                "git"
+              ]
+            }
+          ]
         }
       ]
+    },
+    {
+      "section": "skills",
+      "title": "Skills",
+      "type": "skills",
+      "body": [
+        {
+          "group": "Database & Systems",
+          "items": [
+            {
+              "key": "oracle",
+              "name": "Oracle Database"
+            },
+            {
+              "key": "banner",
+              "name": "Ellucian Banner"
+            },
+            {
+              "key": "tuning",
+              "name": "Performance tuning"
+            },
+            {
+              "key": "backup",
+              "name": "Backup and recovery"
+            },
+            {
+              "key": "linux",
+              "name": "Linux"
+            },
+            {
+              "key": "networking",
+              "name": "Networking"
+            }
+          ]
+        },
+        {
+          "group": "Languages",
+          "items": [
+            {
+              "key": "sql",
+              "name": "SQL"
+            },
+            {
+              "key": "plsql",
+              "name": "PL/SQL"
+            },
+            {
+              "key": "bash",
+              "name": "Bash"
+            },
+            {
+              "key": "python",
+              "name": "Python"
+            },
+            {
+              "key": "javascript",
+              "name": "JavaScript"
+            },
+            {
+              "key": "html",
+              "name": "HTML"
+            },
+            {
+              "key": "css",
+              "name": "CSS / SCSS"
+            },
+            {
+              "key": "csharp",
+              "name": "C#"
+            },
+            {
+              "key": "java",
+              "name": "Java"
+            },
+            {
+              "key": "c",
+              "name": "C / C++"
+            }
+          ]
+        },
+        {
+          "group": "Tools",
+          "items": [
+            {
+              "key": "sqldeveloper",
+              "name": "SQL Developer"
+            },
+            {
+              "key": "git",
+              "name": "Git / GitHub"
+            },
+            {
+              "key": "docker",
+              "name": "Docker"
+            },
+            {
+              "key": "vscode",
+              "name": "VS Code"
+            },
+            {
+              "key": "vim",
+              "name": "Vim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "projects",
+      "title": "Projects",
+      "type": "ls",
+      "body": [
+        {
+          "header": "WebDocker",
+          "subheader": "First Place, Undergraduate Presentations, ACM Mid-Southeast Conference",
+          "main": "Built with two teammates: a web application for managing virtualized services (Docker containers) from the browser.",
+          "subsubheader": "Fall 2019"
+        },
+        {
+          "header": "DockerUI",
+          "subheader": "Electron, Express.js",
+          "main": "Built with two teammates: a desktop interface for managing local Docker containers.",
+          "subsubheader": "Fall 2019"
+        },
+        {
+          "header": "Bipartite Graph Checker",
+          "main": "A DFS algorithm that decides whether a graph is bipartite, implemented in four paradigms: procedural, object-oriented, functional, and logic.",
+          "subsubheader": "Spring 2019"
+        },
+        {
+          "header": "Pseudo-Theremin",
+          "subheader": "Python, Ruby, Raspberry Pi",
+          "main": "Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi, with sound from Sonic Pi.",
+          "subsubheader": "Fall 2018"
+        },
+        {
+          "header": "Financial/Budgeting Application",
+          "subheader": "C#, MS Access",
+          "main": "Pair-programmed application for tracking spending and building budget plans.",
+          "subsubheader": "Fall 2017"
+        }
+      ],
+      "layout": "rows"
     },
     {
       "section": "education",
@@ -50,73 +279,31 @@
       "body": [
         {
           "header": "University of Tennessee at Martin",
-          "subheader": "May 2020 ",
-          "subsubheader": "",
-          "main": "Bachelor of Science, Computer Science"
+          "subheader": "Bachelor of Science, Computer Science",
+          "subsubheader": "May 2020"
         }
-      ]
-    },
-    {
-      "section": "skills",
-      "title": "Skills",
-      "type": "ls",
-      "body": [
-        {
-          "header": "Languages",
-          "subheader": "",
-          "subsubheader": "",
-          "main": "<ul class=\"lang-icon-list list-no-style-inline\"></ul>"
-        },
-        {
-          "header": "Tools",
-          "subheader": "",
-          "subsubheader": "",
-          "main": "<ul class=\"tool-icon-list list-no-style-inline\"></ul>"
-        }
-      ]
-    },
-    {
-      "section": "interests",
-      "title": "Interests",
-      "type": "pg",
-      "body": "I enjoy video games, playing guitar, traveling, and learning new languages"
-    },
-    {
-      "section": "awards",
-      "title": "Awards",
-      "type": "ls",
-      "body": [
-        {
-          "header": "ACM Mid-Southeast Chapter Conference 2019",
-          "subheader": "",
-          "subsubheader": "",
-          "main": "First Place in Undergraduate Programs"
-        }
-      ]
+      ],
+      "layout": "rows"
     },
     {
       "section": "resume",
       "title": "Resume",
       "type": "rs",
-      "file": "./data/whitson_resume_25.pdf",
+      "file": "./data/whitson_resume.pdf",
       "body": ""
     }
   ],
-  "icons": {
-    "languages": ["sqldeveloper", "python", "javascript", "c", "cplusplus", "csharp", "java", "kotlin", "php", "haskell", "jquery", "html5", "css3", "go"],
-    "tools": ["vscode", "git", "oracle", "github", "docker", "linux", "vim", "googlecloud", "firebase", "nodejs"]
-  },
   "ext": {
-    "linkedin": {
-      "icon": "linkedin-plain",
+    "LinkedIn": {
+      "icon": "linkedin",
       "link": "https://www.linkedin.com/in/brett-whitson/"
     },
-    "github": {
-      "icon": "github-original-wordmark",
+    "GitHub": {
+      "icon": "github",
       "link": "https://github.com/brettwhitson"
     },
-    "this": {
-      "icon": "git-plain",
+    "this site's source": {
+      "icon": "code",
       "link": "https://github.com/BrettWhitson/brettwhitson.github.io"
     }
   }

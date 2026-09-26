@@ -1,0 +1,156 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\pagestyle{empty}
+\urlstyle{same}
+\raggedright
+\raggedbottom
+\setlength{\tabcolsep}{0in}
+
+% Margins: 0.5in sides, 0.5in top
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.2in}
+
+\titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large}{}{0em}{}[\titlerule\vspace{-4pt}]
+\titlespacing*{\section}{0pt}{6pt}{5pt}
+
+%-------------------------
+% Custom commands
+
+% {Organization}{Location or date}{Title}{Dates}
+\newcommand{\resumeSubheading}[4]{
+  \item
+  \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{#2} \\
+    \textit{\small #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-2pt}
+}
+
+% Second role under the same organization
+\newcommand{\resumeSubRole}[2]{
+  \item
+  \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textit{\small #1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeItem}[2]{\item \small{\textbf{#1}: #2}}
+
+\newenvironment{entries}{\begin{itemize}[leftmargin=0in, label={}, itemsep=1pt, topsep=0pt]}{\end{itemize}}
+\newenvironment{bullets}{\begin{itemize}[leftmargin=0.2in, itemsep=0pt, topsep=1pt, parsep=0pt, label=\textbullet]\small}{\end{itemize}}
+
+%-------------------------------------------
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{center}
+  {\Huge\textbf{Brett Whitson}} \\ \vspace{4pt}
+  \small
+  \href{mailto:brett.whitson.dev@gmail.com}{brett.whitson.dev@gmail.com} $|$
+  \href{https://home.brettwhitson.dev}{home.brettwhitson.dev} $|$
+  \href{https://www.linkedin.com/in/brett-whitson}{linkedin.com/in/brett-whitson} $|$
+  \href{https://github.com/brettwhitson}{github.com/brettwhitson}
+\end{center}
+
+%-----------SUMMARY------------------
+\section{Summary}
+\small
+Oracle DBA and Banner systems administrator with five years supporting enterprise systems in higher
+education, and a computer science background in full-stack development. Experienced across the
+Banner ERP stack, from PL/SQL and data integrations to database administration, performance tuning,
+and Linux server management.
+\normalsize
+
+%-----------EXPERIENCE-----------------
+\section{Experience}
+\begin{entries}
+
+  \resumeSubheading{The University of Tennessee at Martin}{Martin, TN}
+    {IT Administrator IV -- Oracle DBA and Banner Systems Administrator}{Jun 2025 -- Present}
+  \begin{bullets}
+    \item Administer the Oracle databases behind the university's Ellucian Banner ERP: installation,
+      configuration, patching, backup and recovery, and user access management.
+    \item Plan and apply Banner and Oracle upgrades and patch sets, coordinating testing and downtime
+      with campus stakeholders and Ellucian support.
+    \item Monitor and tune database performance, and automate routine administration with SQL, PL/SQL,
+      and shell scripting on Linux.
+  \end{bullets}
+
+  \resumeSubRole{Programmer/Analyst}{Jul 2021 -- Jun 2025}
+  \begin{bullets}
+    \item Designed, built, and maintained software supporting university operations on the Ellucian
+      Banner ERP system.
+    \item Wrote and optimized SQL queries, PL/SQL packages, and stored procedures for complex data
+      operations, with a focus on data integrity and performance.
+    \item Maintained and extended Banner modules, including custom integrations with third-party
+      applications and APIs.
+    \item Gathered requirements with stakeholders across departments and delivered solutions that
+      improved efficiency for staff and students.
+    \item Supported end users and resolved application and database issues.
+  \end{bullets}
+
+  \resumeSubRole{IT Technician III}{Oct 2020 -- Jul 2021}
+  \begin{bullets}
+    \item Resolved escalated hardware, software, and local network issues from the student help desk,
+      and helped run the ticket queue and equipment inventory.
+  \end{bullets}
+
+  \resumeSubRole{Student Technician -- IT Help Desk, Field Services, Config/Install}{Apr 2018 -- Aug 2020}
+  \begin{bullets}
+    \item Deployed PC and Mac workstations for faculty and staff, provided in-person and phone support,
+      and trained new student workers.
+  \end{bullets}
+
+  \resumeSubheading{JointAccounts}{}
+    {Part-time App/Web Developer}{Jan 2021 -- Jul 2021}
+  \begin{bullets}
+    \item Built front-end components from provided designs, and developed, tested, and documented
+      back-end functionality.
+  \end{bullets}
+
+\end{entries}
+
+%-----------EDUCATION-----------------
+\section{Education}
+\begin{entries}
+  \resumeSubheading{The University of Tennessee at Martin}{Martin, TN}
+    {Bachelor of Science, Computer Science}{May 2020}
+\end{entries}
+
+%-----------SKILLS-----------------
+\section{Skills}
+\begin{entries}
+  \resumeItem{Database \& Systems}{Oracle Database administration, Ellucian Banner ERP, PL/SQL development,
+    performance tuning, backup and recovery, Linux server management, networking fundamentals}
+  \resumeItem{Languages}{SQL, PL/SQL, Bash, Python, JavaScript, HTML, CSS, C\#, Java, C, C++}
+  \resumeItem{Tools}{Git, GitHub, Oracle SQL Developer, Docker, VS Code, Vim}
+\end{entries}
+
+%-----------PROJECTS-----------------
+\section{Projects}
+\begin{entries}
+  \resumeItem{WebDocker (2019)}{\textit{First Place, Undergraduate Presentations, ACM Mid-Southeast Conference.}
+    Team-built web application for managing Docker containers from the browser.}
+  \resumeItem{DockerUI (2019)}{Desktop interface for managing local Docker containers, built with Electron and
+    Express.js as part of a three-person team.}
+  \resumeItem{Bipartite Graph Checker (2019)}{Implemented a DFS bipartite-graph algorithm in four programming
+    paradigms: procedural, object-oriented, functional, and logic.}
+  \resumeItem{Pseudo-Theremin (2018)}{Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi,
+    with Python, Ruby, and Sonic Pi.}
+  \resumeItem{Financial/Budgeting Application (2017)}{Pair-programmed C\# application with an MS Access database
+    for tracking spending and building budget plans.}
+\end{entries}
+
+\end{document}

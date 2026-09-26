@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{url}}">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="{{image}}">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">{{jsonLd}}</script>
+
+  <!-- Before first paint: apply a saved theme (otherwise CSS follows prefers-color-scheme) and
+       flag that scripted motion can run. If main.js is blocked or fails to load, the flags are
+       dropped again so content hidden for its entrance animation is never left hidden. -->
+  <script>
+    (() => {
+      const root = document.documentElement;
+      root.classList.add("js");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) root.classList.add("motion-ok");
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+      } catch {}
+
+      const fallback = () => {
+        if (!root.classList.contains("js-ready")) root.classList.remove("js", "motion-ok");
+      };
+      addEventListener("error", (event) => {
+        if (event.target?.src?.endsWith("/javascript/main.js")) fallback();
+      }, true);
+      setTimeout(fallback, 4000);
+    })();
+  </script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/styles/min/styles.min.css">
+  <script src="/javascript/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <!-- Decorative backdrop; main.js moves its layers at different speeds as the page scrolls -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-grid"></div>
+    <div class="backdrop-glow glow-1"></div>
+    <div class="backdrop-glow glow-2"></div>
+    <div class="backdrop-glow glow-3"></div>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <div class="layout">
+    <header class="sidebar">
+      <div class="intro">
+        <img class="intro-portrait" style="--i: 0" src="/data/images/me-192.webp" width="72" height="72" alt="Portrait of {{name}}">
+        <h1 class="intro-name" style="--i: 1">{{name}}</h1>
+        <p class="intro-role" style="--i: 2">{{headline}}</p>
+        <p class="intro-org" style="--i: 3">{{org}}</p>
+{{query}}
+        <div class="intro-contact" style="--i: 5">
+          <a class="intro-email" href="mailto:{{email}}">{{email}}</a>
+          <button type="button" class="icon-button copy-button" data-copy="{{email}}" aria-label="Copy email address" title="Copy email address" hidden>
+            <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+          <span class="copy-status" role="status"></span>
+        </div>
+        <div class="intro-actions" style="--i: 6">
+          <a class="btn btn-primary btn-download" href="{{resumeFile}}" download>Download resume<svg class="btn-glyph" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
+          <ul class="profile-links">
+{{profileLinks}}
+          </ul>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <nav class="navigation" aria-label="Sections">
+          <ol class="nav-list">
+{{nav}}
+          </ol>
+        </nav>
+        <button type="button" class="icon-button theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <main id="content">
+{{sections}}
+      </main>
+
+      <footer class="site-footer">
+        <p>Hand-built with vanilla JavaScript, SCSS, and a small Node build that renders this page from JSON.
+          <a href="{{sourceUrl}}" target="_blank" rel="noopener noreferrer">View source<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+        <p>&copy; {{name}}</p>
+      </footer>
+    </div>
+  </div>
+</body>
+
+</html>

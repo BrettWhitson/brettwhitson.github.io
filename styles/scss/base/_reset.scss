@@ -42,6 +42,11 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+/* Component display rules must not un-hide elements marked hidden */
+[hidden] {
+  display: none !important;
+}
+
 /* Make images easier to work with */
 img,
 picture {
@@ -55,22 +60,6 @@ button,
 textarea,
 select {
   font: inherit;
-}
-
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html:focus-within {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
 
 // Additional reset for common elements
@@ -89,4 +78,9 @@ button {
 // Remove focus outline for mouse users
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-link) 25%, transparent);
+  color: var(--color-text-primary);
 }
