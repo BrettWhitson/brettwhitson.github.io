@@ -19,7 +19,8 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Brett Whitson","url":"https://home.brettwhitson.dev/","image":"https://home.brettwhitson.dev/data/images/me.jpg","email":"mailto:brett.whitson.dev@gmail.com","jobTitle":"Oracle DBA and Banner Systems Administrator","worksFor":{"@type":"CollegeOrUniversity","name":"University of Tennessee at Martin"},"alumniOf":{"@type":"CollegeOrUniversity","name":"University of Tennessee at Martin"},"sameAs":["https://www.linkedin.com/in/brett-whitson/","https://github.com/brettwhitson"]}</script>
 
   <!-- Before first paint: apply a saved theme (otherwise CSS follows prefers-color-scheme) and
-       flag that scripted motion can run, so nothing starts hidden when JS is off -->
+       flag that scripted motion can run. If main.js is blocked or fails to load, the flags are
+       dropped again so content hidden for its entrance animation is never left hidden. -->
   <script>
     (() => {
       const root = document.documentElement;
@@ -29,6 +30,14 @@
         const theme = localStorage.getItem("theme");
         if (theme === "light" || theme === "dark") root.dataset.theme = theme;
       } catch {}
+
+      const fallback = () => {
+        if (!root.classList.contains("js-ready")) root.classList.remove("js", "motion-ok");
+      };
+      addEventListener("error", (event) => {
+        if (event.target?.src?.endsWith("/javascript/main.js")) fallback();
+      }, true);
+      setTimeout(fallback, 4000);
     })();
   </script>
 
@@ -59,6 +68,7 @@
         <h1 class="intro-name" style="--i: 1">Brett Whitson</h1>
         <p class="intro-role" style="--i: 2">Oracle DBA and Banner Systems Administrator</p>
         <p class="intro-org" style="--i: 3">University of Tennessee at Martin, Martin, TN</p>
+          <p class="visually-hidden">Specialties: Banner ERP administration, Full-stack development, Oracle database administration.</p>
           <figure class="query" style="--i: 4" aria-hidden="true">
             <pre class="query-sql"><code><span class="sql-keyword">SELECT</span> specialty&#10;       <span class="sql-keyword">FROM</span> brett.profile&#10;      <span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> 1;</code></pre>
             <table class="query-result">

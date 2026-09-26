@@ -118,10 +118,11 @@ export function highlightSql(sql) {
   return raw((out + esc(sql.slice(last))).replace(/\r?\n/g, "&#10;"));
 }
 
-// Decorative: the role line above already says the same thing in plain words, so it's hidden from assistive tech
+// The styled query is hidden from assistive tech, which gets the result as a plain sentence instead
 const renderQuery = (query) =>
   query &&
   html`
+<p class="visually-hidden">Specialties: ${query.rows.join(", ")}.</p>
 <figure class="query" style="--i: 4" aria-hidden="true">
   <pre class="query-sql"><code>${highlightSql(query.sql)}</code></pre>
   <table class="query-result">

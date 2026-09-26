@@ -34,6 +34,13 @@
     display: none !important;
   }
 
+  // Sections that were never scrolled to would otherwise print blank
+  .reveal,
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .section {
     break-inside: avoid;
     padding: var(--space-6) 0;

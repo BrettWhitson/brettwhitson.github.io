@@ -1,5 +1,27 @@
 # Changelog
 
+## [5.3.1] - 2026-09-25
+
+### Fixed
+
+- If `main.js` was blocked or failed to load, every section stayed invisible, because the head script had already
+  opted the page into entrance animations. The head script now drops those flags when the script errors or hasn't
+  run within 4 seconds; `main.js` marks itself with `js-ready` as soon as it executes
+- Scroll reveal could never trigger for a section taller than about eight screens (e.g. Experience on a short
+  landscape phone); it now reveals on any overlap past a 10% margin
+- Sections never scrolled to printed blank
+- The copy button showed, inert, without JavaScript: a component display rule overrode the `hidden` attribute
+- Un-pinning a skill by clicking it again cleared the highlight even while the pointer was still on it
+- The sidebar now fades with the rest of the page on theme change (a leftover `.site-header` selector missed it)
+
+### Changed
+
+- Screen readers get the intro query's result as a plain sentence (the styled query stays hidden from them)
+- Removed about 30 unused design tokens
+- README build notes match the current output
+
+---
+
 ## [5.3.0] - 2026-09-25
 
 ### Accessibility (WCAG 2.2 AA)

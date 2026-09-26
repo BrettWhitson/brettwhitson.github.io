@@ -9,6 +9,10 @@
  * @see {@link https://github.com/BrettWhitson/brettwhitson.github.io} Source Code
  */
 
+// Tells the head script's fallback that this file loaded, so entrance animations may hide
+// content until they run. Set at execution, before DOMContentLoaded.
+document.documentElement.classList.add("js-ready");
+
 /**
  * ThemeController - Manages light/dark theme switching
  *
@@ -314,11 +318,13 @@ class Reveal {
   /**
    * @param {Object} [options]
    * @param {string} [options.selector=".reveal"]
-   * @param {number} [options.threshold=0.12] - Fraction visible before revealing
+   * @param {string} [options.rootMargin="0px 0px -10% 0px"] - Reveal once an element's top
+   *   passes 10% above the bottom edge. A margin rather than an area threshold, because a
+   *   section several screens tall can never have a fixed fraction of itself visible.
    */
-  constructor({ selector = ".reveal", threshold = 0.12 } = {}) {
+  constructor({ selector = ".reveal", rootMargin = "0px 0px -10% 0px" } = {}) {
     this.elements = document.querySelectorAll(selector);
-    this.threshold = threshold;
+    this.rootMargin = rootMargin;
   }
 
   init() {
@@ -348,7 +354,7 @@ class Reveal {
             observer.unobserve(entry.target);
           });
       },
-      { threshold: this.threshold, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0, rootMargin: this.rootMargin }
     );
     this.elements.forEach((el) => observer.observe(el));
   }
@@ -621,11 +627,11 @@ class SkillLinks {
       chip.addEventListener("mouseleave", () => this.pinned || this.clear());
       chip.addEventListener("focus", () => this.pinned || this.show(key));
       chip.addEventListener("blur", () => this.pinned || this.clear());
-      chip.addEventListener("click", () => this.toggle(key));
+      chip.addEventListener("click", () => this.toggle(key, chip));
       chip.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          this.toggle(key);
+          this.toggle(key, chip);
         } else if (event.key === "Escape") {
           this.unpin();
         }
@@ -643,9 +649,15 @@ class SkillLinks {
     }
   }
 
-  toggle(key) {
+  /**
+   * @param {string} key - Skill key
+   * @param {HTMLElement} chip - The chip that was activated
+   */
+  toggle(key, chip) {
     if (this.pinned === key) {
       this.unpin();
+      // Still hovered or focused: fall back to the preview instead of going blank
+      if (chip.matches(":hover") || chip === document.activeElement) this.show(key);
     } else {
       this.pinned = key;
       this.show(key);

@@ -157,8 +157,8 @@ html {
     }
   }
 
-  // The toggle needs JavaScript; without it the page just follows the OS theme
-  html:not(.js) & {
+  // The toggle needs main.js; without it the page just follows the OS theme
+  html:not(.js-ready) & {
     display: none;
   }
 }

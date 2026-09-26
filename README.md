@@ -58,7 +58,7 @@ Requires Node 20+ and Dart Sass (`npm install -g sass`).
 node scripts/build.mjs
 ```
 
-Renders `index.html` and `sitemap.xml` and compiles `styles/css/styles.css` and `styles/min/styles.min.css`.
+Renders `index.html` and `sitemap.xml` and compiles `styles/min/styles.min.css`.
 `--html` skips the CSS; `--check` exits non-zero if `index.html` is out of date.
 
 ```bash

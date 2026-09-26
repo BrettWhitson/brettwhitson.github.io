@@ -18,7 +18,8 @@
   <script type="application/ld+json">{{jsonLd}}</script>
 
   <!-- Before first paint: apply a saved theme (otherwise CSS follows prefers-color-scheme) and
-       flag that scripted motion can run, so nothing starts hidden when JS is off -->
+       flag that scripted motion can run. If main.js is blocked or fails to load, the flags are
+       dropped again so content hidden for its entrance animation is never left hidden. -->
   <script>
     (() => {
       const root = document.documentElement;
@@ -28,6 +29,14 @@
         const theme = localStorage.getItem("theme");
         if (theme === "light" || theme === "dark") root.dataset.theme = theme;
       } catch {}
+
+      const fallback = () => {
+        if (!root.classList.contains("js-ready")) root.classList.remove("js", "motion-ok");
+      };
+      addEventListener("error", (event) => {
+        if (event.target?.src?.endsWith("/javascript/main.js")) fallback();
+      }, true);
+      setTimeout(fallback, 4000);
     })();
   </script>
 

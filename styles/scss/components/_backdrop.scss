@@ -69,7 +69,7 @@
   transform-origin: left;
   transform: scaleX(var(--progress, 0));
 
-  html:not(.js) & {
+  html:not(.js-ready) & {
     display: none;
   }
 }

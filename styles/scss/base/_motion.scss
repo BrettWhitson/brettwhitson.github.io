@@ -1,5 +1,6 @@
-// Scroll reveal. main.js adds .motion-ok to <html> only when JavaScript runs and the
-// visitor hasn't asked for reduced motion, so content is never hidden otherwise.
+// Scroll reveal. The head script adds .motion-ok to <html> when the visitor hasn't asked
+// for reduced motion, and removes it again if main.js doesn't load, so content is never
+// left hidden.
 
 .motion-ok .reveal {
   opacity: 0;
@@ -44,7 +45,8 @@
 
 // Theme switches fade instead of snapping; scoped to the elements that carry the colors
 body,
-.site-header,
+.sidebar,
+.nav-bar,
 .site-footer {
   transition: background-color var(--transition-base), color var(--transition-base);
 }
