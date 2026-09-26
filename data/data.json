@@ -286,12 +286,6 @@
       "layout": "rows"
     },
     {
-      "section": "interests",
-      "title": "Interests",
-      "type": "pg",
-      "body": "Outside of work I play video games and write plugins and small tools for the ones I play, keep a few servers running at home for friends' game worlds, travel, take drone and 360-degree photos, and study new languages."
-    },
-    {
       "section": "resume",
       "title": "Resume",
       "type": "rs",

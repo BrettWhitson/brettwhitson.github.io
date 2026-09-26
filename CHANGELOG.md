@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.3.2] - 2026-09-25
+
+### Removed
+
+- Interests section
+
+---
+
 ## [5.3.1] - 2026-09-25
 
 ### Fixed
