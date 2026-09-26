@@ -10,7 +10,30 @@
     "jobTitle": "Oracle DBA and Banner Systems Administrator",
     "worksFor": "University of Tennessee at Martin",
     "alumniOf": "University of Tennessee at Martin",
-    "sourceUrl": "https://github.com/BrettWhitson/brettwhitson.github.io"
+    "sourceUrl": "https://github.com/BrettWhitson/brettwhitson.github.io",
+    "query": {
+      "sql": "SELECT role FROM brett WHERE focus IN ('oracle', 'banner', 'front_end');",
+      "column": "ROLE",
+      "rows": [
+        "Oracle DBA",
+        "Banner Systems Administrator",
+        "Front-end developer"
+      ]
+    },
+    "stats": [
+      {
+        "value": "8",
+        "label": "years in university IT"
+      },
+      {
+        "value": "5",
+        "label": "years on Banner and Oracle"
+      },
+      {
+        "value": "4",
+        "label": "roles, help desk to DBA"
+      }
+    ]
   },
   "sections": [
     {
@@ -34,6 +57,16 @@
                 "Administer the Oracle databases behind the university's Ellucian Banner ERP: installation, configuration, patching, backup and recovery, and user access management.",
                 "Plan and apply Banner and Oracle upgrades and patch sets, coordinating testing and downtime with campus stakeholders and Ellucian support.",
                 "Monitor and tune database performance, and automate routine administration with SQL, PL/SQL, and shell scripting on Linux."
+              ],
+              "stack": [
+                "oracle",
+                "banner",
+                "plsql",
+                "sql",
+                "tuning",
+                "backup",
+                "linux",
+                "bash"
               ]
             },
             {
@@ -44,6 +77,14 @@
                 "Wrote and optimized SQL queries, PL/SQL packages, and stored procedures for complex data operations, with a focus on data integrity and performance.",
                 "Maintained and extended Banner modules, including custom integrations with third-party applications and APIs.",
                 "Gathered requirements with stakeholders across departments and delivered solutions that improved efficiency for staff and students."
+              ],
+              "stack": [
+                "banner",
+                "plsql",
+                "sql",
+                "oracle",
+                "sqldeveloper",
+                "git"
               ]
             },
             {
@@ -51,6 +92,9 @@
               "dates": "October 2020 - July 2021",
               "bullets": [
                 "Resolved escalated hardware, software, and local network issues from the student help desk, and helped run the ticket queue and equipment inventory."
+              ],
+              "stack": [
+                "networking"
               ]
             },
             {
@@ -58,6 +102,9 @@
               "dates": "April 2018 - August 2020",
               "bullets": [
                 "Deployed PC and Mac workstations for faculty and staff, provided in-person and phone support, and trained new student workers."
+              ],
+              "stack": [
+                "networking"
               ]
             }
           ]
@@ -70,7 +117,119 @@
               "dates": "January 2021 - July 2021",
               "bullets": [
                 "Built front-end components from provided designs, and developed, tested, and documented back-end functionality."
+              ],
+              "stack": [
+                "javascript",
+                "html",
+                "css",
+                "git"
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": "skills",
+      "title": "Skills",
+      "type": "skills",
+      "body": [
+        {
+          "group": "Database & Systems",
+          "items": [
+            {
+              "key": "oracle",
+              "name": "Oracle Database"
+            },
+            {
+              "key": "banner",
+              "name": "Ellucian Banner"
+            },
+            {
+              "key": "tuning",
+              "name": "Performance tuning"
+            },
+            {
+              "key": "backup",
+              "name": "Backup and recovery"
+            },
+            {
+              "key": "linux",
+              "name": "Linux"
+            },
+            {
+              "key": "networking",
+              "name": "Networking"
+            }
+          ]
+        },
+        {
+          "group": "Languages",
+          "items": [
+            {
+              "key": "sql",
+              "name": "SQL"
+            },
+            {
+              "key": "plsql",
+              "name": "PL/SQL"
+            },
+            {
+              "key": "bash",
+              "name": "Bash"
+            },
+            {
+              "key": "python",
+              "name": "Python"
+            },
+            {
+              "key": "javascript",
+              "name": "JavaScript"
+            },
+            {
+              "key": "html",
+              "name": "HTML"
+            },
+            {
+              "key": "css",
+              "name": "CSS / SCSS"
+            },
+            {
+              "key": "csharp",
+              "name": "C#"
+            },
+            {
+              "key": "java",
+              "name": "Java"
+            },
+            {
+              "key": "c",
+              "name": "C / C++"
+            }
+          ]
+        },
+        {
+          "group": "Tools",
+          "items": [
+            {
+              "key": "sqldeveloper",
+              "name": "SQL Developer"
+            },
+            {
+              "key": "git",
+              "name": "Git / GitHub"
+            },
+            {
+              "key": "docker",
+              "name": "Docker"
+            },
+            {
+              "key": "vscode",
+              "name": "VS Code"
+            },
+            {
+              "key": "vim",
+              "name": "Vim"
             }
           ]
         }
@@ -83,49 +242,35 @@
       "body": [
         {
           "header": "WebDocker",
-          "subheader": "Fall 2019 - First Place, Undergraduate Presentations, ACM Mid-Southeast Conference",
-          "main": "Built with two teammates: a web application for managing virtualized services (Docker containers) from the browser."
+          "subheader": "First Place, Undergraduate Presentations, ACM Mid-Southeast Conference",
+          "main": "Built with two teammates: a web application for managing virtualized services (Docker containers) from the browser.",
+          "subsubheader": "Fall 2019"
         },
         {
           "header": "DockerUI",
-          "subheader": "Fall 2019 - Electron, Express.js",
-          "main": "Built with two teammates: a desktop interface for managing local Docker containers."
+          "subheader": "Electron, Express.js",
+          "main": "Built with two teammates: a desktop interface for managing local Docker containers.",
+          "subsubheader": "Fall 2019"
         },
         {
           "header": "Bipartite Graph Checker",
-          "subheader": "Spring 2019",
-          "main": "A DFS algorithm that decides whether a graph is bipartite, implemented in four paradigms: procedural, object-oriented, functional, and logic."
+          "main": "A DFS algorithm that decides whether a graph is bipartite, implemented in four paradigms: procedural, object-oriented, functional, and logic.",
+          "subsubheader": "Spring 2019"
         },
         {
           "header": "Pseudo-Theremin",
-          "subheader": "Fall 2018 - Python, Ruby, Raspberry Pi",
-          "main": "Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi, with sound from Sonic Pi."
+          "subheader": "Python, Ruby, Raspberry Pi",
+          "main": "Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi, with sound from Sonic Pi.",
+          "subsubheader": "Fall 2018"
         },
         {
           "header": "Financial/Budgeting Application",
-          "subheader": "Fall 2017 - C#, MS Access",
-          "main": "Pair-programmed application for tracking spending and building budget plans."
+          "subheader": "C#, MS Access",
+          "main": "Pair-programmed application for tracking spending and building budget plans.",
+          "subsubheader": "Fall 2017"
         }
-      ]
-    },
-    {
-      "section": "skills",
-      "title": "Skills",
-      "type": "ls",
-      "body": [
-        {
-          "header": "Database & Systems",
-          "main": "Oracle Database administration, Ellucian Banner ERP, PL/SQL development, performance tuning, backup and recovery, Linux server management, networking fundamentals"
-        },
-        {
-          "header": "Languages",
-          "icons": "languages"
-        },
-        {
-          "header": "Tools",
-          "icons": "tools"
-        }
-      ]
+      ],
+      "layout": "rows"
     },
     {
       "section": "education",
@@ -137,7 +282,8 @@
           "subheader": "Bachelor of Science, Computer Science",
           "subsubheader": "May 2020"
         }
-      ]
+      ],
+      "layout": "rows"
     },
     {
       "section": "interests",
@@ -153,91 +299,17 @@
       "body": ""
     }
   ],
-  "icons": {
-    "languages": [
-      {
-        "icon": "oracle-original",
-        "label": "SQL / PL/SQL"
-      },
-      {
-        "icon": "bash-plain",
-        "label": "Bash"
-      },
-      {
-        "icon": "python-plain",
-        "label": "Python"
-      },
-      {
-        "icon": "javascript-plain",
-        "label": "JavaScript"
-      },
-      {
-        "icon": "html5-plain",
-        "label": "HTML"
-      },
-      {
-        "icon": "css3-plain",
-        "label": "CSS"
-      },
-      {
-        "icon": "csharp-plain",
-        "label": "C#"
-      },
-      {
-        "icon": "java-plain",
-        "label": "Java"
-      },
-      {
-        "icon": "c-plain",
-        "label": "C"
-      },
-      {
-        "icon": "cplusplus-plain",
-        "label": "C++"
-      }
-    ],
-    "tools": [
-      {
-        "icon": "linux-plain",
-        "label": "Linux"
-      },
-      {
-        "icon": "sqldeveloper-plain",
-        "label": "SQL Developer"
-      },
-      {
-        "icon": "git-plain",
-        "label": "Git"
-      },
-      {
-        "icon": "github-original",
-        "label": "GitHub"
-      },
-      {
-        "icon": "docker-plain",
-        "label": "Docker"
-      },
-      {
-        "icon": "vscode-plain",
-        "label": "VS Code"
-      },
-      {
-        "icon": "vim-plain",
-        "label": "Vim"
-      }
-    ]
-  },
   "ext": {
     "LinkedIn": {
-      "icon": "linkedin-plain",
+      "icon": "linkedin",
       "link": "https://www.linkedin.com/in/brett-whitson/"
     },
     "GitHub": {
-      "icon": "github-original",
+      "icon": "github",
       "link": "https://github.com/brettwhitson"
     },
     "this site's source": {
-      "icon": "git-plain",
+      "icon": "code",
       "link": "https://github.com/BrettWhitson/brettwhitson.github.io"
     }
   }

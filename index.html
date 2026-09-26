@@ -35,260 +35,315 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,600&display=swap">
   <link rel="stylesheet" href="/styles/min/styles.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.17.0/devicon.min.css">
   <script src="/javascript/main.js" defer></script>
 </head>
 
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="site-header">
-    <div class="header-container">
-      <a class="brand" href="#top">Brett Whitson</a>
-      <nav class="navigation" aria-label="Sections">
-        <ul class="nav-list">
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-          <li class="nav-item"><a class="nav-link" href="#interests">Interests</a></li>
-          <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <ul class="ext-icon-list">
-          <li><a class="icon-button" href="https://www.linkedin.com/in/brett-whitson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="devicon-linkedin-plain" aria-hidden="true"></i></a></li>
-          <li><a class="icon-button" href="https://github.com/brettwhitson" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i class="devicon-github-original" aria-hidden="true"></i></a></li>
-          <li><a class="icon-button" href="https://github.com/BrettWhitson/brettwhitson.github.io" target="_blank" rel="noopener noreferrer" aria-label="this site&#39;s source" title="this site&#39;s source"><i class="devicon-git-plain" aria-hidden="true"></i></a></li>
-        </ul>
-        <div class="theme-toggle">
-          <button type="button" class="theme-toggle-btn" aria-label="Toggle theme">
-            <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-            </svg>
-            <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
+  <div class="layout">
+    <header class="sidebar">
+      <div class="intro">
+        <img class="intro-portrait" src="/data/images/me-192.webp" width="72" height="72" alt="Portrait of Brett Whitson">
+        <h1 class="intro-name">Brett Whitson</h1>
+        <p class="intro-role">Oracle DBA and Banner Systems Administrator</p>
+        <p class="intro-org">University of Tennessee at Martin, Martin, TN</p>
+          <figure class="query" aria-hidden="true">
+            <pre class="query-sql"><code><span class="sql-keyword">SELECT</span> role <span class="sql-keyword">FROM</span> brett <span class="sql-keyword">WHERE</span> focus <span class="sql-keyword">IN</span> (<span class="sql-string">&#39;oracle&#39;</span>, <span class="sql-string">&#39;banner&#39;</span>, <span class="sql-string">&#39;front_end&#39;</span>);</code></pre>
+            <table class="query-result">
+              <thead>
+                <tr><th>ROLE</th></tr>
+              </thead>
+              <tbody>
+                <tr style="--i: 0"><td>Oracle DBA</td></tr>
+                <tr style="--i: 1"><td>Banner Systems Administrator</td></tr>
+                <tr style="--i: 2"><td>Front-end developer</td></tr>
+              </tbody>
+            </table>
+            <figcaption class="query-caption">3 rows selected.</figcaption>
+          </figure>
+        <div class="intro-contact">
+          <a class="intro-email" href="mailto:brett.whitson.dev@gmail.com">brett.whitson.dev@gmail.com</a>
+          <button type="button" class="icon-button copy-button" data-copy="brett.whitson.dev@gmail.com" aria-label="Copy email address" title="Copy email address" hidden>
+            <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
           </button>
+          <span class="copy-status" role="status"></span>
+        </div>
+        <div class="intro-actions">
+          <a class="btn btn-primary" href="./data/whitson_resume.pdf" download>Download resume</a>
+          <ul class="profile-links">
+            <li><a class="icon-button" href="https://www.linkedin.com/in/brett-whitson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4z"/></svg></a></li>
+            <li><a class="icon-button" href="https://github.com/brettwhitson" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+            <li><a class="icon-button" href="https://github.com/BrettWhitson/brettwhitson.github.io" target="_blank" rel="noopener noreferrer" aria-label="this site&#39;s source" title="this site&#39;s source"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></a></li>
+          </ul>
         </div>
       </div>
-    </div>
-  </header>
 
-  <main id="content" class="main-content">
-    <div class="content-container">
-      <div id="top" class="hero">
-        <img class="hero-portrait" src="/data/images/me-192.webp" width="144" height="144" alt="Portrait of Brett Whitson">
-        <div class="hero-text">
-          <h1 class="hero-name" style="--i: 0">Brett Whitson</h1>
-          <p class="hero-role" style="--i: 1">Oracle DBA and Banner Systems Administrator</p>
-          <p class="hero-org" style="--i: 2">University of Tennessee at Martin, Martin, TN</p>
-          <div class="hero-actions" style="--i: 3">
-            <a class="btn btn-primary" href="./data/whitson_resume.pdf" download>Download resume</a>
-            <a class="btn btn-secondary" href="mailto:brett.whitson.dev@gmail.com">Email me</a>
-            <ul class="hero-links">
-              <li><a class="icon-button" href="https://www.linkedin.com/in/brett-whitson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="devicon-linkedin-plain" aria-hidden="true"></i></a></li>
-              <li><a class="icon-button" href="https://github.com/brettwhitson" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><i class="devicon-github-original" aria-hidden="true"></i></a></li>
+      <div class="nav-bar">
+        <nav class="navigation" aria-label="Sections">
+          <ol class="nav-list">
+            <li><a class="nav-link" href="#about"><span class="nav-index">01</span><span class="nav-line"></span><span class="nav-label">About</span></a></li>
+            <li><a class="nav-link" href="#experience"><span class="nav-index">02</span><span class="nav-line"></span><span class="nav-label">Experience</span></a></li>
+            <li><a class="nav-link" href="#skills"><span class="nav-index">03</span><span class="nav-line"></span><span class="nav-label">Skills</span></a></li>
+            <li><a class="nav-link" href="#projects"><span class="nav-index">04</span><span class="nav-line"></span><span class="nav-label">Projects</span></a></li>
+            <li><a class="nav-link" href="#education"><span class="nav-index">05</span><span class="nav-line"></span><span class="nav-label">Education</span></a></li>
+            <li><a class="nav-link" href="#interests"><span class="nav-index">06</span><span class="nav-line"></span><span class="nav-label">Interests</span></a></li>
+            <li><a class="nav-link" href="#resume"><span class="nav-index">07</span><span class="nav-line"></span><span class="nav-label">Resume</span></a></li>
+          </ol>
+        </nav>
+        <button type="button" class="icon-button theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="content" class="content">
+        <section id="about" class="section reveal" aria-labelledby="about-title">
+          <h2 id="about-title" class="section-title"><span class="section-index" aria-hidden="true">01 /</span> About</h2>
+          <div class="section-body section-body-paragraph">
+            <p>I&#39;m an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I&#39;ve spent the last five years keeping the university&#39;s Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love front-end work: this site is hand-built with vanilla JavaScript and SCSS.</p>
+            <dl class="stats">
+              <div class="stat"><dt>years in university IT</dt><dd>8</dd></div>
+              <div class="stat"><dt>years on Banner and Oracle</dt><dd>5</dd></div>
+              <div class="stat"><dt>roles, help desk to DBA</dt><dd>4</dd></div>
+            </dl>
+          </div>
+        </section>
+        <section id="experience" class="section reveal" aria-labelledby="experience-title">
+          <h2 id="experience-title" class="section-title"><span class="section-index" aria-hidden="true">02 /</span> Experience</h2>
+          <div class="section-body">
+            <ul class="section-body-list">
+              <li class="section-list-item">
+                <div class="list-item-body">
+                  <h3 class="list-item-header">University of Tennessee at Martin</h3>
+                  <p class="list-item-caption">4 roles, 2018 to present</p>
+                  <div class="roles">
+                    <div class="list-item-role is-current" style="--i: 0" data-skills="oracle banner plsql sql tuning backup linux bash">
+                      <h4 class="list-item-role-title">IT Administrator IV - Oracle DBA and Banner Systems Administrator</h4>
+                      <p class="list-item-date">June 2025 - Present</p>
+                      <ul class="list-item-bullets">
+                        <li>Administer the Oracle databases behind the university&#39;s Ellucian Banner ERP: installation, configuration, patching, backup and recovery, and user access management.</li>
+                        <li>Plan and apply Banner and Oracle upgrades and patch sets, coordinating testing and downtime with campus stakeholders and Ellucian support.</li>
+                        <li>Monitor and tune database performance, and automate routine administration with SQL, PL/SQL, and shell scripting on Linux.</li>
+                      </ul>
+                      <ul class="chips" aria-label="Used in this role">
+                        <li><span class="chip" data-skill="oracle">Oracle Database</span></li>
+                        <li><span class="chip" data-skill="banner">Ellucian Banner</span></li>
+                        <li><span class="chip" data-skill="plsql">PL/SQL</span></li>
+                        <li><span class="chip" data-skill="sql">SQL</span></li>
+                        <li><span class="chip" data-skill="tuning">Performance tuning</span></li>
+                        <li><span class="chip" data-skill="backup">Backup and recovery</span></li>
+                        <li><span class="chip" data-skill="linux">Linux</span></li>
+                        <li><span class="chip" data-skill="bash">Bash</span></li>
+                      </ul>
+                    </div>
+                    <div class="list-item-role" style="--i: 1" data-skills="banner plsql sql oracle sqldeveloper git">
+                      <h4 class="list-item-role-title">Programmer/Analyst</h4>
+                      <p class="list-item-date">July 2021 - June 2025</p>
+                      <ul class="list-item-bullets">
+                        <li>Designed, built, and maintained software supporting university operations on the Ellucian Banner ERP system.</li>
+                        <li>Wrote and optimized SQL queries, PL/SQL packages, and stored procedures for complex data operations, with a focus on data integrity and performance.</li>
+                        <li>Maintained and extended Banner modules, including custom integrations with third-party applications and APIs.</li>
+                        <li>Gathered requirements with stakeholders across departments and delivered solutions that improved efficiency for staff and students.</li>
+                      </ul>
+                      <ul class="chips" aria-label="Used in this role">
+                        <li><span class="chip" data-skill="banner">Ellucian Banner</span></li>
+                        <li><span class="chip" data-skill="plsql">PL/SQL</span></li>
+                        <li><span class="chip" data-skill="sql">SQL</span></li>
+                        <li><span class="chip" data-skill="oracle">Oracle Database</span></li>
+                        <li><span class="chip" data-skill="sqldeveloper">SQL Developer</span></li>
+                        <li><span class="chip" data-skill="git">Git / GitHub</span></li>
+                      </ul>
+                    </div>
+                    <div class="list-item-role" style="--i: 2" data-skills="networking">
+                      <h4 class="list-item-role-title">IT Technician III</h4>
+                      <p class="list-item-date">October 2020 - July 2021</p>
+                      <ul class="list-item-bullets">
+                        <li>Resolved escalated hardware, software, and local network issues from the student help desk, and helped run the ticket queue and equipment inventory.</li>
+                      </ul>
+                      <ul class="chips" aria-label="Used in this role">
+                        <li><span class="chip" data-skill="networking">Networking</span></li>
+                      </ul>
+                    </div>
+                    <div class="list-item-role" style="--i: 3" data-skills="networking">
+                      <h4 class="list-item-role-title">Student Technician - IT Help Desk, Field Services, Config/Install</h4>
+                      <p class="list-item-date">April 2018 - August 2020</p>
+                      <ul class="list-item-bullets">
+                        <li>Deployed PC and Mac workstations for faculty and staff, provided in-person and phone support, and trained new student workers.</li>
+                      </ul>
+                      <ul class="chips" aria-label="Used in this role">
+                        <li><span class="chip" data-skill="networking">Networking</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="section-list-item">
+                <div class="list-item-body">
+                  <h3 class="list-item-header">JointAccounts</h3>
+                  <div class="roles">
+                    <div class="list-item-role" style="--i: 0" data-skills="javascript html css git">
+                      <h4 class="list-item-role-title">Part-time App/Web Developer</h4>
+                      <p class="list-item-date">January 2021 - July 2021</p>
+                      <ul class="list-item-bullets">
+                        <li>Built front-end components from provided designs, and developed, tested, and documented back-end functionality.</li>
+                      </ul>
+                      <ul class="chips" aria-label="Used in this role">
+                        <li><span class="chip" data-skill="javascript">JavaScript</span></li>
+                        <li><span class="chip" data-skill="html">HTML</span></li>
+                        <li><span class="chip" data-skill="css">CSS / SCSS</span></li>
+                        <li><span class="chip" data-skill="git">Git / GitHub</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
-        </div>
-      </div>
-      <section id="about" class="section reveal" aria-labelledby="about-title">
-        <div class="section-header">
-          <h2 id="about-title" class="section-title">About</h2>
-        </div>
-        <div class="section-body section-body-paragraph">
-          <p>I&#39;m an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I&#39;ve spent the last five years keeping the university&#39;s Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love front-end work: this site is hand-built with vanilla JavaScript and SCSS.</p>
-        </div>
-      </section>
-      <section id="experience" class="section reveal" aria-labelledby="experience-title">
-        <div class="section-header">
-          <h2 id="experience-title" class="section-title">Experience</h2>
-        </div>
-        <div class="section-body">
-          <ul class="section-body-list">
-            <li class="section-list-item">
-              <h3 class="list-item-header">University of Tennessee at Martin</h3>
-              <div class="list-item-role" style="--i: 0">
-                <h4 class="list-item-role-title">IT Administrator IV - Oracle DBA and Banner Systems Administrator</h4>
-                <p class="list-item-subsubheader">June 2025 - Present</p>
-                <ul class="list-item-bullets">
-                  <li>Administer the Oracle databases behind the university&#39;s Ellucian Banner ERP: installation, configuration, patching, backup and recovery, and user access management.</li>
-                  <li>Plan and apply Banner and Oracle upgrades and patch sets, coordinating testing and downtime with campus stakeholders and Ellucian support.</li>
-                  <li>Monitor and tune database performance, and automate routine administration with SQL, PL/SQL, and shell scripting on Linux.</li>
-                </ul>
-              </div>
-              <div class="list-item-role" style="--i: 1">
-                <h4 class="list-item-role-title">Programmer/Analyst</h4>
-                <p class="list-item-subsubheader">July 2021 - June 2025</p>
-                <ul class="list-item-bullets">
-                  <li>Designed, built, and maintained software supporting university operations on the Ellucian Banner ERP system.</li>
-                  <li>Wrote and optimized SQL queries, PL/SQL packages, and stored procedures for complex data operations, with a focus on data integrity and performance.</li>
-                  <li>Maintained and extended Banner modules, including custom integrations with third-party applications and APIs.</li>
-                  <li>Gathered requirements with stakeholders across departments and delivered solutions that improved efficiency for staff and students.</li>
-                </ul>
-              </div>
-              <div class="list-item-role" style="--i: 2">
-                <h4 class="list-item-role-title">IT Technician III</h4>
-                <p class="list-item-subsubheader">October 2020 - July 2021</p>
-                <ul class="list-item-bullets">
-                  <li>Resolved escalated hardware, software, and local network issues from the student help desk, and helped run the ticket queue and equipment inventory.</li>
-                </ul>
-              </div>
-              <div class="list-item-role" style="--i: 3">
-                <h4 class="list-item-role-title">Student Technician - IT Help Desk, Field Services, Config/Install</h4>
-                <p class="list-item-subsubheader">April 2018 - August 2020</p>
-                <ul class="list-item-bullets">
-                  <li>Deployed PC and Mac workstations for faculty and staff, provided in-person and phone support, and trained new student workers.</li>
-                </ul>
-              </div>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">JointAccounts</h3>
-              <div class="list-item-role" style="--i: 0">
-                <h4 class="list-item-role-title">Part-time App/Web Developer</h4>
-                <p class="list-item-subsubheader">January 2021 - July 2021</p>
-                <ul class="list-item-bullets">
-                  <li>Built front-end components from provided designs, and developed, tested, and documented back-end functionality.</li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="projects" class="section reveal" aria-labelledby="projects-title">
-        <div class="section-header">
-          <h2 id="projects-title" class="section-title">Projects</h2>
-        </div>
-        <div class="section-body">
-          <ul class="section-body-list">
-            <li class="section-list-item">
-              <h3 class="list-item-header">WebDocker</h3>
-              <p class="list-item-subheader">Fall 2019 - First Place, Undergraduate Presentations, ACM Mid-Southeast Conference</p>
-              <div class="list-item-main">Built with two teammates: a web application for managing virtualized services (Docker containers) from the browser.</div>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">DockerUI</h3>
-              <p class="list-item-subheader">Fall 2019 - Electron, Express.js</p>
-              <div class="list-item-main">Built with two teammates: a desktop interface for managing local Docker containers.</div>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">Bipartite Graph Checker</h3>
-              <p class="list-item-subheader">Spring 2019</p>
-              <div class="list-item-main">A DFS algorithm that decides whether a graph is bipartite, implemented in four paradigms: procedural, object-oriented, functional, and logic.</div>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">Pseudo-Theremin</h3>
-              <p class="list-item-subheader">Fall 2018 - Python, Ruby, Raspberry Pi</p>
-              <div class="list-item-main">Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi, with sound from Sonic Pi.</div>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">Financial/Budgeting Application</h3>
-              <p class="list-item-subheader">Fall 2017 - C#, MS Access</p>
-              <div class="list-item-main">Pair-programmed application for tracking spending and building budget plans.</div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="skills" class="section reveal" aria-labelledby="skills-title">
-        <div class="section-header">
-          <h2 id="skills-title" class="section-title">Skills</h2>
-        </div>
-        <div class="section-body">
-          <ul class="section-body-list">
-            <li class="section-list-item">
-              <h3 class="list-item-header">Database &amp; Systems</h3>
-              <div class="list-item-main">Oracle Database administration, Ellucian Banner ERP, PL/SQL development, performance tuning, backup and recovery, Linux server management, networking fundamentals</div>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">Languages</h3>
-              <ul class="icon-list list-no-style-inline">
-                <li><i class="devicon-oracle-original" aria-hidden="true"></i><span class="icon-label">SQL / PL/SQL</span></li>
-                <li><i class="devicon-bash-plain" aria-hidden="true"></i><span class="icon-label">Bash</span></li>
-                <li><i class="devicon-python-plain" aria-hidden="true"></i><span class="icon-label">Python</span></li>
-                <li><i class="devicon-javascript-plain" aria-hidden="true"></i><span class="icon-label">JavaScript</span></li>
-                <li><i class="devicon-html5-plain" aria-hidden="true"></i><span class="icon-label">HTML</span></li>
-                <li><i class="devicon-css3-plain" aria-hidden="true"></i><span class="icon-label">CSS</span></li>
-                <li><i class="devicon-csharp-plain" aria-hidden="true"></i><span class="icon-label">C#</span></li>
-                <li><i class="devicon-java-plain" aria-hidden="true"></i><span class="icon-label">Java</span></li>
-                <li><i class="devicon-c-plain" aria-hidden="true"></i><span class="icon-label">C</span></li>
-                <li><i class="devicon-cplusplus-plain" aria-hidden="true"></i><span class="icon-label">C++</span></li>
-              </ul>
-            </li>
-            <li class="section-list-item">
-              <h3 class="list-item-header">Tools</h3>
-              <ul class="icon-list list-no-style-inline">
-                <li><i class="devicon-linux-plain" aria-hidden="true"></i><span class="icon-label">Linux</span></li>
-                <li><i class="devicon-sqldeveloper-plain" aria-hidden="true"></i><span class="icon-label">SQL Developer</span></li>
-                <li><i class="devicon-git-plain" aria-hidden="true"></i><span class="icon-label">Git</span></li>
-                <li><i class="devicon-github-original" aria-hidden="true"></i><span class="icon-label">GitHub</span></li>
-                <li><i class="devicon-docker-plain" aria-hidden="true"></i><span class="icon-label">Docker</span></li>
-                <li><i class="devicon-vscode-plain" aria-hidden="true"></i><span class="icon-label">VS Code</span></li>
-                <li><i class="devicon-vim-plain" aria-hidden="true"></i><span class="icon-label">Vim</span></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="education" class="section reveal" aria-labelledby="education-title">
-        <div class="section-header">
-          <h2 id="education-title" class="section-title">Education</h2>
-        </div>
-        <div class="section-body">
-          <ul class="section-body-list">
-            <li class="section-list-item">
-              <h3 class="list-item-header">University of Tennessee at Martin</h3>
-              <p class="list-item-subheader">Bachelor of Science, Computer Science</p>
-              <p class="list-item-subsubheader">May 2020</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="interests" class="section reveal" aria-labelledby="interests-title">
-        <div class="section-header">
-          <h2 id="interests-title" class="section-title">Interests</h2>
-        </div>
-        <div class="section-body section-body-paragraph">
-          <p>Outside of work I play guitar, play video games, travel, and study new languages.</p>
-        </div>
-      </section>
-      <section id="resume" class="section reveal" aria-labelledby="resume-title">
-        <div class="section-header">
-          <h2 id="resume-title" class="section-title">Resume</h2>
-        </div>
-        <div class="section-body">
-          <div class="resume-actions">
-            <a class="btn btn-primary" href="./data/whitson_resume.pdf" download="whitson_resume.pdf">Download PDF</a>
-            <a class="btn btn-secondary" id="resume-preview-btn" href="./data/whitson_resume.pdf" target="_blank" rel="noopener" aria-controls="resume-preview-container" aria-expanded="false">Preview</a>
+        </section>
+        <section id="skills" class="section reveal" aria-labelledby="skills-title">
+          <h2 id="skills-title" class="section-title"><span class="section-index" aria-hidden="true">03 /</span> Skills</h2>
+          <div class="section-body">
+            <table class="skills-table">
+              <thead>
+                <tr><th scope="col">skill_group</th><th scope="col">members</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Database &amp; Systems</th>
+                  <td>
+                    <ul class="chips">
+                      <li><span class="chip" data-skill="oracle">Oracle Database</span></li>
+                      <li><span class="chip" data-skill="banner">Ellucian Banner</span></li>
+                      <li><span class="chip" data-skill="tuning">Performance tuning</span></li>
+                      <li><span class="chip" data-skill="backup">Backup and recovery</span></li>
+                      <li><span class="chip" data-skill="linux">Linux</span></li>
+                      <li><span class="chip" data-skill="networking">Networking</span></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Languages</th>
+                  <td>
+                    <ul class="chips">
+                      <li><span class="chip" data-skill="sql">SQL</span></li>
+                      <li><span class="chip" data-skill="plsql">PL/SQL</span></li>
+                      <li><span class="chip" data-skill="bash">Bash</span></li>
+                      <li><span class="chip" data-skill="python">Python</span></li>
+                      <li><span class="chip" data-skill="javascript">JavaScript</span></li>
+                      <li><span class="chip" data-skill="html">HTML</span></li>
+                      <li><span class="chip" data-skill="css">CSS / SCSS</span></li>
+                      <li><span class="chip" data-skill="csharp">C#</span></li>
+                      <li><span class="chip" data-skill="java">Java</span></li>
+                      <li><span class="chip" data-skill="c">C / C++</span></li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Tools</th>
+                  <td>
+                    <ul class="chips">
+                      <li><span class="chip" data-skill="sqldeveloper">SQL Developer</span></li>
+                      <li><span class="chip" data-skill="git">Git / GitHub</span></li>
+                      <li><span class="chip" data-skill="docker">Docker</span></li>
+                      <li><span class="chip" data-skill="vscode">VS Code</span></li>
+                      <li><span class="chip" data-skill="vim">Vim</span></li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="skills-status" aria-live="polite" hidden></p>
           </div>
-          <div id="resume-preview-container" class="resume-preview-container hidden"></div>
-        </div>
-      </section>
-    </div>
-  </main>
+        </section>
+        <section id="projects" class="section reveal" aria-labelledby="projects-title">
+          <h2 id="projects-title" class="section-title"><span class="section-index" aria-hidden="true">04 /</span> Projects</h2>
+          <div class="section-body">
+            <ul class="section-body-list rows">
+              <li class="section-list-item">
+                <p class="list-item-date">Fall 2019</p>
+                <div class="list-item-body">
+                  <h3 class="list-item-header">WebDocker</h3>
+                  <p class="list-item-subheader">First Place, Undergraduate Presentations, ACM Mid-Southeast Conference</p>
+                  <div class="list-item-main">Built with two teammates: a web application for managing virtualized services (Docker containers) from the browser.</div>
+                </div>
+              </li>
+              <li class="section-list-item">
+                <p class="list-item-date">Fall 2019</p>
+                <div class="list-item-body">
+                  <h3 class="list-item-header">DockerUI</h3>
+                  <p class="list-item-subheader">Electron, Express.js</p>
+                  <div class="list-item-main">Built with two teammates: a desktop interface for managing local Docker containers.</div>
+                </div>
+              </li>
+              <li class="section-list-item">
+                <p class="list-item-date">Spring 2019</p>
+                <div class="list-item-body">
+                  <h3 class="list-item-header">Bipartite Graph Checker</h3>
+                  <div class="list-item-main">A DFS algorithm that decides whether a graph is bipartite, implemented in four paradigms: procedural, object-oriented, functional, and logic.</div>
+                </div>
+              </li>
+              <li class="section-list-item">
+                <p class="list-item-date">Fall 2018</p>
+                <div class="list-item-body">
+                  <h3 class="list-item-header">Pseudo-Theremin</h3>
+                  <p class="list-item-subheader">Python, Ruby, Raspberry Pi</p>
+                  <div class="list-item-main">Team-built theremin-like instrument using ultrasonic sensors on a Raspberry Pi, with sound from Sonic Pi.</div>
+                </div>
+              </li>
+              <li class="section-list-item">
+                <p class="list-item-date">Fall 2017</p>
+                <div class="list-item-body">
+                  <h3 class="list-item-header">Financial/Budgeting Application</h3>
+                  <p class="list-item-subheader">C#, MS Access</p>
+                  <div class="list-item-main">Pair-programmed application for tracking spending and building budget plans.</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section id="education" class="section reveal" aria-labelledby="education-title">
+          <h2 id="education-title" class="section-title"><span class="section-index" aria-hidden="true">05 /</span> Education</h2>
+          <div class="section-body">
+            <ul class="section-body-list rows">
+              <li class="section-list-item">
+                <p class="list-item-date">May 2020</p>
+                <div class="list-item-body">
+                  <h3 class="list-item-header">University of Tennessee at Martin</h3>
+                  <p class="list-item-subheader">Bachelor of Science, Computer Science</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section id="interests" class="section reveal" aria-labelledby="interests-title">
+          <h2 id="interests-title" class="section-title"><span class="section-index" aria-hidden="true">06 /</span> Interests</h2>
+          <div class="section-body section-body-paragraph">
+            <p>Outside of work I play guitar, play video games, travel, and study new languages.</p>
+          </div>
+        </section>
+        <section id="resume" class="section reveal" aria-labelledby="resume-title">
+          <h2 id="resume-title" class="section-title"><span class="section-index" aria-hidden="true">07 /</span> Resume</h2>
+          <div class="section-body">
+            <div class="resume-actions">
+              <a class="btn btn-primary" href="./data/whitson_resume.pdf" download="whitson_resume.pdf">Download PDF</a>
+              <a class="btn btn-secondary" id="resume-preview-btn" href="./data/whitson_resume.pdf" target="_blank" rel="noopener" aria-controls="resume-preview-container" aria-expanded="false">Preview</a>
+            </div>
+            <div id="resume-preview-container" class="resume-preview-container hidden"></div>
+          </div>
+        </section>
 
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-info">
-          <p class="footer-copyright">&copy; Brett Whitson</p>
-          <p class="footer-built">Static HTML generated from JSON with a small Node build script</p>
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/BrettWhitson/brettwhitson.github.io" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <span>View Source</span>
-            <i class="devicon-github-original" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+      <footer class="site-footer">
+        <p>Hand-built with vanilla JavaScript, SCSS, and a small Node build that renders this page from JSON.
+          <a href="https://github.com/BrettWhitson/brettwhitson.github.io" target="_blank" rel="noopener noreferrer">View source</a></p>
+        <p>&copy; Brett Whitson</p>
+      </footer>
+    </main>
+  </div>
 </body>
 
 </html>

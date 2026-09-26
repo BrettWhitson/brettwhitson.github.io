@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { esc, html, raw, formatHtml, renderPage } from "./build.mjs";
+import { esc, html, raw, formatHtml, highlightSql, renderPage } from "./build.mjs";
 
 const template = "<!DOCTYPE html>\n<title>{{title}}</title>\n<nav>{{nav}}</nav>\n<main>{{sections}}</main>\n<script>{{jsonLd}}</script>\n";
 
@@ -19,7 +19,6 @@ const minimal = (overrides = {}) => ({
     { section: "about", title: "About", type: "pg", body: "Hello" },
     { section: "resume", title: "Resume", type: "rs", file: "./cv.pdf" },
   ],
-  icons: overrides.icons ?? {},
   ext: overrides.ext ?? {},
 });
 
@@ -59,16 +58,57 @@ test("invalid data is rejected with every problem listed", () => {
   const data = minimal({
     sections: [
       { section: "a", title: "A", type: "rs", file: "x.pdf" },
-      { section: "a", title: "", type: "nope", body: [{ icons: "missing" }] },
+      { section: "a", title: "", type: "nope" },
+      { section: "exp", title: "Exp", type: "ls", body: [{ roles: [{ title: "R", stack: ["cobol"] }] }] },
+      { section: "skills", title: "Skills", type: "skills", body: [{ group: "G", items: [{ key: "sql", name: "SQL" }] }] },
     ],
+    ext: { Mastodon: { icon: "mastodon", link: "https://example.com" } },
   });
   assert.throws(() => renderPage(data, template), (error) => {
     assert.match(error.message, /duplicate section id "a"/);
     assert.match(error.message, /missing "title"/);
     assert.match(error.message, /unknown type "nope"/);
-    assert.match(error.message, /unknown icon group "missing"/);
+    assert.match(error.message, /uses skill "cobol", which isn't in the skills section/);
+    assert.match(error.message, /unknown icon "mastodon"/);
     return true;
   });
+});
+
+test("highlightSql marks keywords and strings and escapes the rest", () => {
+  const out = String(highlightSql("SELECT a FROM t WHERE x IN ('<b>', 'it''s') AND y < 2;"));
+  assert.match(out, /<span class="sql-keyword">SELECT<\/span> a <span class="sql-keyword">FROM<\/span>/);
+  assert.match(out, /<span class="sql-string">&#39;&lt;b&gt;&#39;<\/span>/);
+  assert.match(out, /<span class="sql-string">&#39;it&#39;&#39;s&#39;<\/span>/);
+  assert.match(out, /y &lt; 2;/);
+  assert.doesNotMatch(out, /<b>/);
+});
+
+test("roles get their skill chips and the organization gets a span caption", () => {
+  const data = minimal({
+    sections: [
+      {
+        section: "exp",
+        title: "Experience",
+        type: "ls",
+        body: [
+          {
+            header: "Org",
+            roles: [
+              { title: "Senior", dates: "June 2025 - Present", stack: ["sql"] },
+              { title: "Junior", dates: "April 2018 - August 2020" },
+            ],
+          },
+        ],
+      },
+      { section: "skills", title: "Skills", type: "skills", body: [{ group: "G", items: [{ key: "sql", name: "SQL" }] }] },
+      { section: "resume", title: "Resume", type: "rs", file: "./cv.pdf" },
+    ],
+  });
+  const page = renderPage(data, "{{sections}}");
+  assert.match(page, /<p class="list-item-caption">2 roles, 2018 to present<\/p>/);
+  assert.match(page, /<div class="list-item-role is-current" style="--i: 0" data-skills="sql">/);
+  assert.match(page, /<span class="chip" data-skill="sql">SQL<\/span>/);
+  assert.match(page, /<div class="list-item-role" style="--i: 1" data-skills="">/);
 });
 
 test("unknown template slots fail loudly", () => {

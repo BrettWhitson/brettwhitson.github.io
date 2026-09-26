@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSDoc: Class: ResumePreview</title>
+    <title>JSDoc: Class: QueryTyper</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -16,32 +16,28 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ResumePreview</h1>
+    <h1 class="page-title">Class: QueryTyper</h1>
 
 <section>
 
 <header>
 
-        <h2><span class="attribs"><span class="type-signature"></span></span>ResumePreview<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>QueryTyper<span class="signature">()</span><span class="type-signature"></span></h2>
 
 </header>
 
 <article>
     <div class="container-overview">
 
-    <h4 class="name" id="ResumePreview"><span class="type-signature"></span>new ResumePreview<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="QueryTyper"><span class="type-signature"></span>new QueryTyper<span class="signature">()</span><span class="type-signature"></span></h4>
 
 <div class="description">
-    <p>ResumePreview - Upgrades the resume &quot;Preview&quot; link to an inline PDF viewer</p>
-<p>Without JavaScript, or on narrow screens where mobile browsers can't render a PDF inside
-an iframe, the link simply opens the PDF.</p>
+    <p>QueryTyper - Types out the intro's SQL once, then &quot;runs&quot; it to reveal the result rows</p>
+<p>Untyped characters stay in the DOM as transparent text, so the box is laid out at its
+final size from the start and nothing below it moves. Skipped under reduced motion.</p>
 </div>
 
     </div>
-
-        <h3 class="subsection-title">Members</h3>
-
-<h4 class="name" id="isOpen"><span class="type-signature"></span>isOpen<span class="type-signature"></span></h4>
 
 </article>
 
@@ -51,14 +47,14 @@ an iframe, the link simply opens the PDF.</p>
 
 <header>
 
-        <h2><span class="attribs"><span class="type-signature"></span></span>ResumePreview<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>QueryTyper<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
 
 </header>
 
 <article>
     <div class="container-overview">
 
-    <h4 class="name" id="ResumePreview"><span class="type-signature"></span>new ResumePreview<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="QueryTyper"><span class="type-signature"></span>new QueryTyper<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     <h5>Parameters:</h5>
 
@@ -117,7 +113,7 @@ an iframe, the link simply opens the PDF.</p>
 
         <tr>
 
-                <td class="name"><code>buttonId</code></td>
+                <td class="name"><code>selector</code></td>
 
             <td class="type">
 
@@ -133,7 +129,7 @@ an iframe, the link simply opens the PDF.</p>
 
                 <td class="default">
 
-                    "resume-preview-btn"
+                    ".query"
 
                 </td>
 
@@ -142,11 +138,11 @@ an iframe, the link simply opens the PDF.</p>
 
         <tr>
 
-                <td class="name"><code>containerId</code></td>
+                <td class="name"><code>duration</code></td>
 
             <td class="type">
 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
             </td>
 
@@ -158,36 +154,11 @@ an iframe, the link simply opens the PDF.</p>
 
                 <td class="default">
 
-                    "resume-preview-container"
+                    900
 
                 </td>
 
-            <td class="description last"></td>
-        </tr>
-
-        <tr>
-
-                <td class="name"><code>inlineQuery</code></td>
-
-            <td class="type">
-
-<span class="param-type">string</span>
-
-            </td>
-
-                <td class="attributes">
-
-                    &lt;optional><br>
-
-                </td>
-
-                <td class="default">
-
-                    "(min-width: 769px)"
-
-                </td>
-
-            <td class="description last"><p>When to preview inline</p></td>
+            <td class="description last"><p>Milliseconds to type the whole query</p></td>
         </tr>
 
     </tbody>
@@ -200,10 +171,6 @@ an iframe, the link simply opens the PDF.</p>
 </table>
 
     </div>
-
-        <h3 class="subsection-title">Members</h3>
-
-<h4 class="name" id="isOpen"><span class="type-signature"></span>isOpen<span class="type-signature"></span></h4>
 
 </article>
 

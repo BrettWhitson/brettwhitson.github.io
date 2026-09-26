@@ -18,35 +18,39 @@ preview).
 
 - **Build**: Node.js (no dependencies) renders `data/data.json` into `index.html`
 - **Frontend**: Vanilla JavaScript (ES2020+), progressive enhancement only
-- **Styling**: SCSS, compiled with Dart Sass
-- **Icons**: devicon 2.17.0
+- **Styling**: SCSS, compiled with Dart Sass; Inter, JetBrains Mono, and Newsreader from Google Fonts
+- **Icons**: Inline monochrome SVG
 - **Resume**: LaTeX
 - **Hosting**: GitHub Pages
 
 ## Layout
 
-| Path                         | What                                                        |
-| ---------------------------- | ----------------------------------------------------------- |
-| `data/data.json`             | All page content: site metadata, sections, icons, links     |
-| `templates/index.html`       | Page shell with `{{slot}}` placeholders                     |
-| `scripts/build.mjs`          | Renders the page, writes `sitemap.xml`, compiles the SCSS   |
-| `index.html`                 | Generated output. Don't edit by hand                        |
-| `javascript/main.js`         | `ThemeController` and `ResumePreview`                       |
-| `styles/scss/`               | Source styles (abstracts, base, layout, components)         |
-| `resume/whitson_resume.tex`  | Resume source, built to `data/whitson_resume.pdf`           |
+| Path                         | What                                                          |
+| ---------------------------- | ------------------------------------------------------------- |
+| `data/data.json`             | All page content: site metadata, intro query, sections, links |
+| `templates/index.html`       | Page shell with `{{slot}}` placeholders                       |
+| `scripts/build.mjs`          | Renders the page, writes `sitemap.xml`, compiles the SCSS     |
+| `index.html`                 | Generated output. Don't edit by hand                          |
+| `javascript/main.js`         | Theme, query typing, copy email, scroll-spy, skill linking    |
+| `styles/scss/`               | Source styles: `layout/_shell.scss` and `components/`         |
+| `resume/whitson_resume.tex`  | Resume source, built to `data/whitson_resume.pdf`             |
 
 ## Editing content
 
-Everything on the page comes from `data/data.json`. `site` holds the name, headline, description, and URLs used for
-the header, meta tags, and JSON-LD. Each entry in `sections` has a `type`:
+Everything on the page comes from `data/data.json`.
 
-- `pg` - a paragraph (`body` is a string)
-- `ls` - a list of cards. Each item takes `header`, `subheader`, `subsubheader`, `main` (HTML), `icons` (the name of
-  a group in `icons`), `link` (`{ href, label }`), and `roles` (`[{ title, dates, bullets }]`) for several positions at
-  one organization. All optional
-- `rs` - the resume download and preview (`file` points at the PDF)
-
-Skill icons are `{ "icon": "<devicon class suffix>", "label": "<display name>" }`.
+- `site` - name, headline, org, email, URLs, and description for the intro, meta tags, and JSON-LD.
+  `site.query` is the SQL shown in the intro (`sql`, result `column`, and `rows`); `site.stats` are the
+  numbers under About
+- `ext` - profile links. `icon` is one of `linkedin`, `github`, `code` (inline SVGs in `build.mjs`)
+- `sections` - rendered in order, numbered automatically. Each has a `type`:
+  - `pg` - a paragraph (`body` is a string)
+  - `ls` - a list. Items take `header`, `subheader`, `subsubheader` (shown as the date), `main` (HTML),
+    `link` (`{ href, label }`), and `roles` (`[{ title, dates, bullets, stack }]`) for several positions at
+    one organization. `"layout": "rows"` puts the date in a column beside each item
+  - `skills` - groups of `{ key, name }`. A role's `stack` lists skill keys; hovering or tapping a skill
+    highlights the roles that list it. The build fails if a role uses a key the skills section doesn't define
+  - `rs` - the resume download and preview (`file` points at the PDF)
 
 ## Building
 

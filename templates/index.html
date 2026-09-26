@@ -34,81 +34,61 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,600&display=swap">
   <link rel="stylesheet" href="/styles/min/styles.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.17.0/devicon.min.css">
   <script src="/javascript/main.js" defer></script>
 </head>
 
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="site-header">
-    <div class="header-container">
-      <a class="brand" href="#top">{{name}}</a>
-      <nav class="navigation" aria-label="Sections">
-        <ul class="nav-list">
-{{nav}}
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <ul class="ext-icon-list">
-{{extLinks}}
-        </ul>
-        <div class="theme-toggle">
-          <button type="button" class="theme-toggle-btn" aria-label="Toggle theme">
-            <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-            </svg>
-            <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
+  <div class="layout">
+    <header class="sidebar">
+      <div class="intro">
+        <img class="intro-portrait" src="/data/images/me-192.webp" width="72" height="72" alt="Portrait of {{name}}">
+        <h1 class="intro-name">{{name}}</h1>
+        <p class="intro-role">{{headline}}</p>
+        <p class="intro-org">{{org}}</p>
+{{query}}
+        <div class="intro-contact">
+          <a class="intro-email" href="mailto:{{email}}">{{email}}</a>
+          <button type="button" class="icon-button copy-button" data-copy="{{email}}" aria-label="Copy email address" title="Copy email address" hidden>
+            <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
           </button>
+          <span class="copy-status" role="status"></span>
+        </div>
+        <div class="intro-actions">
+          <a class="btn btn-primary" href="{{resumeFile}}" download>Download resume</a>
+          <ul class="profile-links">
+{{profileLinks}}
+          </ul>
         </div>
       </div>
-    </div>
-  </header>
 
-  <main id="content" class="main-content">
-    <div class="content-container">
-      <div id="top" class="hero">
-        <img class="hero-portrait" src="/data/images/me-192.webp" width="144" height="144" alt="Portrait of {{name}}">
-        <div class="hero-text">
-          <h1 class="hero-name" style="--i: 0">{{name}}</h1>
-          <p class="hero-role" style="--i: 1">{{headline}}</p>
-          <p class="hero-org" style="--i: 2">{{org}}</p>
-          <div class="hero-actions" style="--i: 3">
-            <a class="btn btn-primary" href="{{resumeFile}}" download>Download resume</a>
-            <a class="btn btn-secondary" href="mailto:{{email}}">Email me</a>
-            <ul class="hero-links">
-{{heroLinks}}
-            </ul>
-          </div>
-        </div>
+      <div class="nav-bar">
+        <nav class="navigation" aria-label="Sections">
+          <ol class="nav-list">
+{{nav}}
+          </ol>
+        </nav>
+        <button type="button" class="icon-button theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-icon theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
       </div>
+    </header>
+
+    <main id="content" class="content">
 {{sections}}
-    </div>
-  </main>
 
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-info">
-          <p class="footer-copyright">&copy; {{name}}</p>
-          <p class="footer-built">Static HTML generated from JSON with a small Node build script</p>
-        </div>
-        <div class="footer-links">
-          <a href="{{sourceUrl}}" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <span>View Source</span>
-            <i class="devicon-github-original" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+      <footer class="site-footer">
+        <p>Hand-built with vanilla JavaScript, SCSS, and a small Node build that renders this page from JSON.
+          <a href="{{sourceUrl}}" target="_blank" rel="noopener noreferrer">View source</a></p>
+        <p>&copy; {{name}}</p>
+      </footer>
+    </main>
+  </div>
 </body>
 
 </html>

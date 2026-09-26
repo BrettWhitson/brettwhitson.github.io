@@ -54,8 +54,8 @@ preview).</p>
 <ul>
 <li><strong>Build</strong>: Node.js (no dependencies) renders <code>data/data.json</code> into <code>index.html</code></li>
 <li><strong>Frontend</strong>: Vanilla JavaScript (ES2020+), progressive enhancement only</li>
-<li><strong>Styling</strong>: SCSS, compiled with Dart Sass</li>
-<li><strong>Icons</strong>: devicon 2.17.0</li>
+<li><strong>Styling</strong>: SCSS, compiled with Dart Sass; Inter, JetBrains Mono, and Newsreader from Google Fonts</li>
+<li><strong>Icons</strong>: Inline monochrome SVG</li>
 <li><strong>Resume</strong>: LaTeX</li>
 <li><strong>Hosting</strong>: GitHub Pages</li>
 </ul>
@@ -70,7 +70,7 @@ preview).</p>
 <tbody>
 <tr>
 <td><code>data/data.json</code></td>
-<td>All page content: site metadata, sections, icons, links</td>
+<td>All page content: site metadata, intro query, sections, links</td>
 </tr>
 <tr>
 <td><code>templates/index.html</code></td>
@@ -86,11 +86,11 @@ preview).</p>
 </tr>
 <tr>
 <td><code>javascript/main.js</code></td>
-<td><code>ThemeController</code> and <code>ResumePreview</code></td>
+<td>Theme, query typing, copy email, scroll-spy, skill linking</td>
 </tr>
 <tr>
 <td><code>styles/scss/</code></td>
-<td>Source styles (abstracts, base, layout, components)</td>
+<td>Source styles: <code>layout/_shell.scss</code> and <code>components/</code></td>
 </tr>
 <tr>
 <td><code>resume/whitson_resume.tex</code></td>
@@ -99,16 +99,24 @@ preview).</p>
 </tbody>
 </table>
 <h2>Editing content</h2>
-<p>Everything on the page comes from <code>data/data.json</code>. <code>site</code> holds the name, headline, description, and URLs used for
-the header, meta tags, and JSON-LD. Each entry in <code>sections</code> has a <code>type</code>:</p>
+<p>Everything on the page comes from <code>data/data.json</code>.</p>
+<ul>
+<li><code>site</code> - name, headline, org, email, URLs, and description for the intro, meta tags, and JSON-LD.
+<code>site.query</code> is the SQL shown in the intro (<code>sql</code>, result <code>column</code>, and <code>rows</code>); <code>site.stats</code> are the
+numbers under About</li>
+<li><code>ext</code> - profile links. <code>icon</code> is one of <code>linkedin</code>, <code>github</code>, <code>code</code> (inline SVGs in <code>build.mjs</code>)</li>
+<li><code>sections</code> - rendered in order, numbered automatically. Each has a <code>type</code>:
 <ul>
 <li><code>pg</code> - a paragraph (<code>body</code> is a string)</li>
-<li><code>ls</code> - a list of cards. Each item takes <code>header</code>, <code>subheader</code>, <code>subsubheader</code>, <code>main</code> (HTML), <code>icons</code> (the name of
-a group in <code>icons</code>), <code>link</code> (<code>{ href, label }</code>), and <code>roles</code> (<code>[{ title, dates, bullets }]</code>) for several positions at
-one organization. All optional</li>
+<li><code>ls</code> - a list. Items take <code>header</code>, <code>subheader</code>, <code>subsubheader</code> (shown as the date), <code>main</code> (HTML),
+<code>link</code> (<code>{ href, label }</code>), and <code>roles</code> (<code>[{ title, dates, bullets, stack }]</code>) for several positions at
+one organization. <code>&quot;layout&quot;: &quot;rows&quot;</code> puts the date in a column beside each item</li>
+<li><code>skills</code> - groups of <code>{ key, name }</code>. A role's <code>stack</code> lists skill keys; hovering or tapping a skill
+highlights the roles that list it. The build fails if a role uses a key the skills section doesn't define</li>
 <li><code>rs</code> - the resume download and preview (<code>file</code> points at the PDF)</li>
 </ul>
-<p>Skill icons are <code>{ &quot;icon&quot;: &quot;&lt;devicon class suffix&gt;&quot;, &quot;label&quot;: &quot;&lt;display name&gt;&quot; }</code>.</p>
+</li>
+</ul>
 <h2>Building</h2>
 <p>Requires Node 20+ and Dart Sass (<code>npm install -g sass</code>).</p>
 <pre class="prettyprint source lang-bash"><code>node scripts/build.mjs
@@ -168,13 +176,13 @@ resume preview. The page is fully readable with this script disabled.</p></div>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ResumePreview.html">ResumePreview</a></li><li><a href="Reveal.html">Reveal</a></li><li><a href="ScrollSpy.html">ScrollSpy</a></li><li><a href="ThemeController.html">ThemeController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initializePage">initializePage</a></li><li><a href="global.html#watchHeader">watchHeader</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CopyButton.html">CopyButton</a></li><li><a href="QueryTyper.html">QueryTyper</a></li><li><a href="ResumePreview.html">ResumePreview</a></li><li><a href="Reveal.html">Reveal</a></li><li><a href="ScrollSpy.html">ScrollSpy</a></li><li><a href="SkillLinks.html">SkillLinks</a></li><li><a href="ThemeController.html">ThemeController</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initializePage">initializePage</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Sep 25 2026 22:41:53 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Sep 25 2026 22:59:53 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

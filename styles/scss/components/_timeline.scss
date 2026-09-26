@@ -1,36 +1,40 @@
-// Experience timeline: roles at one organization hang off a vertical rail,
-// so the progression from help desk to DBA reads at a glance.
+// Experience timeline: roles at one organization hang off a vertical rail, so the
+// progression from help desk to DBA reads at a glance.
 
 #experience .section-body-list {
   gap: var(--space-12);
 }
 
+.roles {
+  margin-top: var(--space-2);
+}
+
 .list-item-role {
   --dot: 11px;
-  --rail-x: calc(var(--dot) / 2);
+  --title-mid: calc(var(--space-5) + 0.8em);
 
   position: relative;
-  padding-left: var(--space-8);
-  padding-top: var(--space-4);
+  padding: var(--space-5) 0 0 var(--space-8);
+  transition: opacity var(--transition-base);
 
   // Rail segment from this dot down to the next role
   &:not(:last-child)::before {
     content: "";
     position: absolute;
-    left: calc(var(--rail-x) - 1px);
-    top: calc(var(--space-4) + 0.8em);
-    bottom: calc(-1 * var(--space-4) - 0.8em);
+    left: calc(var(--dot) / 2 - 1px);
+    top: var(--title-mid);
+    bottom: calc(-1 * var(--title-mid));
     width: 2px;
     background: var(--color-border);
     transform-origin: top;
   }
 
-  // Dot, aligned with the role title
+  // Dot, centered on the role title
   &::after {
     content: "";
     position: absolute;
     left: 0;
-    top: calc(var(--space-4) + 0.8em - var(--dot) / 2);
+    top: calc(var(--title-mid) - var(--dot) / 2);
     width: var(--dot);
     height: var(--dot);
     border-radius: var(--radius-full);
@@ -39,10 +43,14 @@
   }
 
   // Current role
-  &:first-of-type::after {
+  &.is-current::after {
     background: var(--color-accent);
     border-color: var(--color-accent);
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+
+  .list-item-date {
+    margin-top: 2px;
   }
 }
 
@@ -52,6 +60,7 @@
   font-weight: var(--font-semibold);
   line-height: 1.6;
   color: var(--color-text-primary);
+  transition: color var(--transition-fast);
 }
 
 // Draw the rail and pop the dots in order when the section scrolls into view

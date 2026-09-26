@@ -11,21 +11,21 @@
 @import "./base/utilities";
 @import "./base/motion";
 
-// 3. Layout - Header, main content, footer
-@import "./layout/header";
-@import "./layout/main";
-@import "./layout/footer";
+// 3. Layout
+@import "./layout/shell";
 
 // 4. Components
 @import "./components/buttons";
 @import "./components/navigation";
-@import "./components/hero";
+@import "./components/intro";
+@import "./components/sections";
 @import "./components/timeline";
 
 // Print: just the content, in black on white
 @media print {
-  .site-header,
-  .hero-actions,
+  .nav-bar,
+  .intro-actions,
+  .copy-button,
   .resume-actions,
   .skip-link {
     display: none !important;
@@ -34,5 +34,10 @@
   .section {
     break-inside: avoid;
     padding: var(--space-6) 0;
+  }
+
+  .sidebar {
+    position: static !important;
+    height: auto !important;
   }
 }

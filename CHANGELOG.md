@@ -1,5 +1,33 @@
 # Changelog
 
+## [5.0.0] - 2026-09-25
+
+### Changed
+
+- **New design** - Two-column layout: a sticky intro and numbered section index on the left, content on the
+  right. Below 1024px the intro scrolls away and the index becomes a sticky horizontal bar
+- **Database-flavored details** - The intro "runs" a SQL query whose result rows are the roles; monospace
+  `01 / section` labels; a `skill_group | members` skills table; a faint dot grid behind the intro
+- Type: Newsreader for the name, Inter for body text, JetBrains Mono for labels, dates, and code
+- Projects and education are rows with the date in its own column; hovering a row quiets the others
+- Skills moved directly under Experience
+- Profile icons are inline SVG; the devicon font is no longer loaded
+
+### Added
+
+- **Skill linking** - Each role lists the skills it used. Hovering, focusing, or tapping a skill highlights
+  the roles that used it, dims the rest, and spells it out under the skills table
+- **Copy email** button with inline confirmation
+- About section stats (years in university IT, years on Banner and Oracle, roles)
+- Organization captions such as "4 roles, 2018 to present", computed from the role dates
+- Build validation for unknown skill keys and icon names
+
+### Removed
+
+- Global list margins that doubled up spacing in every list
+
+---
+
 ## [4.1.1] - 2026-09-25
 
 ### Changed

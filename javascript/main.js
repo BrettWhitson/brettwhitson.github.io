@@ -205,9 +205,11 @@ class ScrollSpy {
     });
     this.links.forEach((_, section) => observer.observe(section));
 
-    // Nothing is active while the intro above the first section is being read
-    const intro = document.querySelector(".hero");
-    if (intro) observer.observe(intro);
+    // On narrow screens the intro scrolls above the first section, and nothing is active while
+    // it's being read. On wide screens it sits in the sticky sidebar and is always in view.
+    this.intro = document.querySelector(".intro");
+    this.introInFlow = window.matchMedia("(max-width: 1023px)");
+    if (this.intro) observer.observe(this.intro);
 
     // The last section is often too short to reach the band before the page ends
     window.addEventListener("scroll", () => this.checkBottom(), { passive: true });
@@ -226,7 +228,9 @@ class ScrollSpy {
 
   onIntersect(entries) {
     if (this.pinned || this.checkBottom()) return;
-    const entry = entries.filter((e) => e.isIntersecting).at(-1);
+    const entry = entries
+      .filter((e) => e.isIntersecting && (e.target !== this.intro || this.introInFlow.matches))
+      .at(-1);
     if (entry) this.setActive(entry.target);
   }
 
@@ -302,21 +306,246 @@ class Reveal {
 }
 
 /**
- * Toggle `is-stuck` on the header once the hero has scrolled out from under it.
- * @param {string} [headerSelector=".site-header"]
- * @param {string} [heroSelector=".hero-name"]
+ * QueryTyper - Types out the intro's SQL once, then "runs" it to reveal the result rows
+ *
+ * Untyped characters stay in the DOM as transparent text, so the box is laid out at its
+ * final size from the start and nothing below it moves. Skipped under reduced motion.
+ *
+ * @class QueryTyper
  */
-function watchHeader(headerSelector = ".site-header", heroSelector = ".hero-name") {
-  const header = document.querySelector(headerSelector);
-  const hero = document.querySelector(heroSelector);
-  if (!header || !hero || !("IntersectionObserver" in window)) {
-    header?.classList.add("is-stuck");
-    return;
+class QueryTyper {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.selector=".query"]
+   * @param {number} [options.duration=900] - Milliseconds to type the whole query
+   */
+  constructor({ selector = ".query", duration = 900 } = {}) {
+    this.figure = document.querySelector(selector);
+    this.code = this.figure?.querySelector("code");
+    this.duration = duration;
   }
 
-  new IntersectionObserver(([entry]) => header.classList.toggle("is-stuck", !entry.isIntersecting), {
-    rootMargin: `-${header.offsetHeight}px 0px 0px 0px`,
-  }).observe(hero);
+  init() {
+    if (!this.figure || !this.code) return;
+    if (!document.documentElement.classList.contains("motion-ok")) {
+      this.figure.classList.add("is-run");
+      return;
+    }
+
+    // Split every text node into a typed part and a transparent "ghost" part
+    const walker = document.createTreeWalker(this.code, NodeFilter.SHOW_TEXT);
+    const parts = [];
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) parts.push(node);
+
+    this.segments = parts.map((node) => {
+      const typed = document.createTextNode("");
+      const ghost = document.createElement("span");
+      ghost.className = "ghost";
+      ghost.textContent = node.textContent;
+      node.replaceWith(typed, ghost);
+      return { typed, ghost, text: ghost.textContent };
+    });
+    this.total = this.segments.reduce((sum, s) => sum + s.text.length, 0);
+
+    this.caret = document.createElement("span");
+    this.caret.className = "caret";
+    this.caret.setAttribute("aria-hidden", "true");
+
+    this.start = null;
+    requestAnimationFrame((t) => this.frame(t));
+  }
+
+  frame(time) {
+    this.start ??= time;
+    const progress = Math.min(1, (time - this.start) / this.duration);
+    let remaining = Math.round(progress * this.total);
+
+    let caretPlaced = false;
+    for (const segment of this.segments) {
+      const shown = Math.min(segment.text.length, remaining);
+      remaining -= shown;
+      segment.typed.textContent = segment.text.slice(0, shown);
+      segment.ghost.textContent = segment.text.slice(shown);
+      // Caret sits at the first character not yet typed
+      if (!caretPlaced && shown < segment.text.length) {
+        segment.ghost.before(this.caret);
+        caretPlaced = true;
+      }
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame((t) => this.frame(t));
+    } else {
+      this.code.append(this.caret);
+      setTimeout(() => {
+        this.caret.remove();
+        this.figure.classList.add("is-run");
+      }, 250);
+    }
+  }
+}
+
+/**
+ * CopyButton - Copies a value to the clipboard and confirms it in place
+ *
+ * The button ships hidden, since it can't work without JavaScript.
+ *
+ * @class CopyButton
+ */
+class CopyButton {
+  /** @param {HTMLButtonElement} button - Has `data-copy` with the text to copy */
+  constructor(button) {
+    this.button = button;
+    this.status = button.parentElement.querySelector(".copy-status");
+  }
+
+  init() {
+    this.button.hidden = false;
+    this.button.addEventListener("click", () => this.copy());
+  }
+
+  async copy() {
+    const text = this.button.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(text);
+      this.flash("Copied");
+    } catch {
+      // Clipboard API missing or refused (older browsers, some embedded views)
+      this.flash(CopyButton.legacyCopy(text) ? "Copied" : "Couldn't copy");
+    }
+  }
+
+  /** @returns {boolean} Whether the pre-Clipboard-API copy command succeeded */
+  static legacyCopy(text) {
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+    document.body.append(field);
+    field.select();
+    try {
+      return document.execCommand("copy");
+    } catch {
+      return false;
+    } finally {
+      field.remove();
+    }
+  }
+
+  flash(message) {
+    this.button.classList.add("is-copied");
+    if (this.status) this.status.textContent = message;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.button.classList.remove("is-copied");
+      if (this.status) this.status.textContent = "";
+    }, 1800);
+  }
+}
+
+/**
+ * SkillLinks - Connects each skill to the roles where it was used
+ *
+ * Hovering or focusing a skill chip highlights every chip for that skill and the roles that
+ * list it, and dims the rest; tapping or pressing Enter pins the highlight (touch has no
+ * hover). A status line under the skills table spells the connection out in words.
+ *
+ * @class SkillLinks
+ */
+class SkillLinks {
+  /**
+   * @param {Object} [options]
+   * @param {string} [options.root="#content"] - Element that gets `is-linking` while active
+   * @param {string} [options.status=".skills-status"]
+   */
+  constructor({ root = "#content", status = ".skills-status" } = {}) {
+    this.root = document.querySelector(root);
+    this.status = document.querySelector(status);
+    this.chips = [...document.querySelectorAll(".chip[data-skill]")];
+    this.roles = [...document.querySelectorAll(".list-item-role[data-skills]")];
+    this.pinned = null;
+    this.hint = "Hover or tap a skill to see where I've used it.";
+  }
+
+  init() {
+    if (!this.root || !this.chips.length) return;
+
+    this.chips.forEach((chip) => {
+      chip.setAttribute("role", "button");
+      chip.setAttribute("tabindex", "0");
+      chip.setAttribute("aria-pressed", "false");
+
+      const key = chip.dataset.skill;
+      chip.addEventListener("mouseenter", () => this.pinned || this.show(key));
+      chip.addEventListener("mouseleave", () => this.pinned || this.clear());
+      chip.addEventListener("focus", () => this.pinned || this.show(key));
+      chip.addEventListener("blur", () => this.pinned || this.clear());
+      chip.addEventListener("click", () => this.toggle(key));
+      chip.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          this.toggle(key);
+        } else if (event.key === "Escape") {
+          this.unpin();
+        }
+      });
+    });
+
+    // Clicking anywhere else releases a pinned highlight
+    document.addEventListener("click", (event) => {
+      if (this.pinned && !event.target.closest(".chip")) this.unpin();
+    });
+
+    if (this.status) {
+      this.status.hidden = false;
+      this.status.textContent = this.hint;
+    }
+  }
+
+  toggle(key) {
+    if (this.pinned === key) {
+      this.unpin();
+    } else {
+      this.pinned = key;
+      this.show(key);
+    }
+  }
+
+  unpin() {
+    this.pinned = null;
+    this.clear();
+  }
+
+  /** @param {string} key - Skill key, as in data-skill */
+  show(key) {
+    const roles = this.roles.filter((role) => role.dataset.skills.split(" ").includes(key));
+
+    this.root.classList.add("is-linking");
+    this.chips.forEach((chip) => {
+      const linked = chip.dataset.skill === key;
+      chip.classList.toggle("is-linked", linked);
+      chip.setAttribute("aria-pressed", String(linked && this.pinned === key));
+    });
+    this.roles.forEach((role) => role.classList.toggle("is-linked", roles.includes(role)));
+
+    if (this.status) {
+      const name = this.chips.find((chip) => chip.dataset.skill === key).textContent;
+      const titles = roles.map((role) => role.querySelector(".list-item-role-title").textContent);
+      this.status.textContent = titles.length
+        ? `-- ${name}: ${titles.join("; ")}`
+        : `-- ${name}: coursework and side projects`;
+    }
+  }
+
+  clear() {
+    this.root.classList.remove("is-linking");
+    this.chips.forEach((chip) => {
+      chip.classList.remove("is-linked");
+      chip.setAttribute("aria-pressed", "false");
+    });
+    this.roles.forEach((role) => role.classList.remove("is-linked"));
+    if (this.status) this.status.textContent = this.hint;
+  }
 }
 
 /**
@@ -328,10 +557,12 @@ function initializePage() {
   window.themeController = new ThemeController();
   window.themeController.init();
 
+  new QueryTyper().init();
+  document.querySelectorAll(".copy-button").forEach((button) => new CopyButton(button).init());
   new ResumePreview().init();
   new ScrollSpy().init();
+  new SkillLinks().init();
   new Reveal().init();
-  watchHeader();
 }
 
 if (document.readyState === "loading") {
