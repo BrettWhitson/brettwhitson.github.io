@@ -88,15 +88,17 @@
       </div>
     </header>
 
-    <main id="content" class="content">
+    <div class="content">
+      <main id="content">
 {{sections}}
+      </main>
 
       <footer class="site-footer">
         <p>Hand-built with vanilla JavaScript, SCSS, and a small Node build that renders this page from JSON.
-          <a href="{{sourceUrl}}" target="_blank" rel="noopener noreferrer">View source</a></p>
+          <a href="{{sourceUrl}}" target="_blank" rel="noopener noreferrer">View source<span class="visually-hidden"> (opens in a new tab)</span></a></p>
         <p>&copy; {{name}}</p>
       </footer>
-    </main>
+    </div>
   </div>
 </body>
 

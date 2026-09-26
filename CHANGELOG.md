@@ -1,5 +1,34 @@
 # Changelog
 
+## [5.3.0] - 2026-09-25
+
+### Accessibility (WCAG 2.2 AA)
+
+- Light-theme muted text darkened to `#6b6b74` so it passes 4.5:1 on every surface
+- Hover and skill-linking now quiet other content with the muted text color instead of opacity, which had dropped
+  dimmed text to about 2-3:1
+- Skill chips meet the 24px minimum target size
+- The footer is now a page-level landmark, outside `main`
+- Links that open a new tab say so to screen readers; the resume Preview link acts as a button when it opens inline
+- Section numbers in the nav are hidden from screen readers
+- Keyboard focus and anchor targets stay clear of the sticky bar on narrow screens
+- The backdrop glows no longer animate on their own; all background motion is driven by scrolling
+- Links in running text are underlined, so they don't rely on color alone
+
+### Removed
+
+- Published JSDoc pages and their toolchain; the doc comments stay in the source
+- Unused CSS outputs (`styles/css/`, empty and legacy files in `styles/min/`); the build writes only
+  `styles/min/styles.min.css`
+- Unused utility classes, typography classes, button variants, and mixins
+
+### Changed
+
+- `.gitignore` is now tracked (its old `.git*` pattern ignored itself) and covers editor, OS, Node, and LaTeX files
+- Added `.nojekyll` so GitHub Pages serves the site as-is
+
+---
+
 ## [5.2.0] - 2026-09-25
 
 ### Added
@@ -218,7 +247,7 @@
 
 ---
 
-## [2.0.0] - 2025-10-07 🚀 **Major Architecture Overhaul**
+## [2.0.0] - 2025-10-07 **Major Architecture Overhaul**
 
 ### Added
 

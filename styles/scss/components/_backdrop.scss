@@ -57,29 +57,6 @@
   transform: translate3d(0, calc(var(--scroll-y, 0) * -0.42px), 0);
 }
 
-// Slow breathing so the glows feel alive even when the page is still
-.motion-ok .backdrop-glow {
-  animation: glow-breathe 14s ease-in-out infinite alternate;
-}
-
-.motion-ok .glow-2 {
-  animation-delay: -5s;
-}
-
-.motion-ok .glow-3 {
-  animation-delay: -9s;
-}
-
-@keyframes glow-breathe {
-  from {
-    scale: 1;
-  }
-
-  to {
-    scale: 1.15;
-  }
-}
-
 // Reading progress along the top edge
 .scroll-progress {
   position: fixed;

@@ -162,11 +162,30 @@ class ResumePreview {
   init() {
     if (!this.button || !this.container) return;
 
+    // The label is the button's first text node; the "(opens in a new tab)" note after it is
+    // only true when the link isn't being upgraded to an inline preview
+    this.label = this.button.firstChild;
+    this.newTabNote = this.button.querySelector(".visually-hidden");
+    this.syncMode();
+    this.inline.addEventListener("change", () => this.syncMode());
+
     this.button.addEventListener("click", (event) => {
       if (!this.inline.matches) return; // let the link open the PDF
       event.preventDefault();
       this.toggle();
     });
+  }
+
+  /** Match the button's semantics to what a click will do at the current width. */
+  syncMode() {
+    if (this.inline.matches) {
+      this.button.setAttribute("role", "button");
+      this.newTabNote?.remove();
+    } else {
+      if (this.isOpen) this.toggle();
+      this.button.removeAttribute("role");
+      if (this.newTabNote) this.button.append(this.newTabNote);
+    }
   }
 
   /** @returns {boolean} Whether the inline preview is showing */
@@ -187,7 +206,7 @@ class ResumePreview {
       this.container.classList.remove("hidden");
     }
 
-    this.button.textContent = this.isOpen ? "Hide Preview" : "Preview";
+    this.label.nodeValue = this.isOpen ? "Hide Preview" : "Preview";
     this.button.setAttribute("aria-expanded", String(this.isOpen));
   }
 }

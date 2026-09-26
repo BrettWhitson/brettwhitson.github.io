@@ -24,7 +24,6 @@ const paths = {
   output: path.join(root, "index.html"),
   sitemap: path.join(root, "sitemap.xml"),
   scss: path.join(root, "styles", "scss", "styles.scss"),
-  css: path.join(root, "styles", "css", "styles.css"),
   cssMin: path.join(root, "styles", "min", "styles.min.css"),
 };
 
@@ -183,7 +182,7 @@ const renderListItem = (item, names) => html`
     ${item.link?.href &&
     html`<a class="list-item-link" href="${item.link.href}" target="_blank" rel="noopener noreferrer">${
       item.link.label || item.link.href
-    }</a>`}
+    }<span class="visually-hidden"> (opens in a new tab)</span></a>`}
   </div>
 </li>`;
 
@@ -235,7 +234,7 @@ const bodies = {
 <div class="section-body">
   <div class="resume-actions">
     <a class="btn btn-primary btn-download" href="${section.file}" download="${path.basename(section.file)}">Download PDF${icon("download")}</a>
-    <a class="btn btn-secondary" id="resume-preview-btn" href="${section.file}" target="_blank" rel="noopener" aria-controls="resume-preview-container" aria-expanded="false">Preview</a>
+    <a class="btn btn-secondary" id="resume-preview-btn" href="${section.file}" target="_blank" rel="noopener" aria-controls="resume-preview-container" aria-expanded="false">Preview<span class="visually-hidden"> (opens in a new tab)</span></a>
   </div>
   <div id="resume-preview-container" class="resume-preview-container hidden"></div>
 </div>`,
@@ -312,7 +311,7 @@ function jsonLd({ site, ext }) {
 
 const renderProfileLinks = (entries) => html`${entries.map(
   ([label, { icon: name, link }]) =>
-    html`<li><a class="icon-button" href="${link}" target="_blank" rel="noopener noreferrer" aria-label="${label}" title="${label}">${icon(name)}</a></li>`
+    html`<li><a class="icon-button" href="${link}" target="_blank" rel="noopener noreferrer" aria-label="${label} (opens in a new tab)" title="${label}">${icon(name)}</a></li>`
 )}`;
 
 export function renderPage(data, template) {
@@ -336,7 +335,7 @@ export function renderPage(data, template) {
     nav: formatHtml(
       html`${data.sections.map(
         (s, i) =>
-          html`<li><a class="nav-link" href="#${s.section}"><span class="nav-index">${sectionIndex(i)}</span><span class="nav-line"></span><span class="nav-label">${s.title}</span></a></li>`
+          html`<li><a class="nav-link" href="#${s.section}"><span class="nav-index" aria-hidden="true">${sectionIndex(i)}</span><span class="nav-line" aria-hidden="true"></span><span class="nav-label">${s.title}</span></a></li>`
       )}`,
       12
     ),
@@ -372,7 +371,7 @@ function compileCss() {
     }).toString();
 
   try {
-    return { css: run("expanded"), min: run("compressed") };
+    return run("compressed");
   } catch (error) {
     throw new Error(`sass failed (is it installed? npm install -g sass): ${error.message}`);
   }
@@ -404,9 +403,8 @@ async function main(args) {
   }
 
   if (!args.includes("--html")) {
-    const { css, min } = compileCss();
-    await Promise.all([writeFile(paths.css, css), writeFile(paths.cssMin, min)]);
-    console.log("Compiled styles/css/styles.css and styles/min/styles.min.css");
+    await writeFile(paths.cssMin, compileCss());
+    console.log("Compiled styles/min/styles.min.css");
   }
 }
 

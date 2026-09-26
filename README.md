@@ -1,7 +1,6 @@
 # Brett Whitson Portfolio
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://home.brettwhitson.dev)
-[![JSDoc](https://img.shields.io/badge/JSDoc-Documentation-blue)](https://home.brettwhitson.dev/docs/JSDocs)
 
 Personal site and resume, live at **[home.brettwhitson.dev](https://home.brettwhitson.dev)**. Content lives in one
 JSON file; a zero-dependency Node script renders it to static HTML, so the page is complete for search engines, link
@@ -11,7 +10,6 @@ preview).
 | Link                                                      | Description         |
 | --------------------------------------------------------- | ------------------- |
 | **[Site](https://home.brettwhitson.dev)**                 | Live site           |
-| **[API Docs](https://home.brettwhitson.dev/docs/JSDocs)** | JSDoc documentation |
 | **[Changelog](./CHANGELOG.md)**                           | Version history     |
 
 ## Tech Stack

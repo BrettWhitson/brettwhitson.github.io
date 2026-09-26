@@ -1,4 +1,4 @@
-// Button Components
+// Buttons
 
 .btn {
   @include button-base;
@@ -6,52 +6,12 @@
   font-size: var(--text-base);
   line-height: var(--leading-tight);
 
-  &-sm {
-    padding: var(--space-2) var(--space-4);
-    font-size: var(--text-sm);
-  }
-
-  &-lg {
-    padding: var(--space-4) var(--space-8);
-    font-size: var(--text-lg);
-  }
-
   &-primary {
     @include button-primary;
   }
 
   &-secondary {
     @include button-secondary;
-  }
-
-  &-ghost {
-    @include button-ghost;
-  }
-
-  // Icon buttons
-  &-icon {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-
-    &.btn-sm {
-      width: 32px;
-      height: 32px;
-    }
-
-    &.btn-lg {
-      width: 48px;
-      height: 48px;
-    }
-  }
-
-  // Button with icon
-  .btn-icon-left {
-    margin-right: var(--space-2);
-  }
-
-  .btn-icon-right {
-    margin-left: var(--space-2);
   }
 }
 

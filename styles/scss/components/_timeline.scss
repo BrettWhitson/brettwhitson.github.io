@@ -15,7 +15,10 @@
 
   position: relative;
   padding: var(--space-5) 0 0 var(--space-8);
-  transition: opacity var(--transition-base);
+
+  .list-item-bullets {
+    transition: color var(--transition-base);
+  }
 
   // Rail segment from this dot down to the next role
   &:not(:last-child)::before {

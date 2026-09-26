@@ -53,6 +53,13 @@ $sidebar-break: 1024px;
   }
 }
 
+// Keep keyboard focus and anchor targets clear of the sticky bar on narrow screens (WCAG 2.4.11)
+html {
+  @include narrow {
+    scroll-padding-top: 72px;
+  }
+}
+
 .nav-bar {
   // The theme toggle sits in the sidebar's top corner, so the index keeps the vertical room
   @include wide {

@@ -190,7 +190,13 @@
     margin: 0 calc(-1 * var(--space-4));
     padding: var(--space-4);
     border-radius: var(--radius-lg);
-    transition: background-color var(--transition-base), opacity var(--transition-base);
+    transition: background-color var(--transition-base);
+
+    .list-item-header,
+    .list-item-subheader,
+    .list-item-main {
+      transition: color var(--transition-base);
+    }
 
     @media (max-width: 599px) {
       grid-template-columns: 1fr;
@@ -202,10 +208,15 @@
     padding-top: 0.3rem;
   }
 
-  // Hovering one row brings it forward and quiets the rest
+  // Hovering one row brings it forward and quiets the rest. Dimmed with the muted text
+  // color rather than opacity, so the quieted rows still meet contrast minimums.
   @media (hover: hover) {
     &:hover .section-list-item:not(:hover) {
-      opacity: 0.55;
+      .list-item-header,
+      .list-item-subheader,
+      .list-item-main {
+        color: var(--color-text-muted);
+      }
     }
 
     .section-list-item:hover {
@@ -234,7 +245,10 @@
 }
 
 .chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  // min-height keeps chips at the 24px minimum target size (WCAG 2.5.8)
+  min-height: 24px;
   padding: 2px var(--space-2);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
@@ -269,12 +283,17 @@
 
 // While a skill is highlighted, everything not connected to it steps back
 .is-linking {
+  // Stepped back with the muted color rather than opacity, so everything stays readable
   .chip:not(.is-linked) {
-    opacity: 0.45;
+    color: var(--color-text-muted);
+    background: transparent;
   }
 
   .list-item-role:not(.is-linked) {
-    opacity: 0.4;
+    .list-item-role-title,
+    .list-item-bullets {
+      color: var(--color-text-muted);
+    }
   }
 
   .list-item-role.is-linked .list-item-role-title {
