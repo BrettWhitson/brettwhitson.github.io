@@ -21,6 +21,7 @@
 @import "./components/sections";
 @import "./components/timeline";
 @import "./components/backdrop";
+@import "./components/changelog";
 
 // Print: just the content, in black on white
 @media print {
@@ -30,7 +31,8 @@
   .intro-actions,
   .copy-button,
   .resume-actions,
-  .skip-link {
+  .skip-link,
+  .changelog-dialog {
     display: none !important;
   }
 

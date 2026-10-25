@@ -448,9 +448,10 @@
 
 ## Project Statistics
 
-**Total Development Period**: April 26, 2021 - October 24, 2026 (5+ years)
-**Total Commits**: 100+ commits
-**Major Versions**: 6 major releases
+- **Total Development Period**: April 26, 2021 - October 24, 2026 (5+ years)
+- **Total Commits**: 100+ commits
+- **Major Versions**: 6 major releases
+
 **Key Milestones**:
 
 - 2021: Project inception and initial development
