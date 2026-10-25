@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.0.0] - Unreleased
+## [6.0.0] - 2026-10-24
 
 ### Changed
 
@@ -448,42 +448,21 @@
 
 ## Project Statistics
 
-**Total Development Period**: April 26, 2021 - October 7, 2025 (4+ years)
-**Total Commits**: 60+ commits
-**Major Versions**: 3 major releases
+**Total Development Period**: April 26, 2021 - October 24, 2026 (5+ years)
+**Total Commits**: 100+ commits
+**Major Versions**: 6 major releases
 **Key Milestones**:
 
 - 2021: Project inception and initial development
 - 2022: Major redesign and mobile optimization
 - 2023: Feature expansion and library integration
 - 2025: Complete architectural overhaul with modern practices
+- 2026: Static rendering from JSON, a full visual redesign, then a move to SvelteKit on brettwhitson.dev
 
 **Technology Evolution**:
 
 - Started with basic HTML/CSS/JS
 - Progressed to SCSS and modular architecture
 - Integrated custom BuilderJS library
-- Achieved professional documentation standards
-- Planned migration to modern design systems
-
----
-
-## Development Patterns
-
-### Commit Frequency
-
-- **High Activity Periods**: April 2021, November 2022, April 2023, October 2025
-- **Maintenance Periods**: Regular updates between major releases
-- **Recent Focus**: Documentation and architectural improvements
-
-### Feature Development
-
-- **Iterative Approach**: Multiple small commits for feature refinement
-- **Quality Focus**: Emphasis on mobile compatibility and user experience
-- **Modern Practices**: Progression toward professional development standards
-
-### Technical Debt Management
-
-- **Regular Refactoring**: Continuous improvement of code quality
-- **Documentation**: Increased focus on comprehensive documentation
-- **Architecture**: Evolution from simple to sophisticated patterns
+- Replaced client-side rendering with a zero-dependency Node build that prerendered the page from JSON
+- Moved to SvelteKit and Svelte 5, still fully prerendered, deployed by GitHub Actions
