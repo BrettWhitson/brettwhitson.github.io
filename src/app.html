@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Meta tags, canonical, JSON-LD, and title from Seo.svelte, then the built CSS and preloads -->
+  %sveltekit.head%
+
+  <!-- Before first paint: apply a saved theme (otherwise CSS follows prefers-color-scheme) and
+       flag that scripted motion can run. If the app's JavaScript is blocked or fails to load, the
+       flags are dropped again so content hidden for its entrance animation is never left hidden. -->
+  <script>
+    (() => {
+      const root = document.documentElement;
+      root.classList.add("js");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) root.classList.add("motion-ok");
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+      } catch {}
+
+      const fallback = () => {
+        if (!root.classList.contains("js-ready")) root.classList.remove("js", "motion-ok");
+      };
+      // SvelteKit boots with dynamic import(), which rejects rather than firing an element error.
+      // Any early rejection or failed /_app/ request counts, so a flaky preload can cost the
+      // motion but never the content.
+      addEventListener("unhandledrejection", fallback);
+      addEventListener("error", (event) => {
+        const url = event.target?.src || event.target?.href || "";
+        if (url.includes("/_app/")) fallback();
+      }, true);
+      setTimeout(fallback, 4000);
+    })();
+  </script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+</head>
+
+<body data-sveltekit-preload-data="false">
+  <div style="display: contents">%sveltekit.body%</div>
+</body>
+
+</html>

@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.0.0] - Unreleased
+
+### Changed
+
+- **SvelteKit** - The page is now a SvelteKit 3 / Svelte 5 app, fully prerendered to static HTML by
+  `adapter-static`. The rendered markup, SEO tags, JSON-LD, and public URLs are unchanged
+- **Canonical host** - `brettwhitson.dev` (apex) everywhere: canonical, Open Graph, JSON-LD, sitemap, robots.txt,
+  and the resume
+- **Deploy** - GitHub Actions builds and deploys to GitHub Pages
+- Behavior from `main.js` is now Svelte actions; a failing enhancement logs an error and leaves the static content
+  in place
+
+### Removed
+
+- `scripts/build.mjs`, `templates/`, `javascript/main.js`, `styles/min/`, and the generated root `index.html` and
+  `sitemap.xml`. Static files moved to `static/`
+
+---
+
 ## [5.3.2] - 2026-09-25
 
 ### Removed

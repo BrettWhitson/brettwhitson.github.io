@@ -4,8 +4,8 @@
     "headline": "Oracle DBA and Banner Systems Administrator",
     "org": "University of Tennessee at Martin, Martin, TN",
     "email": "brett.whitson.dev@gmail.com",
-    "url": "https://home.brettwhitson.dev/",
-    "image": "https://home.brettwhitson.dev/data/images/me.jpg",
+    "url": "https://brettwhitson.dev/",
+    "image": "https://brettwhitson.dev/data/images/me.jpg",
     "description": "Brett Whitson is an Oracle DBA and Ellucian Banner systems administrator at the University of Tennessee at Martin, with a background in software development.",
     "jobTitle": "Oracle DBA and Banner Systems Administrator",
     "worksFor": "University of Tennessee at Martin",
@@ -40,7 +40,7 @@
       "section": "about",
       "title": "About",
       "type": "pg",
-      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love full-stack work: this site is hand-built with vanilla JavaScript, SCSS, and a small Node build."
+      "body": "I'm an Oracle DBA and Banner systems administrator at the University of Tennessee at Martin, where I've spent the last five years keeping the university's Ellucian Banner ERP running, first as a programmer/analyst writing PL/SQL and integrations, and now administering the databases underneath it. I have a B.S. in Computer Science, and outside the database I still love full-stack work: this site is built with SvelteKit and SCSS and prerendered to plain HTML."
     },
     {
       "section": "experience",

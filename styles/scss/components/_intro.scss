@@ -125,7 +125,13 @@
   color: var(--color-text-muted);
 }
 
-// Rows arrive one by one after the query "runs" (main.js adds .is-run)
+// The SQL stays hidden until the typer takes it over (.is-typing), so the full query doesn't
+// flash and then get retyped when hydration is slow. Without motion-ok it shows at once.
+.motion-ok .query:not(.is-typing):not(.is-run) .query-sql code {
+  visibility: hidden;
+}
+
+// Rows arrive one by one after the query "runs" (the queryTyper action adds .is-run)
 .motion-ok .query:not(.is-run) {
   .query-result tbody tr,
   .query-caption {
